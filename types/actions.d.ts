@@ -1,0 +1,1 @@
+export type AppActions = 'email-verification' | 'payment' | 'deposit';
