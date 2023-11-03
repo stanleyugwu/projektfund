@@ -12,6 +12,7 @@ import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuS
 import { IRoles } from '@/types/user'
 import roles from '@/lib/roles'
 import { useAuth } from '@/context/AuthProvider'
+import Script from 'next/script'
 
 
 interface IDashboardLayoutProps extends PropsWithChildren {
@@ -43,10 +44,9 @@ export default function ({children} : IDashboardLayoutProps) {
     if(!user) redirect('/login')
 
     return (
-        <div className='h-screen'>
-            {/* Sidebar */}
+        <div className='h-screen'>            
             <div className="h-full grid-cols-6 md:grid">
-                <div className='hidden md:flex h-full col-span-1 p-5 space-y-10 md:flex-col border-e'>
+                <div className='hidden h-full col-span-1 p-5 space-y-10 md:flex md:flex-col border-e'>
                     <div>
                         <h1 className='text-2xl font-medium'>Brand</h1>
                     </div>
@@ -100,7 +100,7 @@ export default function ({children} : IDashboardLayoutProps) {
                         </div>
                     </div>
                     
-                    <div className="md:container p-5 md:py-10">
+                    <div className="p-5 md:container md:py-10">
                         {children}          
                     </div>
                 </div>
