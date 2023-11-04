@@ -1,51 +1,41 @@
 import { userPortfolio } from "@/api/units/units"
+import { InvestedPropertyItem } from "@/components/partials/property/InvestedPropertyItem"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import Link from "next/link"
 
-export default async () => {
 
-    const portfolio = await userPortfolio()
-    
+export default async function Portfolio () {
+    const portfolio = await userPortfolio()    
     return (
         <>
-            <Card>
-                <CardContent className="p-10">
-                    <div className="">
-                        {
-                            portfolio.map(item => (
-                                <div className="flex items-center justify-between gap-10 p-3 px-5 hover:bg-slate-50">
-                                    <div className="flex items-center w-5/12 space-x-10">
-                                        <div className="w-2/12">
-                                            <img src={item.property.image} className="object-cover rounded aspect-square" alt="" />
-                                        </div>
-                                        <div className="w-10/12">
-                                            <p className="text-lg font-semibold">{item.property.name}</p>
-                                            <p className="text-sm">{item.property.address}, {item.property.city}, {item.property.country}</p>
-                                        </div>
-                                    </div>
+            <div className="flex">
+                <div className="w-8/12">
+                    <Card>
+                        <CardContent className="p-10 divide-y-2">
+                            {
+                                portfolio.length > 0 
+                                
+                                ?
+                                    <>
+                                        { 
+                                            portfolio.map((item: any) => <InvestedPropertyItem key={item._id} unit={item} />)}    
+                                    </>
+                                :
 
-                                    <div>
-                                        <div className="flex space-x-20">
-                                            <div className="text-center">
-                                                <p>Total Units</p>
-                                                <p>{item.units}</p>
-                                            </div>
-                                            <div className="text-center">
-                                                <p>Total Value</p>
-                                                <p>{item.units}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-x-2">
-                                        <Button variant={'outline'}>Resell Units</Button>
-                                    </div>
+                                <div className="p-10 space-y-5 text-center">
+                                    <h1 className="text-xl font-semibold">You have not purchased any property units yet!</h1>
+                                    <Button asChild>
+                                        <Link href={'/properties'} >Find Properties</Link>
+                                    </Button>
                                 </div>
-                            ))
-                        }
-                    </div>
-                </CardContent>
-            </Card>
+                            }
+
+                            {}
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
         </>
     )
 }

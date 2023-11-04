@@ -145,38 +145,37 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                             </>                        
                         }
 
-                        <div>
-                            <DialogHeader className='mb-5'>
-                                <DialogTitle>Purchase Successful</DialogTitle>
-                                <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
-                            </DialogHeader>
-
-                            <div >
-                                <div className="flex p-2 space-x-3 border rounded-md">
-                                    <div className='w-2/12'>
-                                        <img src={property.image} className='rounded-md aspect-square' alt="" />
-                                    </div>
-                                    <div className="flex-1 py-2">
-                                        <h4 className='font-bold'>{property.name}</h4>
-                                        <div>
-                                            <Badge variant={'secondary'}>{units} Unit</Badge>
-                                            <Badge variant={'secondary'}><Naira /> {(units * property.unit_price).toLocaleString()} Amount</Badge>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <Button asChild>
-                                    <Link href={''} >View Portfolio</Link>
-                                </Button>
-                            </div>
-                        </div>
-                        {/* {
-                          step == 2 &&
+                        {
+                            step == 2 &&
                           
-                          <>
-                            
-                          </>
-                        } */}
+                            <>
+                                <div>
+                                    <DialogHeader className='mb-5'>
+                                        <DialogTitle>Purchase Successful</DialogTitle>
+                                        <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                                    </DialogHeader>
+
+                                    <div >
+                                        <div className="flex p-2 space-x-3 border rounded-md">
+                                            <div className='w-2/12'>
+                                                <img src={property.image} className='rounded-md aspect-square' alt="" />
+                                            </div>
+                                            <div className="flex-1 py-2">
+                                                <h4 className='font-bold'>{property.name}</h4>
+                                                <div>
+                                                    <Badge variant={'secondary'}>{units} Unit</Badge>
+                                                    <Badge variant={'secondary'}><Naira /> {(units * property.unit_price).toLocaleString()} Amount</Badge>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <Button asChild>
+                                            <Link href={''} >View Portfolio</Link>
+                                        </Button>
+                                    </div>
+                                </div>    
+                            </>
+                        }
                     </>
                 </DialogContent>
             </Dialog>

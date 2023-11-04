@@ -13,6 +13,7 @@ import { experimental_useFormState as useFormState } from 'react-dom'
 import { AlertError } from "@/components/partials/AlertError";
 import { useAuth } from "@/context/AuthProvider";
 import { redirect } from "next/navigation";
+import roles from "@/lib/roles";
 
 export default () => {
 
@@ -28,7 +29,7 @@ export default () => {
 	useEffect(() => {
 		if(state.status) {
 			authLogin(state.user)
-			state.user.role == 'user' ? redirect('/dashboard') : redirect('/admin')
+			state.user.role == roles.user ? redirect('/dashboard') : redirect('/admin')
 		}
 	}, [state])
 

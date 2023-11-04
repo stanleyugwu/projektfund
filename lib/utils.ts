@@ -6,3 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const env = (key: string): any => process.env[key]
+
+export function getFormDataAsJson(formData: FormData){
+  return JSON.parse(JSON.stringify(Object.fromEntries(formData.entries())))
+}

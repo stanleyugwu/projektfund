@@ -8,7 +8,7 @@ export function Loader({loading = true}) {
     )
 }
 
-export function FormLoader({children}: {children: any}){
+export function FormLoader({children}: {children?: any}){
 	const {pending}  = useFormStatus()
-	return pending ? children : <></>
+	return pending ? children ?? <Loader /> : <></>
 }

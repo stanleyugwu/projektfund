@@ -15,7 +15,7 @@ export async function createProperty(state: any, data: FormData){
     const galleryFiles = data.getAll('gallery')
     const image = data.get('image')
 
-    const body = Object.fromEntries(data.entries()) as unknown as IProperty
+    const body = Object.fromEntries(data.entries()) as unknown as any
 
     const validator = new Validator(body, __PropertySchema.rules)
     validator.setAttributeNames(__PropertySchema.attributes as Validator.AttributeNames)

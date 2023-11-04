@@ -28,8 +28,6 @@ export default function RootLayout({
 
           <Toaster />
         </Providers>
-
-
       </body>
     </html>
   )

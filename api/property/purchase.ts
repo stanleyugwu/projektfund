@@ -7,6 +7,7 @@ import Transactions from "@/models/Transactions"
 import Unit from "@/models/Unit"
 import User from "@/models/User"
 import { authUser } from "@/services/auth"
+import database from "@/services/database"
 import { transactionType } from "@/services/transactions"
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
@@ -16,6 +17,7 @@ const secretKey = process.env.PAYSTACK_SECRET
 const publicKey = process.env.PAYSTACK_PUBLIC
 
 export async function initiatePurchase(state: any, formData: FormData){
+    await database()
     const body = Object.fromEntries(formData.entries())
 
     const units = formData.get('units')
@@ -55,10 +57,12 @@ export async function initiatePurchase(state: any, formData: FormData){
         key: publicKey
     }
 
+    console.log(payment)
     return {status: true, payment}
 }
 
 export async function verifyPurchase(reference: string){
+    await database()
     const user = await authUser();
 
     const transaction = await Transactions.findOne({reference})
@@ -73,7 +77,7 @@ export async function verifyPurchase(reference: string){
     if(transaction && transaction.user_id == user._id){
         if(req.ok) {
             const data = await req.json()
-            console.log(data)
+
             if(data.status) {
                 transaction.status = data.data.status
                 await transaction.save()                

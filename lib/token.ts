@@ -11,7 +11,6 @@ export default class Token {
             const model = await mongoose.connection.db.collection(collection).findOne({[column] : id})  
             if(model) return await this.random(collection, column, len);
         }
-
         return id;
     }
 
