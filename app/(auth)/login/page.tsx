@@ -12,6 +12,7 @@ import { FormLoader, Loader } from "@/components/ui/loader";
 import { experimental_useFormState as useFormState } from 'react-dom'
 import { AlertError } from "@/components/partials/AlertError";
 import { useAuth } from "@/context/AuthProvider";
+import { EmailVerificationError } from "./(partials)/email-verification";
 
 export default () => {
 
@@ -40,7 +41,7 @@ export default () => {
 
 			<div className="flex items-center justify-center h-full p-10 flex-column">
 				<form action={action} className="w-3/5 space-y-5">
-					{state.error ? <AlertError message={state.error} title="Email Verification" /> : ''}
+					{state.error ? <EmailVerificationError message={state.error} /> : ''}
 					<div className="space-y-0">
 						<h1 className="text-2xl font-semibold tracking-tight">
 							Log into your account

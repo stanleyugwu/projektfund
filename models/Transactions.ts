@@ -6,6 +6,7 @@ const Transaction = new mongoose.Schema({
     amount: {type: Number, required: true},
     transactable: {type: mongoose.Schema.Types.ObjectId, refPath: 'transactable_type'},
     transactable_type: {type: String},
+    type: {type: String},
     purpose: {type: String},
     status: {type: String, required: true}
 }, {timestamps: true})

@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import Wallet from "./Wallet";
 import { Status } from "@/casts/status";
 import roles from "@/lib/roles";
+import Unit from "./Unit";
 
 const UserSchema = new mongoose.Schema<IUser>({
     firstname: {type: String, required: true},
@@ -21,6 +22,37 @@ const UserSchema = new mongoose.Schema<IUser>({
         pending_bal: 0
     }},
     status: {type: String, required: true, default: 'active'}
-}, {timestamps: true})
+}, {timestamps: true, 
+    virtuals: {
+        units: {
+            options: {
+                ref: 'Unit',
+                localField: '_id',
+                foreignField: 'user'
+            }
+        }
+    }} )
+
+// UserSchema.virtual('units', {
+//     ref: 'Unit',
+//     localField: '_id',
+//     foreignField: 'user'
+// })
+// UserSchema.virtual('user_units').get(async () => {
+//     // @ts-ignore
+//     return await Unit.where({user: this._id}).find()
+// })
+
+UserSchema.virtual('transactions', {
+    ref: 'Transaction',
+    localField: '_id',
+    foreignField: 'user'
+})
+
+UserSchema.virtual('listedUnits', {
+    ref: 'ListedUnit',
+    localField: '_id',
+    foreignField: 'user'
+})
 
 export default mongoose.models?.User ?? mongoose.model('User', UserSchema)

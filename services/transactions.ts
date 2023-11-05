@@ -6,12 +6,15 @@ import { ITransaction } from "@/types/transaction"
 
 export const transactionType = {
     unit: {
+        name: 'unit',
         description: 'Property Unit Purchase'
     },
     deposit: {
+        name: 'deposit',
         description: 'Wallet Deposit'
     },
     withdrawal: {
+        name: 'withdrawal',
         description: 'Funds Withdrawal'
     }
 }

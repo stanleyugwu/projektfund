@@ -1,6 +1,7 @@
 import { IStatus } from "./status"
 
 interface IProperty{
+    id: Key | null | undefined
     _id: string
     name: string
     price: number

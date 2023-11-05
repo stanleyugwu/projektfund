@@ -12,6 +12,6 @@ export async function fetchUser(){
     if(!id?.value) return null;
 
     const user = await User.findById(id.value)
-    if(!user) return {status: false}
+    if(!user) return null
     return JSON.parse(JSON.stringify(user))
 }

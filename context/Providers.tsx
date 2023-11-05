@@ -1,6 +1,9 @@
+'use server'
+
 import React, { PropsWithChildren } from 'react'
 import { AuthProvider } from './AuthProvider'
 import { fetchUser } from '@/api/user/current'
+import { redirect } from 'next/navigation'
 
 interface IProvidersProps extends PropsWithChildren {
 

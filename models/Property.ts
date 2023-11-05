@@ -17,4 +17,10 @@ const PropertySchema = new mongoose.Schema<IProperty>({
     video: {type: String}
 }, {timestamps: true})
 
+PropertySchema.virtual('listedUnits', {
+    ref: 'ListedUnit',
+    localField: '_id',
+    foreignField: 'property'
+})
+
 export default mongoose.models?.Property ?? mongoose.model('Property', PropertySchema)

@@ -1,38 +1,36 @@
-import { listProperties } from "@/api/property/list"
 import { Naira } from "@/components/naira"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { IProperty } from "@/types/property"
-import Link from "next/link"
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
+import { Link } from "lucide-react"
+import { listUsers } from "@/api/user/list"
 
 export default async () => {
-    const properties : IProperty[] = await listProperties()
-
+    const users = await listUsers()
     return (
         <>
             <Card>
                 <CardHeader className="px-10">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h1 className="text-lg font-semibold">Properties</h1>
+                            <h1 className="text-lg font-semibold">Users</h1>
                         </div>
                         <div>
                             <Button asChild>
-                                <Link href="/admin/properties/create">Add Property</Link>
+                                {/* <Link href="/admin/properties/create">Add Property</Link> */}
                             </Button>
                         </div>
                     </div>
                 </CardHeader>
                 <CardContent className="px-10">
                     <Table>
-                        <TableCaption>Listed Properties.</TableCaption>
+                        <TableCaption>All Users.</TableCaption>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[400px]">Property</TableHead>
-                                <TableHead>Units</TableHead>
-                                <TableHead>Unit Price</TableHead>
+                                <TableHead className="w-[400px]">Name</TableHead>
+                                <TableHead>Email</TableHead>
+                                <TableHead>Purchased Units</TableHead>
                                 <TableHead>Sold Units</TableHead>
                                 {/* <TableHead>Amount</TableHead> */}
                                 <TableHead></TableHead>
@@ -41,11 +39,11 @@ export default async () => {
 
                         <TableBody>
                             {
-                                properties.map((property) => (
-                                    <TableRow key={property.id}>
-                                        <TableCell className="w-[400px]">{property.name}</TableCell>
-                                        <TableCell>{property.units.toLocaleString()}</TableCell>
-                                        <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
+                                users.map((user) => (
+                                    <TableRow key={user.id}>
+                                        <TableCell className="w-[400px]">{user.firstname} {user.lastname}</TableCell>
+                                        <TableCell>{user.email}</TableCell>
+                                        <TableCell><Naira />{user.units?.length.toLocaleString()}</TableCell>
                                         <TableCell >$250.00</TableCell>
                                         <TableCell>
                                         <DropdownMenu>

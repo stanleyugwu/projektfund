@@ -1,14 +1,13 @@
-import { listProperties } from "@/api/property/list"
 import { Naira } from "@/components/naira"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { IProperty } from "@/types/property"
-import Link from "next/link"
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
+import { listTransactions } from "@/api/transactions/list"
+import moment from "moment"
 
 export default async () => {
-    const properties : IProperty[] = await listProperties()
+    const transactions = await listTransactions()
 
     return (
         <>
@@ -16,37 +15,38 @@ export default async () => {
                 <CardHeader className="px-10">
                     <div className="flex items-center justify-between">
                         <div>
-                            <h1 className="text-lg font-semibold">Properties</h1>
+                            <h1 className="text-xl font-semibold">Transactions</h1>
                         </div>
                         <div>
                             <Button asChild>
-                                <Link href="/admin/properties/create">Add Property</Link>
+                                {/* <Link href="/admin/properties/create">Add Property</Link> */}
                             </Button>
                         </div>
                     </div>
                 </CardHeader>
                 <CardContent className="px-10">
                     <Table>
-                        <TableCaption>Listed Properties.</TableCaption>
+                        <TableCaption>All Transactions</TableCaption>
                         <TableHeader>
                             <TableRow>
-                                <TableHead className="w-[400px]">Property</TableHead>
-                                <TableHead>Units</TableHead>
-                                <TableHead>Unit Price</TableHead>
-                                <TableHead>Sold Units</TableHead>
-                                {/* <TableHead>Amount</TableHead> */}
+                                <TableHead className="w-[400px]">Reference</TableHead>
+                                <TableHead>Amount</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Created At</TableHead>
                                 <TableHead></TableHead>
                             </TableRow>
                         </TableHeader>
 
                         <TableBody>
                             {
-                                properties.map((property) => (
-                                    <TableRow key={property.id}>
-                                        <TableCell className="w-[400px]">{property.name}</TableCell>
-                                        <TableCell>{property.units.toLocaleString()}</TableCell>
-                                        <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
-                                        <TableCell >$250.00</TableCell>
+                                transactions.map((transaction) => (
+                                    <TableRow key={transaction.id}>
+                                        <TableCell className="w-[400px]">{transaction.reference}</TableCell>
+                                        <TableCell><Naira /> {transaction.amount.toLocaleString()}</TableCell>
+                                        <TableCell><Naira />{transaction.status}</TableCell>
+                                        <TableCell>
+                                            {moment(transaction.createdAt).format('jS F Y')}
+                                        </TableCell>
                                         <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger>Open</DropdownMenuTrigger>

@@ -4,8 +4,7 @@ import { Naira } from "@/components/naira";
 import { Button } from "@/components/ui/button";
 import { SheetTrigger, SheetContent, SheetHeader, SheetDescription, Sheet, SheetFooter } from "@/components/ui/sheet";
 import { IProperty } from "@/types/property";
-import { useState } from "react";
-import { PurchasePropertyDialog } from "./PurchasePropertyDialog";
+import { useEffect, useState } from "react";
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react";
 import { IUnit } from "@/types/units";
@@ -23,6 +22,11 @@ interface IPropertyDetailsProps {
 export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPropertyDetailsProps) {
     const [more, setMore] = useState(false)
 
+    // useEffect(() => {
+    //     console.log(property)
+    // }, [property])
+
+
     return (
         <>
             <Sheet  >
@@ -38,7 +42,8 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                     </SheetHeader>
 
                     <SheetDescription>
-                        <div className="h-64 overflow-hidden">
+                        <div className="h-64 overflow-hidden relative">
+                            <div className="absolute top-0 right-0 left-0 bottom-0 bg-black bg-opacity-50" />
                             <img src={property.image} className="object-cover object-center w-full h-full" />
                         </div>
                         <div className="p-5 space-y-4 text-black">
@@ -77,6 +82,7 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
 
                             <div className="space-y-2">
                                 <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
+                                <Button variant={'ghost'} onClick={() => setOpen(true)} size={'lg'} className="w-full">View Sell Offers</Button>
 
                                 <Disclose show={!!unit}>
                                     <div className="space-x-3 space-y-3">

@@ -9,4 +9,5 @@ export interface ITransaction {
     purpose: string
     status?: IStatus
     reference: string
+    type: string
 }
