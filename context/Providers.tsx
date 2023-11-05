@@ -8,6 +8,7 @@ interface IProvidersProps extends PropsWithChildren {
 
 export const Providers = async ({children}: IProvidersProps) => {
     const user = await fetchUser()
+    
     return (
         <AuthProvider user={user}>
             {children}

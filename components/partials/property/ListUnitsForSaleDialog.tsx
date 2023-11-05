@@ -31,10 +31,6 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
 		error: ''
 	})
 
-    useEffect(() => {
-        console.log(state)
-    }, [state])
-
     return (
         <>
             <Dialog modal={modal} open={open} onOpenChange={(open: any) => setIsOpen(open)}>

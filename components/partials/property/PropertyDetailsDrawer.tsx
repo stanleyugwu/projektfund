@@ -8,13 +8,19 @@ import { useState } from "react";
 import { PurchasePropertyDialog } from "./PurchasePropertyDialog";
 import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react";
+import { IUnit } from "@/types/units";
+import { Disclose } from "@/components/ui/disclose";
+import _ from "lodash";
 
 interface IPropertyDetailsProps {
     property: IProperty
     setOpen: any
+    unit?: IUnit,
+    sellUnit?: boolean
+    setSellUnit?: any
 }
 
-export function PropertyDetails ({property, setOpen} : IPropertyDetailsProps) {
+export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPropertyDetailsProps) {
     const [more, setMore] = useState(false)
 
     return (
@@ -35,9 +41,12 @@ export function PropertyDetails ({property, setOpen} : IPropertyDetailsProps) {
                         <div className="h-64 overflow-hidden">
                             <img src={property.image} className="object-cover object-center w-full h-full" />
                         </div>
-                        <div className="p-5 space-y-3 text-black">
+                        <div className="p-5 space-y-4 text-black">
                             <div className="space-y-2">
                                 <div>
+                                    <Disclose show={!!unit}>
+                                        <h4 className="mb-1 text-xl font-semibold text-primary"><Naira />{property.unit_price.toLocaleString()}<span className="text-sm font-normal text-muted-foreground"> per unit</span></h4>
+                                    </Disclose>
                                     <p className="text-lg font-semibold leading-none">
                                         {property.name}
                                     </p>
@@ -49,15 +58,31 @@ export function PropertyDetails ({property, setOpen} : IPropertyDetailsProps) {
                                         <h4 className="text-2xl font-semibold leading-none text-primary">{property.units.toLocaleString()} </h4>
                                         <span className="text-sm font-normal leading-none text-muted-foreground">Available Units</span>
                                     </div>
-                                    <div className="text-end">
-                                        <h4 className="text-2xl font-semibold leading-none text-primary"><Naira />{property.unit_price.toLocaleString()} </h4>
-                                        <span className="text-sm font-normal leading-none text-muted-foreground ms-2">/ unit</span>
-                                    </div>
+
+                                    <Disclose show={!!unit}>
+                                        <div className="text-end">
+                                            <h4 className="text-2xl font-semibold leading-none text-primary">{unit?.units} </h4>
+                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Units Owned</span>
+                                        </div>
+                                    </Disclose>
+                                    
+                                    <Disclose show={!!!unit}>
+                                        <div className="text-end">
+                                            <h4 className="text-2xl font-semibold leading-none text-primary"><Naira />{property.unit_price.toLocaleString()} </h4>
+                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Per Unit</span>
+                                        </div>
+                                    </Disclose>
                                 </div>
                             </div>
 
-                            <div className="space-y-3">
+                            <div className="space-y-2">
                                 <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
+
+                                <Disclose show={!!unit}>
+                                    <div className="space-x-3 space-y-3">
+                                        <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
+                                    </div>
+                                </Disclose>
                             </div>
 
                             <div className="p-3 space-y-3 rounded bg-primary-foreground">
@@ -70,19 +95,6 @@ export function PropertyDetails ({property, setOpen} : IPropertyDetailsProps) {
 
                                 </div>
                             </div>
-
-                            {/* <div>
-                                <h4 className="text-lg font-semibold leading-none">More Images</h4>
-
-                                <div className="gap-1 columns-2">
-                                    {property.gallery.map(image => (
-                                        <div className="py-[2px]">
-                                            <img src={image as string} className="w-100" loading="lazy" />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div> */}
-
                         </div>
                     </SheetDescription>
                     <SheetFooter>

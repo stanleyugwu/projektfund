@@ -12,12 +12,8 @@ import { FormLoader, Loader } from "@/components/ui/loader";
 import { experimental_useFormState as useFormState } from 'react-dom'
 import { AlertError } from "@/components/partials/AlertError";
 import { useAuth } from "@/context/AuthProvider";
-import { redirect } from "next/navigation";
-import roles from "@/lib/roles";
 
 export default () => {
-
-	const {login: authLogin} = useAuth()
 
 	const [state, action] = useFormState(login, {
 		status: false,
@@ -26,12 +22,15 @@ export default () => {
 		error: ''
 	})
 
-	useEffect(() => {
-		if(state.status) {
-			authLogin(state.user)
-			state.user.role == roles.user ? redirect('/dashboard') : redirect('/admin')
-		}
-	}, [state])
+	// const {refresh} = useAuth()
+
+	// // useEffect(() => {
+	// // 	if(state.status){
+	// // 		if(state.user) {
+	// // 			refresh(state.user)
+	// // 		}
+	// // 	}
+	// // }, [state])
 
     return (
 		<div className="grid h-full grid-cols-2" >

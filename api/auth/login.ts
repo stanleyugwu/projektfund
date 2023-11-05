@@ -1,13 +1,15 @@
 'use server'
 
+import roles from "@/lib/roles";
 import User from "@/models/User";
-import connect from "@/services/database";
+import database from "@/services/database";
 import bcrypt from 'bcryptjs'
 import { cookies } from 'next/headers'
+import { redirect } from "next/navigation";
 
 
 export async function login (prevState: any, formData: FormData)  {
-    await connect()
+    await database()
     
     const body = Object.fromEntries(formData.entries())
     const user = await User.findOne({email: body.email}).select('+password')
@@ -26,5 +28,5 @@ export async function login (prevState: any, formData: FormData)  {
         return {status: false, error: 'Please verify your email address!'}
     }
 
-    return {status: true, user}
+    return user.role == roles.user ? redirect('/dashboard') : redirect('/admin')
 }

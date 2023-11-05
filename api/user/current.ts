@@ -9,8 +9,9 @@ export async function fetchUser(){
     
     const cookieStore = cookies()
     const id = cookieStore.get('authorization')
-    if(!id) return null;
+    if(!id?.value) return null;
 
     const user = await User.findById(id.value)
+    if(!user) return {status: false}
     return JSON.parse(JSON.stringify(user))
 }

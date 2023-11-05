@@ -3,19 +3,18 @@
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import { redirect, usePathname, useRouter } from "next/navigation"
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { IRoles } from '@/types/user'
 import roles from '@/lib/roles'
 import { useAuth } from '@/context/AuthProvider'
-import Script from 'next/script'
-import { handleLogout } from '@/api/auth/logout'
 import { HomeIcon, WalletIcon } from '@heroicons/react/20/solid'
 import { BriefcaseIcon } from '@heroicons/react/24/solid'
 import { PieChartIcon } from '@radix-ui/react-icons'
 import { UserCircleIcon } from '@heroicons/react/24/outline'
+import Script from 'next/script'
 
 
 interface IDashboardLayoutProps extends PropsWithChildren {
@@ -33,21 +32,20 @@ const nav_items : INavIcons[]  = [
     { name: 'Overview', role: roles.user},
     {href: '/dashboard', name: 'Overview', role: roles.user, icon: <HomeIcon className="w-4 h-4 mr-2" />},
     {href: '/portfolio', name: 'Portfolio', role: roles.user, icon: <BriefcaseIcon className="w-4 h-4 mr-2" />},
-    {href: '/investments', name: 'Invest', role: roles.user, icon: <PieChartIcon className="w-4 h-4 mr-2" />},
+    {href: '/invest', name: 'Invest', role: roles.user, icon: <PieChartIcon className="w-4 h-4 mr-2" />},
     { name: 'Account'},
     {href: '/profile', name: 'Profile', icon: <UserCircleIcon className="w-4 h-4 mr-2" />},
     {href: '/wallet', name: 'Wallet', role: roles.user, icon: <WalletIcon className="w-4 h-4 mr-2" />},
     {href: '/settings', name: 'Settings', role: roles.user, icon: <UserCircleIcon className="w-4 h-4 mr-2" />},
 ]
 
-export default function ({children} : IDashboardLayoutProps) {
+export default async function ({children} : IDashboardLayoutProps) {
     const pathname = usePathname()
-    const {status, user} = useAuth()
-
-    if(!user) return redirect('/login')
-
-    const logout = () => handleLogout()
-
+    const {user, logout} = useAuth()
+    const router = useRouter()
+    
+    if(!user) return router.replace('/login');
+    
     return (
         <div className='h-screen'>            
             <div className="h-full grid-cols-6 md:grid">
@@ -102,7 +100,7 @@ export default function ({children} : IDashboardLayoutProps) {
                                     <DropdownMenuItem>Billing</DropdownMenuItem>
                                     <DropdownMenuItem>Team</DropdownMenuItem>
                                     <DropdownMenuItem>Subscription</DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => logout()}>Logout</DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer' onClick={() => logout()}>Logout</DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
@@ -113,6 +111,8 @@ export default function ({children} : IDashboardLayoutProps) {
                     </div>
                 </div>
             </div>
+
+            <Script src="https://js.paystack.co/v1/inline.js" />
         </div>
     )
 }

@@ -4,6 +4,8 @@ import { Naira } from "@/components/naira";
 import { Button } from "@/components/ui/button";
 import React, { useMemo, useState } from "react";
 import { ListUnitsForSaleDialog } from "./ListUnitsForSaleDialog";
+import { PropertyDetails } from "./PropertyDetailsDrawer";
+import { PurchasePropertyDialog } from "./PurchasePropertyDialog";
 // import { ListUnitsForSaleDialog } from "./ListUnitsForSaleDialog";
 
 interface IUnitItem {
@@ -13,16 +15,19 @@ interface IUnitItem {
 export const InvestedPropertyItem = ({unit} : IUnitItem) => {
     const [modal, setModal] = useState(true)
     const [isOpen, setIsOpen] = useState(false)
+    const [drawer, setDrawer] = useState(false)
+    const [sellUnit, setSellUnit] = useState(false)
+    const [buyProperty, setBuyProperty] = useState(false)
 
     return (
         <>
-            <div className="flex py-3 space-x-2 align-middle">
-                <div className="w-3/12">
-                    <div className="rounded h-[200px] md:aspect-square bg-muted-foreground overflow-hidden">
+            <div className="flex py-3 space-x-5">
+                <div className="w-2/12">
+                    <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
                         <img src={unit.property.image} alt="" className="object-cover object-center w-full h-full" />
                     </div>
                 </div>
-                <div className="flex flex-col justify-center flex-1 p-4 space-y-2">
+                <div className="flex flex-col justify-center flex-1 space-y-3">
                     <div>
                         <p className="text-lg font-semibold leading-none uppercase">
                             {unit.property.name}
@@ -33,11 +38,11 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
                     <div className="grid grid-cols-3">
                         <div>
                             <h2 className="font-medium leading-none">{unit.units}</h2>
-                            <p className="text-sm text-muted-foreground">Owned Units</p>
+                            <p className="text-sm text-muted-foreground">Units Owned</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none"><Naira /> {unit.property.unit_price.toLocaleString()}</h2>
-                            <p className="text-sm text-muted-foreground">Value Per Unit</p>
+                            <p className="text-sm text-muted-foreground">Price Per Unit</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none"><Naira /> {(unit.units * unit.property.unit_price).toLocaleString()}</h2>
@@ -49,9 +54,10 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
 
                     <div className="space-x-2">
                         <Button onClick={() => setIsOpen(true)}>Sell Units</Button>
-                        <Button variant={"ghost"}>View Details</Button>
+                        <PropertyDetails setOpen={setBuyProperty} property={unit.property} setSellUnit={setIsOpen} unit={unit} />
                     </div>
-
+                    
+                    <PurchasePropertyDialog open={buyProperty} property={unit.property} setOpen={setBuyProperty}  />
                     <ListUnitsForSaleDialog modal={modal} setModal={setModal} open={isOpen} setIsOpen={setIsOpen} unit={unit} />
                 </div>
             </div>

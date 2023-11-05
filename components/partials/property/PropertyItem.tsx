@@ -15,13 +15,13 @@ export const PropertyItem = ({property} : PropertyItemProps) => {
         const [open, setOpen] = useState(false)
         
         return (
-            <div className="py-3 align-middle md:flex md:space-x-2">
-                <div className="md:w-3/12">
-                    <div className="rounded h-[200px] md:aspect-square bg-muted-foreground overflow-hidden">
+            <div className="py-3  md:flex md:space-x-5">
+                <div className="md:w-2/12">
+                    <div className="rounded md:aspect-square bg-muted-foreground overflow-hidden">
                         <img src={property.image} alt="" className="object-cover object-center w-full h-full" />
                     </div>
                 </div>
-                <div className="flex-col justify-center flex-1 p-0 space-y-2 md:flex md:p-4">
+                <div className="flex-col flex-1 p-0 space-y-2 md:flex">
                     <div>
                         <p className="font-semibold leading-none uppercase md:text-lg">
                             {property.name}

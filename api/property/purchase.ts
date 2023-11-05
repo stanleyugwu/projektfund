@@ -57,7 +57,6 @@ export async function initiatePurchase(state: any, formData: FormData){
         key: publicKey
     }
 
-    console.log(payment)
     return {status: true, payment}
 }
 

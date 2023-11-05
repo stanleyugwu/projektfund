@@ -5,7 +5,6 @@ import { WelcomeHeading } from "@/components/partials/user/WelcomeHeading";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/context/AuthProvider";
 import { LandmarkIcon } from "lucide-react";
 import React from "react";
 
@@ -82,7 +81,7 @@ export default async () => {
                       </div>
 
                       <div className="divide-y">
-                        <InvestedPropertyItem />
+                        {/* <InvestedPropertyItem /> */}
                       </div>
                     </TabsContent>
                     <TabsContent value="completed">

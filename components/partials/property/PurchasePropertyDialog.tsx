@@ -39,24 +39,15 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
 
     const [step, setStep] = useState(1)
 
-    const onSuccess = async (transaction: any) => {
-        console.log(transaction)
-        setIsModal(true)
-        setStep(2)
-        
-        if(transaction.status == "success"){
-           const status = await verifyPurchase(transaction.reference)
-           if(status.status == true) {
-                
-           }
+    const {paystackInit, paystackStatus} = usePaystack({
+        whenCancelled: () => {
+            setIsModal(true)
+        },
+        whenSuccessful: () => {
+            setIsModal(true)
+            setStep(2)
         }
-    };
-
-    const paystack = usePaystack()
-    
-    const onClose = () => {
-        setIsModal(true)
-    }
+    })
 
     const [state, action] = useFormState(initiatePurchase, {
 		status: false,
@@ -65,16 +56,12 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
 		error: '',
 	})
     
-    const initializePayment = (payment: any) => {
-        paystack(payment, onSuccess, onClose)
-        
-    }
 
     useEffect(() => {
         if(state.status){
             if(state.payment) {
                 setIsModal(false)
-                initializePayment(state.payment)
+                paystackInit(state.payment)
             }
         }
     }, [state]);
@@ -139,8 +126,6 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                             Purchase Now
                                         </Button>
                                     </div>
-                        
-                                    <Script src="https://js.paystack.co/v1/inline.js" />
                                 </form>
                             </>                        
                         }
@@ -182,8 +167,5 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
 
         </>
     )
-}
-function initializePayment(payment: any) {
-    throw new Error('Function not implemented.');
 }
 

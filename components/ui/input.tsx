@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
+import { Naira } from "../naira"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -32,3 +33,17 @@ export const InputError = ({message} : {message: string}) => {
     )
 }
 
+interface InputPriceProps extends React.InputHTMLAttributes<HTMLInputElement> {
+
+}
+
+export const InputPrice = ({className, placeholder, type, ...props} : InputPriceProps) => {
+  return (
+    <div className="relative rounded-md shadow-sm">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <span className="text-gray-500 sm:text-sm"><Naira /></span>
+        </div>
+        <Input type="number" className="block w-full px-3 py-2 text-gray-900 pl-7 input-number" placeholder="0.00" {...props} />
+    </div>
+  )
+}

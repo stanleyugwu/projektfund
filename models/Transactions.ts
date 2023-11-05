@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const Transaction = new mongoose.Schema({
-    user_id: {type: String, required: true},
+    user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true},
     reference: {type: String},
     amount: {type: Number, required: true},
-    transactable: {type: mongoose.Schema.Types.ObjectId, refPath: 'transactable_type', required: true},
+    transactable: {type: mongoose.Schema.Types.ObjectId, refPath: 'transactable_type'},
     transactable_type: {type: String},
     purpose: {type: String},
     status: {type: String, required: true}

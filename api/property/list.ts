@@ -6,8 +6,6 @@ import { IProperty } from "@/types/property";
 
 export async function listProperties() : Promise<IProperty[]> {
     await database()
-    
-
-    const properties = JSON.parse(JSON.stringify(await Property.find() ?? []))
-    return properties
+    const properties = await Property.find()
+    return JSON.parse(JSON.stringify(properties))
 }
