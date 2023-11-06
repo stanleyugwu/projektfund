@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const UnitSchema = new mongoose.Schema({
     property: {type: mongoose.SchemaTypes.ObjectId, ref: 'Property', required: true},
     user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true},
-    unit: {type: mongoose.SchemaTypes.ObjectId, ref: 'Unit'},
+    listing: {type: mongoose.SchemaTypes.ObjectId, ref: 'ListedUnit'},
     unit_cost: {type: String},
     units: {type: Number, required: true},
     listed_units: {type: Number, default: 0},

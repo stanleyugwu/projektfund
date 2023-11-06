@@ -11,7 +11,7 @@ import database from "@/services/database";
 export async function userPortfolio () {
     await database()
     const user = await authUser();
-    const data = await Unit.find({user: user.id}).populate('property user unit')
+    const data = await Unit.find({user: user.id}).populate('property user listing')
     return JSON.parse(JSON.stringify(data))
 }
 
@@ -21,7 +21,7 @@ export async function listUnits(state: any, formData: FormData){
     const body = getFormDataAsJson(formData)
     const user = await authUser()
 
-    const unit = await Unit.findById(body.unit_id).populate('property unit user')
+    const unit = await Unit.findById(body.unit_id).populate('property listing user')
     const available_units = unit.units - unit.listed_units
 
     if(available_units < body.units) return response.error().json({errors: {units: "You do not have enough units to proceed!"}});

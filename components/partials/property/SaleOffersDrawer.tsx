@@ -9,27 +9,15 @@ import React, { useEffect, useState } from 'react'
 import { SaleOfferItem } from './SaleOfferItem'
 
 interface ISaleOffersDrawerProps {
-    unit: any
+    offers: any[]
 }
 
-export const SaleOffersDrawer = ({unit} : ISaleOffersDrawerProps) => {
-    const [offers, setOffers] = useState([])
+export const SaleOffersDrawer = ({offers} : ISaleOffersDrawerProps) => {
     
-    useEffect(() => {
-        console.log(unit)
-        saleOffers(unit._id).then((res: any) => {
-            setOffers(res)
-        })
-    }, [])
-
-    useEffect(() => {
-        console.log(offers)
-    }, [offers])
-
     return (
         <Sheet>
-            <Button variant={'ghost'} asChild >
-                <SheetTrigger >Sale Offers</SheetTrigger>
+            <Button  variant={'ghost'} asChild >
+                <SheetTrigger className='w-100' >View Sale Offers</SheetTrigger>
             </Button>
             <SheetContent  className="min-w-full md:min-w-[470px] overflow-y-auto text-black space-y-1 p-0">
                 <SheetHeader className="sticky top-0 flex items-end justify-between p-3 bg-white">

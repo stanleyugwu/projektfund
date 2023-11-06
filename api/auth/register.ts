@@ -37,6 +37,6 @@ export async function register (prevState: any, formData: FormData) {
     
     const html = template<{user: IUser, code: string}>('emails/email-verification.template', {user, code: token})
     await mailer.sendMail({html, to: user.email,})
-    redirect('/')
+    redirect('/login')
     return {status: true, message: 'Registration Successful. Please verify your email!'}
 }

@@ -12,6 +12,7 @@ import { experimental_useFormState as useFormState } from 'react-dom'
 import React, { useEffect } from 'react'
 import { createProperty } from '@/api/property/create'
 import { FormLoader, Loader } from '@/components/ui/loader'
+import { useToast } from '@/components/ui/use-toast'
 
 
 export default function () {
@@ -22,6 +23,17 @@ export default function () {
 		errors: {},
 		error: ''
 	})
+
+    const {toast} = useToast()
+
+    useEffect(() => {
+        if(state.status) {
+            toast({
+                title: 'Success',
+                description: "The property was created successfully!"
+            })
+        }
+    }, [state])
 
     return (
         <>

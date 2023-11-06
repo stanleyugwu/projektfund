@@ -44,15 +44,39 @@ export async function initiatePurchase(state: any, formData: FormData){
     if(body.method == 'wallet'){
         if(user.wallet.main_bal < amount) return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})  
     }
+
+    const existingUnit = await Unit.findOne({property: property, user: user.id})
+    // let unit;
     
-    const unit = await Unit.create({
+    // if(!existingUnit){
+    //     unit = await Unit.create({
+    //         user: user._id,
+    //         property: property.id,
+    //         unit_cost: property.unit_price,
+    //         units: purchasedUnits,
+    //         status: status.pending,
+    //         listed_units: 0,
+    //         listing: body.listing_id ?? null
+    //     })
+    // }else{
+    //     unit = existingUnit
+    // }
+
+    let unit = await Unit.create({
         user: user._id,
-        property: property,
+        property: property.id,
         unit_cost: property.unit_price,
         units: purchasedUnits,
         status: status.pending,
-        listed_units: 0
+        listed_units: 0,
+        listing: body.listing_id ?? null
     })
+
+    // if(existingUnit) {
+    //     existingUnit.units += purchasedUnits
+    //     unit = await existingUnit.save()
+    // }
+
 
     const transaction = await Transactions.create({
         user: user._id,
@@ -75,6 +99,7 @@ export async function initiatePurchase(state: any, formData: FormData){
         const reloadTransaction = await Transactions.findById(transaction.id)
 
         const complete = await completePurchase(reloadTransaction)
+
         if(complete.status){
             await User.findByIdAndUpdate(user.id, {
                 wallet: {
@@ -129,7 +154,7 @@ export async function verifyPurchase(state: any, formData: FormData){
 }
 
 
-export async function completePurchase(transactionModel: any) {
+export async function completePurchase(transactionModel: any, units?: any) {
     const transaction = await Transactions.findById(transactionModel.id).populate('transactable')
     const unit = await Unit.findById(transaction.transactable.id).populate('property')
     if(!unit) return response.error().json({error: "The requested unit does not exist"})

@@ -15,7 +15,7 @@ Validator.registerAsync('exists', async (value, requirement, attribute, passes) 
         return;
     }
 
-    passes()
+    // passes()
 }, "The :attribute does not exist");
 
 Validator.registerAsync('unique', async (value, requirement, attribute, passes) => {
@@ -30,7 +30,8 @@ Validator.registerAsync('unique', async (value, requirement, attribute, passes) 
             passes(false, `This ${field} has already been taken`)
             return;
         }
-        passes()
+        console.log(passes)
+        // passes()
     })
 }, "The :attribute has already been taken")
 

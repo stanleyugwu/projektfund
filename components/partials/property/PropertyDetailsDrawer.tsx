@@ -10,6 +10,7 @@ import { IUnit } from "@/types/units";
 import { Disclose } from "@/components/ui/disclose";
 import _ from "lodash";
 import { SaleOffersDrawer } from "./SaleOffersDrawer";
+import { getPropertyUnits } from "@/api/property/list";
 
 interface IPropertyDetailsProps {
     property: IProperty
@@ -21,6 +22,14 @@ interface IPropertyDetailsProps {
 
 export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPropertyDetailsProps) {
     const [more, setMore] = useState(false)
+
+    const [offers, setOffers] = useState([])
+
+    useEffect(() => {
+        getPropertyUnits(property._id).then((units: any) => {
+            setOffers(units)
+        })
+    }, [])
 
     return (
         <>
@@ -85,8 +94,8 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                                         <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
                                     </div>
                                 </Disclose>
-
-                                <SaleOffersDrawer unit={unit} />
+                                
+                                <SaleOffersDrawer offers={offers} />
                             </div>
 
                             <div className="p-3 space-y-3 rounded bg-primary-foreground">
@@ -96,7 +105,6 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                                     {
                                         more ? <Button variant={'link'} onClick={() => setMore(false)} className="px-0 py-0">View Less</Button> : <Button variant={'link'} onClick={() => setMore(true)} className="px-0 py-0">View More</Button>
                                     }
-
                                 </div>
                             </div>
                         </div>

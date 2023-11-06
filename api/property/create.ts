@@ -24,10 +24,9 @@ export async function createProperty(state: any, data: FormData){
         return {status: false, ...validator.errors}
     }
 
-    const date = new Date()
     const uploadedImages: any[] = await Promise.all(galleryFiles.map(file => upload(file, 'properties/' + random())))
     const featuredImage = await upload(image, 'properties/'+ random() )
-
+   
     body.id ? await Property.findByIdAndUpdate(body.id, {
         ...body,
         gallery: uploadedImages,
@@ -36,7 +35,7 @@ export async function createProperty(state: any, data: FormData){
         ...body,
         gallery: uploadedImages,
         image: featuredImage,
-        avalable_units: body.units
+        available_units: body.units
     })
 
     return {status: true, message: "Property Created Successfully!"};    
