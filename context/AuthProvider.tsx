@@ -2,7 +2,6 @@
 
 import { handleLogout } from "@/api/auth/logout"
 import { IUser } from "@/types/user"
-import { redirect } from "next/navigation"
 import React, { PropsWithChildren, useContext, useMemo, useState } from "react"
 
 // @ts-expect-error
@@ -35,6 +34,12 @@ export const AuthProvider = ({children, user: authUser}: IAuthContextProps) => {
 
     const status = useMemo(() => !!user, [user])
 
+    const [state, action] = useFormState(handleLogout, {
+		status: false,
+		message: '',
+		errors: {}
+	})
+
     const login = (user: IUser) => {
         setUser(user)
     }
@@ -45,7 +50,7 @@ export const AuthProvider = ({children, user: authUser}: IAuthContextProps) => {
 
     const logout = () => {
         setUser(null)
-        handleLogout()
+        action()
     }
 
     return (

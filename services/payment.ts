@@ -41,6 +41,23 @@ export const getBanks = async () => {
     return JSON.parse(JSON.stringify(banks))
 }
 
+export const resolveBank = async (data: {account_no: string, bank_code: number}) => {
+    const url = `${baseUrl}/bank/resolve`
+    
+    const req = await fetch(url, {
+        headers: {"Authorization": "Bearer "+secretKey},
+        body: JSON.stringify(data),
+        method: 'POST'
+    })
+
+    if(req.ok) {
+        const data = await req.json()
+        if(data.status) {
+
+        }
+    }
+}
+
 export const setPaystackPaymentData = (transaction: ITransaction) : IPaymentData => {
     const amount = transaction.amount * 100
     return {
@@ -51,9 +68,10 @@ export const setPaystackPaymentData = (transaction: ITransaction) : IPaymentData
     }
 }
 
-export async function verify(reference: string){
+export async function verify(state: any, formData: FormData){
     await database()
     const user = await authUser();
+    const reference = formData.get('reference') as string
     const transaction = await Transactions.findOne({reference})
     if(!transaction) return {status: false, error: 'The requested transaction was not found!'}
     if(transaction.user != user.id) return {status: false, error: 'The requested transaction does not belong to the current user. Please try again or contact support.'}
@@ -71,7 +89,7 @@ export async function verify(reference: string){
             transaction.status = status.success
             await transaction.save()                
             console.timeStamp('Transaction Verified')
-            return {status: true, transaction: transaction}
+            return {status: true, transaction: JSON.parse(JSON.stringify(transaction))}
         }    
     }
     

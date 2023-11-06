@@ -6,7 +6,7 @@ const UnitSchema = new mongoose.Schema({
     unit: {type: mongoose.SchemaTypes.ObjectId, ref: 'Unit'},
     unit_cost: {type: String},
     units: {type: Number, required: true},
-    listed_units: {type: Number, required: true},
+    listed_units: {type: Number, default: 0},
     status: {type: String, required: true}
 }, {timestamps: true})
 

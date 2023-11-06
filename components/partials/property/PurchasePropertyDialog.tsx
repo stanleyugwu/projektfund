@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { InfoCircledIcon } from '@radix-ui/react-icons';
 import Script from 'next/script';
-import { initiatePurchase, verifyPurchase } from '@/api/property/purchase';
+import { completePurchase, initiatePurchase, verifyPurchase } from '@/api/property/purchase';
 import usePaystack from '@/hooks/usePaystack';
 
 // @ts-expect-error
@@ -22,6 +22,7 @@ import { AlertCircleIcon, CheckCheckIcon, CheckCircleIcon } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import { useToast } from '@/components/ui/use-toast';
 
 
 interface IPurchasePropertyDrawerProps {
@@ -36,18 +37,42 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
     const price = useMemo(() => units * property.unit_price, [units])
     const {user} = useAuth()
     const [isModal, setIsModal] = useState(true)
+    const {toast} = useToast()
 
     const [step, setStep] = useState(1)
+
+    const [verifyPurchaseState, verifiyPurchaseAction, reset] = useFormState(verifyPurchase, {})
 
     const {paystackInit, paystackStatus} = usePaystack({
         whenCancelled: () => {
             setIsModal(true)
         },
-        whenSuccessful: () => {
+        whenSuccessful: (transaction) => {
+            const data = new FormData()
+            data.set('reference', transaction.reference)
+            verifiyPurchaseAction(data)
             setIsModal(true)
-            setStep(2)
         }
     })
+
+    useEffect(() => {
+        if(verifyPurchaseState.status == 'completed'){
+            setStep(2)
+
+            toast({
+                title: "Payment completed",
+                description: verifyPurchaseState.message
+            })
+        }
+
+        if(!verifyPurchaseState) {
+            toast({
+                variant: 'destructive',
+                title: "Transaction Error",
+                description: verifyPurchaseState.error
+            })
+        }
+    }, [verifyPurchaseState])
 
     const [state, action] = useFormState(initiatePurchase, {
 		status: false,
@@ -58,12 +83,28 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
     
 
     useEffect(() => {
-        if(state.status){
-            if(state.payment) {
-                setIsModal(false)
-                paystackInit(state.payment)
-            }
+        if(state.status == 'pay'){
+            setIsModal(false)
+            paystackInit(state.payment)
         }
+
+        if(state.status == 'completed'){
+            toast({
+                title: "Payment completed",
+                description: state.message
+            })
+
+            setStep(2)
+        }
+
+        if(!state.status && state.error){
+            toast({
+                variant: 'destructive',
+                description: state.error
+            })
+        }
+
+
     }, [state]);
 
     return (
@@ -90,7 +131,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
 
                                     <div className='space-y-1'>
                                         <Label>Payment Method</Label>
-                                        <Select>
+                                        <Select name='method'>
                                             <SelectTrigger className="">
                                                 <SelectValue placeholder="Select payment method" />
                                             </SelectTrigger>
@@ -110,13 +151,6 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
 
                                     <input type="text" hidden value={property._id} name="property_id" />
 
-                                    <Alert >
-                                        <InfoCircledIcon className="w-4 h-4" />
-                                        <AlertTitle>Heads up!</AlertTitle>
-                                        <AlertDescription >
-                                            You can add components to your app using the cli.
-                                        </AlertDescription>
-                                    </Alert>
 
                                     <div>
                                         <Button className='w-full' type='submit'>
@@ -140,7 +174,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                         <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
                                     </DialogHeader>
 
-                                    <div >
+                                    <div className='space-y-5' >
                                         <div className="flex p-2 space-x-3 border rounded-md">
                                             <div className='w-2/12'>
                                                 <img src={property.image} className='rounded-md aspect-square' alt="" />
@@ -155,7 +189,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                         </div>
 
                                         <Button asChild>
-                                            <Link href={''} >View Portfolio</Link>
+                                            <Link href={'/portfolio'} >View Portfolio</Link>
                                         </Button>
                                     </div>
                                 </div>    

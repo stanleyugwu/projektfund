@@ -1,4 +1,7 @@
+'use client'
+
 import { PropertyItem } from '@/components/partials/property/PropertyItem'
+import { useApp } from '@/context/AppContext'
 import { IProperty } from '@/types/property'
 import React from 'react'
 
@@ -7,6 +10,10 @@ interface IShowProperties {
 }
 
 export const ShowProperties = ({properties} : IShowProperties) => {
+    useApp({
+        title: "Invest"
+    })
+
     return (
         <>
             <div>

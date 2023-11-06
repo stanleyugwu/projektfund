@@ -3,7 +3,7 @@ import { ISchema } from "@/types/validator";
 export const __PropertySchema : ISchema = {
     rules: {
         name: ['required', 'string'],
-        price: ['required', 'integer'],
+        price: ['required', 'numeric'],
         address: 'required|string',
         image: ['required', 'image'],
         city: ['required', 'string'],
@@ -11,8 +11,8 @@ export const __PropertySchema : ISchema = {
         description: ['required'],
         // gallery: [''],
         type: ['required'],
-        unit_price: ['required', 'integer'],
-        units: ['required', 'integer'],
+        unit_price: ['required', 'numeric'],
+        units: ['required', 'numeric'],
         video: 'url',
         status: 'required|in:active,inactive'
     },

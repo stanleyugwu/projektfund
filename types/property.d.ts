@@ -9,6 +9,7 @@ interface IProperty{
     city: string
     country: string
     type: string
+    available_units: number
     image: string
     gallery: Array<String>,
     video: string

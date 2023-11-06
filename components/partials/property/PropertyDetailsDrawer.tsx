@@ -2,14 +2,14 @@
 
 import { Naira } from "@/components/naira";
 import { Button } from "@/components/ui/button";
-import { SheetTrigger, SheetContent, SheetHeader, SheetDescription, Sheet, SheetFooter } from "@/components/ui/sheet";
+import { SheetTrigger, SheetContent, SheetHeader, SheetDescription, Sheet, SheetFooter, SheetClose } from "@/components/ui/sheet";
 import { IProperty } from "@/types/property";
 import { useEffect, useState } from "react";
-import * as SheetPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react";
 import { IUnit } from "@/types/units";
 import { Disclose } from "@/components/ui/disclose";
 import _ from "lodash";
+import { SaleOffersDrawer } from "./SaleOffersDrawer";
 
 interface IPropertyDetailsProps {
     property: IProperty
@@ -22,28 +22,25 @@ interface IPropertyDetailsProps {
 export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPropertyDetailsProps) {
     const [more, setMore] = useState(false)
 
-    // useEffect(() => {
-    //     console.log(property)
-    // }, [property])
-
-
     return (
         <>
             <Sheet  >
-                <Button variant={'ghost'} asChild >
-                    <SheetTrigger>View Details</SheetTrigger>
-                </Button>
+                    <SheetTrigger asChild>
+                        <Button variant={'ghost'}>
+                        View Details
+                        </Button>
+                    </SheetTrigger>
                 <SheetContent  className="min-w-full md:min-w-[470px] overflow-y-auto text-black space-y-1 p-0">
                     <SheetHeader className="sticky top-0 flex items-end justify-end p-3 bg-white">
-                        <SheetPrimitive.Close className="inline-block">
-                            <X className="w-8 h-8" />
+                        <SheetClose className="inline-block">
+                            <X className="w-5 h-5" />
                             <span className="sr-only">Close</span>
-                        </SheetPrimitive.Close>
+                        </SheetClose>
                     </SheetHeader>
 
                     <SheetDescription>
-                        <div className="h-64 overflow-hidden relative">
-                            <div className="absolute top-0 right-0 left-0 bottom-0 bg-black bg-opacity-50" />
+                        <div className="relative h-64 overflow-hidden">
+                            <div className="absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50" />
                             <img src={property.image} className="object-cover object-center w-full h-full" />
                         </div>
                         <div className="p-5 space-y-4 text-black">
@@ -82,13 +79,14 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
 
                             <div className="space-y-2">
                                 <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
-                                <Button variant={'ghost'} onClick={() => setOpen(true)} size={'lg'} className="w-full">View Sell Offers</Button>
 
                                 <Disclose show={!!unit}>
                                     <div className="space-x-3 space-y-3">
                                         <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
                                     </div>
                                 </Disclose>
+
+                                <SaleOffersDrawer unit={unit} />
                             </div>
 
                             <div className="p-3 space-y-3 rounded bg-primary-foreground">

@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input, InputError } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { FormLoader } from '@/components/ui/loader'
+import { useToast } from '@/components/ui/use-toast'
 import { IUnit } from '@/types/units'
 import React, { useEffect, useState } from 'react'
 
@@ -14,7 +15,7 @@ import React, { useEffect, useState } from 'react'
 import { experimental_useFormState as useFormState } from 'react-dom'
 
 interface IListUnitsForSaleDialog{
-    unit: IUnit,
+    unit: IUnit
     modal: any
     open: any
     setModal: any
@@ -30,6 +31,17 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
 		errors: {},
 		error: ''
 	})
+    
+    const { toast } = useToast()
+    
+    useEffect(() => {
+        if(state.status){
+            toast({
+                title: "Unit listed successfully",
+                description: state.message
+            })
+        }
+    }, [state])
 
     return (
         <>
@@ -43,7 +55,7 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
                     <form action={action} className='space-y-3'>
                         <div className='space-y-2' >
                             <Label>Number of Units to sell</Label>
-                            <Input name='units' value={units} onChange={(e) => setUnits(parseInt(e.currentTarget.value))} />
+                            <Input name='units' type='number' value={units} onChange={(e) => setUnits(e.currentTarget.value as unknown as number)} />
                             <InputError message={state?.errors?.units} />
                             <div className='grid grid-cols-6'>
                                 <Button variant={'secondary'} type='button' onClick={() => setUnits(unit.units)} className='w-full' size={'sm'}>All</Button>

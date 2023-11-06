@@ -7,5 +7,6 @@ export const status = {
     completed: 'completed', 
     progress: 'in progress', 
     active: 'active', 
-    inactive: 'inactive'
+    inactive: 'inactive',
+    failed: 'failed',
 }

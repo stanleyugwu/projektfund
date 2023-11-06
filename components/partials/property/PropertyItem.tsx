@@ -15,9 +15,9 @@ export const PropertyItem = ({property} : PropertyItemProps) => {
         const [open, setOpen] = useState(false)
         
         return (
-            <div className="py-3  md:flex md:space-x-5">
+            <div className="py-3 md:flex md:space-x-5">
                 <div className="md:w-2/12">
-                    <div className="rounded md:aspect-square bg-muted-foreground overflow-hidden">
+                    <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
                         <img src={property.image} alt="" className="object-cover object-center w-full h-full" />
                     </div>
                 </div>
@@ -31,7 +31,7 @@ export const PropertyItem = ({property} : PropertyItemProps) => {
 
                     <div className="grid grid-cols-3">
                         <div>
-                            <h2 className="font-medium leading-none">{property.units.toLocaleString()}</h2>
+                            <h2 className="font-medium leading-none">{property.available_units?.toLocaleString()} out of {property.units?.toLocaleString()}</h2>
                             <p className="text-sm text-muted-foreground">Available Units</p>
                         </div>
                         <div>

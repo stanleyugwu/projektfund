@@ -1,5 +1,6 @@
 import roles from "@/lib/roles"
 import { IStatus } from "./status"
+import { IUserBank } from "./banks"
 
 export interface IUser {
     _id: string
@@ -15,6 +16,7 @@ export interface IUser {
     avatar: string
     wallet: IWallet
     status: IStatus
+    bank: IUserBank
 }
 
 export type IRoles = 'admin' | 'user' | 'super admin'

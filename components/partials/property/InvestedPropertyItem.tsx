@@ -6,6 +6,7 @@ import React, { useMemo, useState } from "react";
 import { ListUnitsForSaleDialog } from "./ListUnitsForSaleDialog";
 import { PropertyDetails } from "./PropertyDetailsDrawer";
 import { PurchasePropertyDialog } from "./PurchasePropertyDialog";
+import { SaleOffersDrawer } from "./SaleOffersDrawer";
 // import { ListUnitsForSaleDialog } from "./ListUnitsForSaleDialog";
 
 interface IUnitItem {
@@ -18,7 +19,7 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
     const [drawer, setDrawer] = useState(false)
     const [sellUnit, setSellUnit] = useState(false)
     const [buyProperty, setBuyProperty] = useState(false)
-
+    
     return (
         <>
             <div className="flex py-3 space-x-5">
@@ -35,10 +36,14 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
                         <p className="text-sm">{unit.property.address}, {unit.property.city}, {unit.property.country}</p>
                     </div>
 
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-4">
                         <div>
                             <h2 className="font-medium leading-none">{unit.units}</h2>
                             <p className="text-sm text-muted-foreground">Units Owned</p>
+                        </div>
+                        <div>
+                            <h2 className="font-medium leading-none">{unit.listed_units}</h2>
+                            <p className="text-sm text-muted-foreground">Units Listed</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none"><Naira /> {unit.property.unit_price.toLocaleString()}</h2>

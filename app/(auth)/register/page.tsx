@@ -21,9 +21,7 @@ export default function () {
 
     return (
         <div className="grid h-full grid-cols-2" >
-			<div>
-
-			</div>
+			<div className="bg-primary"></div>
 
 			<div className="flex items-center justify-center h-full p-10 flex-column">
 				<form action={action} className="w-4/6 space-y-5">
@@ -72,8 +70,8 @@ export default function () {
 					</div>
 
 					<div>
-						<p className="text-sm text-muted-foreground">
-							Already have an account? <Link  href={'/login'}>Login</Link>
+						<p className="text-sm font-semibold text-muted-foreground">
+							Already have an account? <Link className='text-primary' href={'/login'}>Login</Link>
 						</p>
 					</div>
 				</form>

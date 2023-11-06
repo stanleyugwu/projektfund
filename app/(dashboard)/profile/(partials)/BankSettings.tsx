@@ -3,25 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { Input, InputError } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import { useAuth } from "@/context/AuthProvider";
 import React from "react";
 
 export const BankSettings = ({ banks }: { banks: any[] }) => {
+  const {user, refresh} = useAuth()
   return (
-    <form className="md:w-2/4 space-y-3 py-5">
+    <form className="py-5 space-y-3 md:w-2/4">
       <div>
         <h3 className="text-lg font-bold">Bank Account Information</h3>
       </div>
-      <div className="w-1/2">
+      <div className="w-2/3">
         <div>
           <Label>Bank</Label>
-          <select className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+          <select className="flex items-center justify-between w-full h-10 px-3 py-2 text-sm border rounded-md border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
               <option value={''}>Select Bank</option>
               {banks.map((bank) => (
                 <option value={bank.code}>{bank.name}</option>

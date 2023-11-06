@@ -35,7 +35,8 @@ export async function createProperty(state: any, data: FormData){
     }) : await Property.create({
         ...body,
         gallery: uploadedImages,
-        image: featuredImage
+        image: featuredImage,
+        avalable_units: body.units
     })
 
     return {status: true, message: "Property Created Successfully!"};    

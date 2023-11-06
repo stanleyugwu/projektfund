@@ -5,6 +5,7 @@ import Wallet from "./Wallet";
 import { Status } from "@/casts/status";
 import roles from "@/lib/roles";
 import Unit from "./Unit";
+import Bank from "./Bank";
 
 const UserSchema = new mongoose.Schema<IUser>({
     firstname: {type: String, required: true},
@@ -21,6 +22,7 @@ const UserSchema = new mongoose.Schema<IUser>({
         main_bal: 0,
         pending_bal: 0
     }},
+    bank: {type: Bank},
     status: {type: String, required: true, default: 'active'}
 }, {timestamps: true, 
     virtuals: {
