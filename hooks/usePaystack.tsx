@@ -1,6 +1,6 @@
 'use client'
 
-import { verifyPurchase } from "@/api/property/purchase"
+import { useToast } from "@/components/ui/use-toast"
 import { verify } from "@/services/payment"
 import { IPaymentData } from "@/types/paystack"
 import { useState } from "react"
@@ -16,14 +16,32 @@ interface IPaystackProps {
 export default ({whenCancelled, whenSuccessful, whenInit}: IPaystackProps = {}) => {
 
     const [status, setStatus] = useState<IPaymentStatus>(null)
+    const {toast} = useToast()
 
-    const onSuccess = (transaction: any) => {
+    const onSuccess = async (transaction: any) => {
         if(transaction.status == "success"){
-            verify(transaction.reference).then((res) => {
-                if(res.status == true) {
-                    setStatus('completed')
-                    if(whenSuccessful) whenSuccessful(res.transaction)
-                }
+            const response = await verify(transaction.reference)
+            if(response.status == true) {
+                setStatus('completed')
+                
+                // toast({
+                //     title: "Transaction Successful",
+                //     description: "Your transaction was completed successfully!"
+                // })
+
+                if(whenSuccessful) whenSuccessful(response.transaction)
+            }else{
+                toast({
+                    variant: 'destructive',
+                    title: "Transaction Error",
+                    description: response.error
+                })
+            }
+        }else{
+            toast({
+                variant: 'destructive',
+                title: "Transaction Error",
+                description: "Your transaction was not successful! Please try again."
             })
         }
         setStatus('uncompleted')

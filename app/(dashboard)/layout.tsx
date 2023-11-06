@@ -16,7 +16,7 @@ import { Disclose } from '@/components/ui/disclose'
 
 
 interface IDashboardLayoutProps extends PropsWithChildren {
-
+    title?: string 
 }
 
 interface INavIcons {
@@ -42,7 +42,7 @@ const nav_items : INavIcons[]  = [
     {href: '/wallet', name: 'Wallet', role: roles.user, icon: <Wallet2Icon className="w-4 h-4 mr-2" />},
 ]
 
-export default async function ({children} : IDashboardLayoutProps) {
+export default async function ({children, title} : IDashboardLayoutProps) {
     const pathname = usePathname()
     const {user, logout} = useAuth()
     const router = useRouter()
@@ -54,45 +54,44 @@ export default async function ({children} : IDashboardLayoutProps) {
     return (
         <div className='h-screen'>            
             <div className="h-full grid-cols-6 md:grid">
-                <div className='hidden h-full col-span-1 p-5 space-y-10 md:flex md:flex-col border-e'>
-                    <div>
-                        <h1 className='text-2xl font-medium'>Brand</h1>
+                <div className='hidden h-full col-span-1  md:flex md:flex-col border-e max-h-screen '>
+                    <div className='sticky top-0 p-5 space-y-10'>
+                        <div>
+                            <h1 className='text-2xl font-medium'>Brand</h1>
+                        </div>
+                        
+                        <div className='flex w-full space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1'>
+
+                            {
+                                nav_items.map(({icon, role, ...item}, index) => (
+                                    <Disclose show={user?.role == role || !role}>
+                                        {
+                                            item.href ?
+                                            <Link
+                                                key={item.name + index}
+                                                href={item.href}
+                                                className={cn(
+                                                    buttonVariants({ variant: "ghost" }),
+                                                    pathname === item.href
+                                                    ? "bg-muted hover:bg-muted text-primary"
+                                                    : "hover:bg-muted hover:text-primary",
+                                                    "justify-start", 'rounded'
+                                                )}
+                                            >{icon} {item.name}</Link> : <p key={item.name} className='px-1 text-sm text-gray-600'>{item.name}</p>
+                                        }
+                                    </Disclose>
+                                ))
+                            }
+
+                        </div>
+                        <div></div>
                     </div>
-                    
-                    <div className='flex w-full space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1'>
-
-                        {
-                            nav_items.map(({icon, role, ...item}, index) => (
-                                <Disclose show={user?.role == role || !role}>
-                                    {
-                                        item.href ?
-                                        <Link
-                                            key={item.name + index}
-                                            href={item.href}
-                                            className={cn(
-                                                buttonVariants({ variant: "ghost" }),
-                                                pathname === item.href
-                                                ? "bg-muted hover:bg-muted text-primary"
-                                                : "hover:bg-muted hover:text-primary",
-                                                "justify-start", 'rounded'
-                                            )}
-                                        >{icon} {item.name}</Link> : <p key={item.name} className='px-1 text-sm text-gray-600'>{item.name}</p>
-                                    }
-                                </Disclose>
-                            ))
-                        }
-
-                    </div>
-
-                    {/* <Button variant={'secondary'} onClick={() => logout()} className="mt-10 rounded">Logout</Button> */}
-
-                    <div></div>
                 </div>
                 
-                <div className='col-span-5 bg-muted'>
-                    <div className='flex justify-between px-10 py-3 bg-white'>
+                <div className='col-span-5 bg-muted flex flex-col'>
+                    <div className='flex justify-between px-10 py-3 bg-white sticky top-0 border-b'>
                         <div>
-                            
+                            {title}
                         </div>
 
                         <div>
@@ -116,8 +115,15 @@ export default async function ({children} : IDashboardLayoutProps) {
                         </div>
                     </div>
                     
-                    <div className="p-5 md:container md:py-10">
+                    <div className="p-5 md:container md:py-10 flex-1">
                         {children}          
+                    </div>
+
+                    <div className=''>
+                        <div className="flex justify-between py-4 container text-muted-foreground font-semibold">
+                            <div>
+                                <p>&copy; {new Date().getFullYear()}</p>
+                            </div>                        </div>
                     </div>
                 </div>
             </div>

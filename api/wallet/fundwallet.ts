@@ -7,7 +7,7 @@ import Transactions from "@/models/Transactions"
 import { authUser } from "@/services/auth"
 import database from "@/services/database"
 import { setPaystackPaymentData } from "@/services/payment"
-import { createTransaction } from "@/services/transactions"
+import { createTransaction, transactionType } from "@/services/transactions"
 
 export async function initiateWalletFunding(state: any, formData: FormData){
     await database()
@@ -18,7 +18,8 @@ export async function initiateWalletFunding(state: any, formData: FormData){
     const transaction = await createTransaction({
         user: user.id,
         amount: body.amount,
-        purpose: "Wallet Deposit",
+        purpose: transactionType.deposit.description,
+        type: transactionType.deposit.name
     })
 
     const paymentData = setPaystackPaymentData(transaction)
@@ -30,15 +31,20 @@ export async function initiateWalletFunding(state: any, formData: FormData){
 
 export async function completeWalletFunding(transaction_id: string){
     await database()
-
     const user = await authUser()
 
+    console.log("Completing Walllet Funding")
+    
     const transaction = await Transactions.findById(transaction_id)
     if(user.id != transaction?.user) return response.error().json({message: 'Transaction failed'})
     if(transaction.status !== status.success) return response.error().json("You transaction was not completed!")
     
-    user.wallet.main_balance += transaction.amount;
+    console.log("Funding Wallet")
+    user.wallet.main_bal += transaction.amount;
     user.save() 
+
+    console.timeStamp('Wallet Funded')
+    console.log("Wallet Funded")
 
     return response.success().json('Wallet funding successful!', {user: user})
 }

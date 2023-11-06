@@ -28,12 +28,13 @@ export function DepositDialog(){
 	})
 
     const {paystackInit, paystackStatus} = usePaystack({
-        whenSuccessful: (transaction) => {
+        whenSuccessful: async (transaction) => {
             switchModalMode(true)
-
-            completeWalletFunding(transaction.id).then((res) => {
-                if(res.status) refresh(res.user)
-            })
+            const req = await completeWalletFunding(transaction._id)
+            if(req.status) refresh(req.user)
+        },
+        whenCancelled: () => {
+            switchModalMode(true)
         }
     })
 

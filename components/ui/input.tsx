@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 import { Naira } from "../naira"
+import { isNumber } from "lodash"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -37,13 +38,24 @@ interface InputPriceProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 }
 
-export const InputPrice = ({className, placeholder, type, ...props} : InputPriceProps) => {
+export const InputPrice = ({className, placeholder, type, name, ...props} : InputPriceProps) => {
+
+  const [amount, setAmount] = React.useState('')
+
+  const price = React.useMemo(() => {
+    const format = amount.split(',').join('')
+    const int = parseInt(format)
+    const isNum = isNumber(int) && (!Number.isNaN(int))
+    return (amount && isNum) ? parseInt(format).toLocaleString() : ''
+  }, [amount])
+
   return (
     <div className="relative rounded-md shadow-sm">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <span className="text-gray-500 sm:text-sm"><Naira /></span>
         </div>
-        <Input type="number" className="block w-full px-3 py-2 text-gray-900 pl-7 input-number" placeholder="0.00" {...props} />
+        <Input type="text" value={price} onChange={(e) => setAmount(e.currentTarget.value)} className="block w-full px-3 py-2 text-gray-900 pl-7 input-number" placeholder="0.00" {...props} />
+        <input type="hidden"  name={name} value={price.split(',').join('') } />
     </div>
   )
 }

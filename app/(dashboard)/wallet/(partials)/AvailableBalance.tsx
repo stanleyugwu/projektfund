@@ -1,5 +1,6 @@
 'use client'
 
+import { Naira } from "@/components/naira";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/context/AuthProvider";
 import { cn } from "@/lib/utils";
@@ -16,10 +17,7 @@ export function AvailableBalance () {
                 <LandmarkIcon className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold">{user?.wallet.avail_bal}</div>
-                <p className="text-xs text-muted-foreground">
-                +180.1% from last month
-                </p>
+                <div className="text-2xl font-bold"><Naira />{user?.wallet.main_bal.toLocaleString()}</div>
             </CardContent>
         </Card>
     )
