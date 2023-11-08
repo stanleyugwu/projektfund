@@ -12,7 +12,7 @@ export const SaleOfferItem = ({offer} : {offer: any}) => {
                 <div className='flex items-center gap-3'>
                     <div className="grid flex-1 grid-cols-3 text-center">
                         <div>
-                            <h2 className="font-medium leading-none">{offer.units}</h2>
+                            <h2 className="font-medium leading-none">{offer.available_units}</h2>
                             <p className="text-sm text-muted-foreground">Units Listed</p>
                         </div>
                         <div>

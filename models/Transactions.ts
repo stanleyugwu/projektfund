@@ -9,7 +9,8 @@ const Transaction = new mongoose.Schema({
     type: {type: String},
     purpose: {type: String},
     payment_method: {type: String, required: true},
-    status: {type: String, required: true}
+    status: {type: String, required: true},
+    data: {type: Object}
 }, {timestamps: true})
 
 export default mongoose.models?.Transaction ?? mongoose.model('Transaction', Transaction)

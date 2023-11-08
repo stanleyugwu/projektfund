@@ -12,7 +12,7 @@ import { authUser } from "@/services/auth"
 import database from "@/services/database"
 import { transactionType } from "@/services/transactions"
 import Validator from '@/lib/validator'
-import { Transaction } from "mongodb"
+import ListedUnit from "@/models/ListedUnit"
 
 const baseUrl = process.env.PAYSTACK_BASE_URL
 const secretKey = process.env.PAYSTACK_SECRET
@@ -27,6 +27,7 @@ export async function initiatePurchase(state: any, formData: FormData){
     const validator = new Validator(body, __PurchaseUnitSchema.rules)
     validator.setAttributeNames(__PurchaseUnitSchema.attributes as Validator.AttributeNames)
 
+    // Validate Data
     if(! validator.check()) {
         return {status: false, ...validator.errors}
     }
@@ -37,69 +38,58 @@ export async function initiatePurchase(state: any, formData: FormData){
     const property = await Property.findById(body.property_id)
     if(!property) return {status: false, message: 'Invalid Property Selected'} 
 
-    const reference = await Token.random('transactions', 'refrence')
+    // Try the listed unit 
+    const listing = await ListedUnit.findById(body.listing_id).populate('unit')
     
-    const amount = property.unit_price * purchasedUnits
-    
-    if(body.method == 'wallet'){
-        if(user.wallet.main_bal < amount) return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})  
+    /**
+     * Check if listed unit id is on the body,
+     * if it is, check if the listing was retrieved
+     * if it was not return an error that the listing does not exist
+     */
+    if(body.listing_id && !listing){
+        return response.error().json({error: "The listing does not exist!"})
     }
 
-    const existingUnit = await Unit.findOne({property: property, user: user.id})
-    // let unit;
+    const reference = await Token.random('transactions', 'refrence')
     
-    // if(!existingUnit){
-    //     unit = await Unit.create({
-    //         user: user._id,
-    //         property: property.id,
-    //         unit_cost: property.unit_price,
-    //         units: purchasedUnits,
-    //         status: status.pending,
-    //         listed_units: 0,
-    //         listing: body.listing_id ?? null
-    //     })
-    // }else{
-    //     unit = existingUnit
-    // }
-
-    let unit = await Unit.create({
-        user: user._id,
-        property: property.id,
-        unit_cost: property.unit_price,
-        units: purchasedUnits,
-        status: status.pending,
-        listed_units: 0,
-        listing: body.listing_id ?? null
-    })
-
-    // if(existingUnit) {
-    //     existingUnit.units += purchasedUnits
-    //     unit = await existingUnit.save()
-    // }
-
-
+    // Check if the listing existed and user the listing unit_price else, use the property price
+    const unit_price = listing ? listing.unit_price : property.unit_price
+    const amount = unit_price * purchasedUnits
+    
+    // If wallet payment, check if the wallet has enough money to cover the transaction
+    if(body.method == 'wallet'){
+        if(user.wallet.main_bal < amount) {
+            return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})  
+        }
+    }
+    
+    // Create a transaction for this purchase
     const transaction = await Transactions.create({
         user: user._id,
         status: status.pending,
         amount: amount,
         reference: reference,
         purpose: transactionType.unit.description,
-        transactable: unit._id,
-        transactable_type: 'Unit',
-        payment_method: body.method
+        payment_method: body.method,
+        data: {
+            units: purchasedUnits,
+            property: property.id,
+            listing_id: body.listing_id ?? null
+        }
     });
-
+    
+    // If payment method is wallet, handle the payment
     if(transaction.payment_method == 'wallet') {
         if(user.wallet.main_bal < amount) {
             transaction.status = status.failed
             transaction.save()
             return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})
         }
-
+        
         const reloadTransaction = await Transactions.findById(transaction.id)
-
+        
         const complete = await completePurchase(reloadTransaction)
-
+        
         if(complete.status){
             await User.findByIdAndUpdate(user.id, {
                 wallet: {
@@ -108,10 +98,11 @@ export async function initiatePurchase(state: any, formData: FormData){
                 }
             })
         }
-
+        
         return complete
     }
-
+    
+    // Else, handle the response
     if(transaction.payment_method == 'paystack'){
         const payment = {
             ref: reference,
@@ -143,7 +134,11 @@ export async function verifyPurchase(state: any, formData: FormData){
             const data = await req.json()
 
             if(data.status) {
-                return await completePurchase(transaction)
+                const complete = await completePurchase(transaction)
+                transaction.user.wallet.main_bal -= transaction.amount
+                await transaction.user.save()
+
+                return complete
             }    
         }
         
@@ -154,20 +149,59 @@ export async function verifyPurchase(state: any, formData: FormData){
 }
 
 
-export async function completePurchase(transactionModel: any, units?: any) {
-    const transaction = await Transactions.findById(transactionModel.id).populate('transactable')
-    const unit = await Unit.findById(transaction.transactable.id).populate('property')
-    if(!unit) return response.error().json({error: "The requested unit does not exist"})
+export async function completePurchase(transactionModel: any) {
+    const transaction = await Transactions.findById(transactionModel.id).populate('user')
+    if(!transaction) return response.error().json({error: "The transaction was not found"})
 
+    const property = await Property.findById(transaction.data.property)
+    if(!property) return response.error().json({error: "The property does not exist"})
+
+    const unit = await createOrUpdateUnit(property, transaction)
+    if(transaction.data.listing_id) await updateListing(transaction)
+
+    transaction.transactable = unit._id,
+    transaction.transactable_type = 'Unit',
     transaction.status = status.success
     await transaction.save()             
     
-    const property = unit.property
-    property.available_units = property.available_units - unit.units
+    property.available_units -= unit.units
     await property.save()
-
-    unit.status = status.active
-    await unit.save()
     
-    return {status: 'completed', message: `You have successfully Purchased ${unit.units} units for ${transaction.amount} Naira`}
+    return {status: 'completed', message: `You have successfully Purchased ${transaction.data.units} units for ${transaction.amount} Naira`}
+}
+
+async function createOrUpdateUnit(property: any, transaction: any){
+    
+    const existingUnit = await Unit.findOne({property: property, user: transaction.user.id})
+
+    if(!existingUnit){
+        return await Unit.create({
+            user: transaction.user._id,
+            property: transaction.data.property,
+            unit_cost: property.unit_price,
+            units: transaction.data.units,
+            status: status.active,
+            listed_units: 0,
+            available_units: transaction.data.units
+        })
+    }
+
+    existingUnit.units += transaction.data.units
+    existingUnit.available_units += transaction.data.units
+    return await existingUnit.save()
+}
+
+async function updateListing(transaction: any) {
+    const listing = await ListedUnit.findById(transaction.data.listing_id).populate('unit')
+    const unit = listing.unit
+
+    listing.available_units -= transaction.data.units;
+    await listing.save();
+
+    unit.available_units -= transaction.data.units
+    unit.listed_units -= transaction.data.units
+    await unit.save()
+    // const listing = await ListedUnit.findById(transaction.data.listing_id)
+    // listing.available_units -= transaction.data.units
+    // await listing.save()
 }

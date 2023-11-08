@@ -14,6 +14,7 @@ export async function listProperties() : Promise<IProperty[]> {
 
 export async function getPropertyUnits(property: string) {
     await database()
-    const listedUnits = await ListedUnit.find({property}).populate('property user unit')
-    return listedUnits
+    const listedUnits = await ListedUnit.find({property: property}).populate('property user unit')
+    // console.log(listedUnits)
+    return JSON.parse(JSON.stringify(listedUnits))
 }

@@ -10,16 +10,11 @@ import { FormLoader, Loader } from '@/components/ui/loader';
 import { Naira } from '@/components/naira';
 import { useAuth } from '@/context/AuthProvider';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { InfoCircledIcon } from '@radix-ui/react-icons';
-import Script from 'next/script';
-import { completePurchase, initiatePurchase, verifyPurchase } from '@/api/property/purchase';
+import { initiatePurchase, verifyPurchase } from '@/api/property/purchase';
 import usePaystack from '@/hooks/usePaystack';
 
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
-import { AlertCircleIcon, CheckCheckIcon, CheckCircleIcon } from 'lucide-react';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useToast } from '@/components/ui/use-toast';
@@ -198,7 +193,6 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                     </>
                 </DialogContent>
             </Dialog>
-
         </>
     )
 }

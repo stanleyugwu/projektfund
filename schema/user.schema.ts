@@ -33,14 +33,14 @@ export const __UpdatePasswordSchema : ISchema = {
 export const __UpdateUserBankSchema : ISchema = {
     rules: {
         account_name: 'required|string',
-        bank_name: 'required|string',
+        // bank_name: 'required|string',
         bank_code: 'required|numeric',
         account_number: 'required|numeric'
     },
     
     attributes: {
         account_name: 'Account Name',
-        bank_name: 'Bank Name',
+        // bank_name: 'Bank Name',
         bank_code: 'Bank Code',
         account_number: 'Account Number'
     }

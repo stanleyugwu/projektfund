@@ -66,7 +66,7 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
 
                                 <div className="flex justify-between">
                                     <div className="">
-                                        <h4 className="text-2xl font-semibold leading-none text-primary">{property.units.toLocaleString()} </h4>
+                                        <h4 className="text-2xl font-semibold leading-none text-primary">{property.available_units.toLocaleString()} </h4>
                                         <span className="text-sm font-normal leading-none text-muted-foreground">Available Units</span>
                                     </div>
 

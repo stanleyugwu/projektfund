@@ -5,14 +5,16 @@ import { useApp } from '@/context/AppContext'
 import React from 'react'
 
 export const ShowPortfolio = ({portfolio} : {portfolio: any[]}) => {
-    // useApp({
-    //     title: "Portfolio"
-    // })
+    
+    useApp({
+        title: "Portfolio"
+    })
 
     return (
         <>
             { 
-                portfolio.map((item: any) => <InvestedPropertyItem key={item._id} unit={item} />)}    
+                portfolio.map((item: any) => <InvestedPropertyItem key={item._id} unit={item} />)
+            }    
         </>
     )
 }

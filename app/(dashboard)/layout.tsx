@@ -11,7 +11,6 @@ interface IDashboardLayoutProps extends PropsWithChildren {
     title?: string 
 }
 
-
 export default async function ({children} : IDashboardLayoutProps) {    
     return (
         <div className='min-h-screen'>            
@@ -37,6 +36,7 @@ export default async function ({children} : IDashboardLayoutProps) {
                 </div>
             </div>
 
+            <div id='portal' />
             <Script src="https://js.paystack.co/v1/inline.js" />
         </div>
     )

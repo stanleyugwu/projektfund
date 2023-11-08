@@ -5,6 +5,7 @@ const ListedUnitSchema = new mongoose.Schema({
     user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true},
     unit: {type: mongoose.SchemaTypes.ObjectId, ref: 'Unit', required: true},
     units: {type: Number, required: true},
+    available_units: {type: Number, required: true}, 
     unit_price: {type: Number, required: true},
     status: {type: String, required: true}
 }, {timestamps: true})

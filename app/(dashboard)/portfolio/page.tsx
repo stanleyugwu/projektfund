@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Metadata } from "next"
 import Link from "next/link"
 import { ShowPortfolio } from "./(partials)/ShowPortfolio"
+import { Input } from '@/components/ui/input'
 
 export const metadata: Metadata = {
 	title: 'Portfolio',
@@ -18,23 +19,27 @@ export default async function Portfolio () {
             <div className="flex">
                 <div className="w-8/12">
                     <Card>
-                        <CardContent className="p-10 divide-y-2">
-                            {
-                                portfolio.length > 0 
-                                
-                                ?
-                                    <ShowPortfolio portfolio={portfolio} />
-                                :
+                        <CardContent className="p-10">
+                            <div className="flex items-center w-full mb-5 space-x-2">
+                                <Input type="email" placeholder="Search for available properties" />
+                            </div>
 
-                                <div className="p-10 space-y-5 text-center">
-                                    <h1 className="text-xl font-semibold">You have not purchased any property units yet!</h1>
-                                    <Button asChild>
-                                        <Link href={'/properties'} >Find Properties</Link>
-                                    </Button>
-                                </div>
-                            }
+                            <div className="divide-y-2">
+                                {
+                                    portfolio.length > 0 
+                                    
+                                    ?
+                                        <ShowPortfolio portfolio={portfolio} />
+                                    :
 
-                            {}
+                                    <div className="p-10 space-y-5 text-center">
+                                        <h1 className="text-xl font-semibold">You have not purchased any property units yet!</h1>
+                                        <Button asChild>
+                                            <Link href={'/properties'} >Find Properties</Link>
+                                        </Button>
+                                    </div>
+                                }
+                            </div>
                         </CardContent>
                     </Card>
                 </div>

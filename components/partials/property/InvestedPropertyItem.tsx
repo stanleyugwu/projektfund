@@ -22,7 +22,7 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
     
     return (
         <>
-            <div className="flex py-3 space-x-5">
+            <div className="flex items-center py-5 space-x-5">
                 <div className="w-2/12">
                     <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
                         <img src={unit.property.image} alt="" className="object-cover object-center w-full h-full" />
@@ -30,7 +30,7 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
                 </div>
                 <div className="flex flex-col justify-center flex-1 space-y-3">
                     <div>
-                        <p className="text-lg font-semibold leading-none uppercase">
+                        <p className="font-semibold leading-none">
                             {unit.property.name}
                         </p>
                         <p className="text-sm">{unit.property.address}, {unit.property.city}, {unit.property.country}</p>
@@ -38,7 +38,7 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
 
                     <div className="grid grid-cols-4">
                         <div>
-                            <h2 className="font-medium leading-none">{unit.units}</h2>
+                            <h2 className="font-medium leading-none">{unit.available_units}</h2>
                             <p className="text-sm text-muted-foreground">Units Owned</p>
                         </div>
                         <div>

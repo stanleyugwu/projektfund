@@ -1,3 +1,5 @@
+'use client'
+
 import { Naira } from '@/components/naira'
 import { Button } from '@/components/ui/button'
 import { DialogHeader } from '@/components/ui/dialog'
@@ -7,7 +9,7 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import { Label } from '@radix-ui/react-label'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '@/components/ui/select'
 import { property } from 'lodash'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { verifyPurchase, initiatePurchase } from '@/api/property/purchase'
 import { useToast } from '@/components/ui/use-toast'
 import { useAuth } from '@/context/AuthProvider'
@@ -25,20 +27,36 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
     const [units, setUnits] = useState(1)
     const price = useMemo(() => units * offer.unit_price, [units])
     const {toast} = useToast()
+    const [isModal, setIsModal] = useState(true)
+    const modalRef = useRef<HTMLDivElement>(null)
+
+    // useEffect(() => {
+    //     if(modalRef.current){
+    //         if(isModal){
+    //             modalRef.current.style.pointerEvents = 'auto'
+    //         }else{
+                
+    //             modalRef.current.style.pointerEvents = 'none'
+    //         }
+    //     }
+    // }, [isModal])
 
     const [step, setStep] = useState(1)
 
     const [verifyPurchaseState, verifiyPurchaseAction] = useFormState(verifyPurchase, {})
 
     const {paystackInit, paystackStatus} = usePaystack({
+        whenInit: () => {
+            setIsModal(false)
+        },
         whenCancelled: () => {
-            modal.switchModalMode(true)
+            setIsModal(true)
         },
         whenSuccessful: (transaction) => {
             const data = new FormData()
             data.set('reference', transaction.reference)
             verifiyPurchaseAction(data)
-            modal.switchModalMode(true)
+            setIsModal(true)
         }
     })
 
@@ -71,7 +89,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
 
     useEffect(() => {
         if(state.status == 'pay'){
-            modal.switchModalMode(false)
+            setIsModal(false)
             paystackInit(state.payment)
         }
 
@@ -82,6 +100,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
             })
 
             setStep(2)
+            setIsModal(true)
         }
 
         if(!state.status && state.error){
@@ -89,14 +108,13 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
                 variant: 'destructive',
                 description: state.error
             })
+            setIsModal(true)
         }
-
-
     }, [state]);
     
     return (
-        <Dialog modal={modal.isModal} open={modal.isOpen} onOpenChange={(open) => modal.setOpen(open)}>
-            <DialogContent >
+        <Dialog  key={'buy-sale-offer-' + offer.id} open={modal.isOpen} onOpenChange={(open) => modal.setOpen(open)} modal={false}>
+            <DialogContent ref={modalRef} >
                 <> 
 
                     {

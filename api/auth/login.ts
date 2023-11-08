@@ -24,9 +24,9 @@ export async function login (prevState: any, formData: FormData)  {
 
     cookies().set('authorization', user.id)
 
-    if(!user.email_verified_at) {
-        return {status: false, error: 'Please verify your email address!'}
-    }
+    // if(!user.email_verified_at) {
+    //     return {status: false, error: 'Please verify your email address!'}
+    // }
 
     return user.role == roles.user ? redirect('/dashboard') : redirect('/admin')
 }

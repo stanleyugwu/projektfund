@@ -25,8 +25,13 @@ export async function initiateWithdrawal (state: string, formData: FormData) {
         purpose: transactionType.withdrawal.description,
         user: user.id,
         transactable: withdrawal.id,
-        transactable_type: 'Withdrawal'
+        transactable_type: 'Withdrawal',
+        type: transactionType.withdrawal.name,
+        // reference: 
     })
+
+    user.wallet.main_bal -= body.amount
+    await user.save()
 
     withdrawal.transaction = transaction.id
     await withdrawal.save()

@@ -57,3 +57,7 @@
     @apply appearance-none;
   }
 }
+
+iframe{
+  pointer-events: auto !important;
+}
