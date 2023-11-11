@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
-import { Link } from "lucide-react"
 import { listUsers } from "@/api/user/list"
+import { FlipVertical2, MoreVerticalIcon } from "lucide-react"
+import { DotsVerticalIcon } from "@radix-ui/react-icons"
 
 export default async () => {
     const users = await listUsers()
@@ -30,7 +31,7 @@ export default async () => {
                             <TableRow>
                                 <TableHead className="w-[400px]">Name</TableHead>
                                 <TableHead>Email</TableHead>
-                                <TableHead>Purchased Units</TableHead>
+                                <TableHead>Units Owned</TableHead>
                                 <TableHead>Sold Units</TableHead>
                                 {/* <TableHead>Amount</TableHead> */}
                                 <TableHead></TableHead>
@@ -39,15 +40,19 @@ export default async () => {
 
                         <TableBody>
                             {
-                                users.map((user) => (
+                                users.map((user: any) => (
                                     <TableRow key={user.id}>
                                         <TableCell className="w-[400px]">{user.firstname} {user.lastname}</TableCell>
                                         <TableCell>{user.email}</TableCell>
-                                        <TableCell><Naira />{user.units?.length.toLocaleString()}</TableCell>
+                                        <TableCell>{user.units?.length.toLocaleString()}</TableCell>
                                         <TableCell >$250.00</TableCell>
                                         <TableCell>
                                         <DropdownMenu>
-                                            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                                            <DropdownMenuTrigger asChild >
+                                                <Button variant={'ghost'} size={'icon'} >
+                                                    <MoreVerticalIcon className="h-5" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
                                             <DropdownMenuContent>
                                                 <DropdownMenuItem>Edit</DropdownMenuItem>
                                                 <DropdownMenuItem>Deactivate</DropdownMenuItem>

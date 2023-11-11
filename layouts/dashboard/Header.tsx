@@ -15,7 +15,7 @@ export const Header = () => {
 
         <div className='sticky top-0 flex items-center justify-between px-10 py-3 bg-white border-b'>
             <div>
-                <h3 className='font-extrabold'>{title}</h3>
+                <h3 className='text-lg font-semibold'>{title}</h3>
             </div>
 
             <div>

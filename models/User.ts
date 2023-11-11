@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import Wallet from "./Wallet";
 import { Status } from "@/casts/status";
 import roles from "@/lib/roles";
-import Unit from "./Unit";
 import Bank from "./Bank";
 
 const UserSchema = new mongoose.Schema<IUser>({
@@ -24,34 +23,49 @@ const UserSchema = new mongoose.Schema<IUser>({
     }},
     bank: {type: Bank},
     status: {type: String, required: true, default: 'active'}
-}, {timestamps: true, 
+}, {
+    timestamps: true, 
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true 
+    },
     virtuals: {
         units: {
-            options: {
-                ref: 'Unit',
-                localField: '_id',
-                foreignField: 'user'
-            }
-        }
-    }} )
+            ref: 'Unit',
+            localField: '_id',
+            foreignField: 'user'
+        },
+        transactions: {
+            ref: 'Transaction',
+            localField: '_id',
+            foreignField: 'user',
+        },
+        listings: {
+            ref: 'ListedUnit',
+            localField: '_id',
+           foreignField: 'user'
+        } 
+    }
+})
 
-// UserSchema.virtual('units', {
-//     ref: 'Unit',
-//     localField: '_id',
-//     foreignField: 'user'
-// })
-// UserSchema.virtual('user_units').get(async () => {
-//     // @ts-ignore
-//     return await Unit.where({user: this._id}).find()
-// })
+UserSchema.virtual('units', {
+    ref: 'Unit',
+    localField: '_id',
+    foreignField: 'user',
+    options: {
+        
+    }
+})
 
 UserSchema.virtual('transactions', {
     ref: 'Transaction',
     localField: '_id',
-    foreignField: 'user'
+    foreignField: 'user',
 })
 
-UserSchema.virtual('listedUnits', {
+UserSchema.virtual('listings', {
     ref: 'ListedUnit',
     localField: '_id',
     foreignField: 'user'

@@ -8,7 +8,7 @@ const Transaction = new mongoose.Schema({
     transactable_type: {type: String},
     type: {type: String},
     purpose: {type: String},
-    payment_method: {type: String, required: true},
+    payment_method: {type: String},
     status: {type: String, required: true},
     data: {type: Object}
 }, {timestamps: true})

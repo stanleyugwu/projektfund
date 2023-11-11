@@ -24,7 +24,7 @@ export default async () => {
         })
     }
 
-    if(banks.length < 1){
+    if(banks.length < 0){
         await fetchBanks()
     }
 

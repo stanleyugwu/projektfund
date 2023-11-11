@@ -34,18 +34,14 @@ export async function completeWalletFunding(transaction_id: string){
     await database()
     const user = await authUser()
 
-    console.log("Completing Walllet Funding")
-    
     const transaction = await Transactions.findById(transaction_id)
     if(user.id != transaction?.user) return response.error().json({message: 'Transaction failed'})
     if(transaction.status !== status.success) return response.error().json("You transaction was not completed!")
     
-    console.log("Funding Wallet")
     user.wallet.main_bal += transaction.amount;
     user.save() 
 
-    console.timeStamp('Wallet Funded')
     console.log("Wallet Funded")
 
-    return response.success().json('Wallet funding successful!', {user: user})
+    return response.success().json('Wallet funding successful!', {user: JSON.parse(JSON.stringify(user))})
 }

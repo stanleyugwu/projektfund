@@ -157,15 +157,18 @@ export async function completePurchase(transactionModel: any) {
     if(!property) return response.error().json({error: "The property does not exist"})
 
     const unit = await createOrUpdateUnit(property, transaction)
-    if(transaction.data.listing_id) await updateListing(transaction)
+    if(transaction.data.listing_id) {
+        await updateListing(transaction)
+    }else{
+        property.available_units -= unit.units
+        await property.save()
+    }
 
+    
     transaction.transactable = unit._id,
     transaction.transactable_type = 'Unit',
     transaction.status = status.success
-    await transaction.save()             
-    
-    property.available_units -= unit.units
-    await property.save()
+    await transaction.save()           
     
     return {status: 'completed', message: `You have successfully Purchased ${transaction.data.units} units for ${transaction.amount} Naira`}
 }

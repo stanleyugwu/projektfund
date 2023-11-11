@@ -25,7 +25,10 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
     }
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+    mongoose.set('strictPopulate', false)
+    cached.promise = mongoose.connect(MONGODB_URI, {
+      
+    }).then((mongoose) => {
       return mongoose
     })
   }

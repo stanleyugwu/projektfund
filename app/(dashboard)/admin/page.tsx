@@ -1,48 +1,62 @@
-import { listProperties } from "@/api/property/list";
-import { InvestedPropertyItem } from "@/components/partials/property/InvestedPropertyItem";
-import { PropertyItem } from "@/components/partials/property/PropertyItem";
+import { getDataSummary } from "@/api/pages/dashboard";
+import { Naira } from "@/components/naira";
 import { WelcomeHeading } from "@/components/partials/user/WelcomeHeading";
+import { Title } from "@/components/title";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LandmarkIcon } from "lucide-react";
+import { Building2Icon, Users2Icon, Wallet2Icon } from "lucide-react";
 import React from "react";
 
 export default async () => {
-  const properties = await listProperties();
+
+  const {users, properties, payments, withdrawals} = await getDataSummary()
 
   return (
     <div>
       <WelcomeHeading />
+      
+      <Title title="Overview" />
+
       <div className="flex">
         <div className="md:w-2/3">
           <div className="grid grid-cols-2 gap-5 mb-5">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">
-                  Total Investments
+                  Users
                 </CardTitle>
-                <LandmarkIcon className="w-4 h-4 text-muted-foreground" />
+                <Users2Icon className="w-4 h-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+2350</div>
-                <p className="text-xs text-muted-foreground">
-                  +180.1% from last month
-                </p>
+                <div className="text-2xl font-bold">{users}</div>
               </CardContent>
             </Card>
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">
-                  Total Investments
+                  Properties
                 </CardTitle>
-                <LandmarkIcon className="w-4 h-4 text-muted-foreground" />
+                <Building2Icon className="w-4 h-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+2350</div>
-                <p className="text-xs text-muted-foreground">
-                  +180.1% from last month
-                </p>
+                <div className="text-2xl font-bold">{properties}</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">Payments</CardTitle>
+                <Wallet2Icon className="w-4 h-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold"><Naira />{payments}</div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+                <CardTitle className="text-sm font-medium">Withdrawals</CardTitle>
+                <Wallet2Icon className="w-4 h-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold"><Naira />{withdrawals}</div>
               </CardContent>
             </Card>
           </div>
@@ -50,45 +64,7 @@ export default async () => {
           <div>
             <Card>
               <CardContent className="p-5">
-                <Tabs defaultValue="account">
-                  <TabsList>
-                    <TabsTrigger value="account">Explore</TabsTrigger>
-                    <TabsTrigger value="password">Investments</TabsTrigger>
-                    <TabsTrigger value="completed">Offers</TabsTrigger>
-                  </TabsList>
-
-                  <div className="w-full mt-3">
-                    <TabsContent value="account" className="w-full space-y-3">
-                      <div className="flex items-center w-full space-x-2">
-                        <Input
-                          type="email"
-                          placeholder="Search for available properties"
-                        />
-                      </div>
-
-                      <div className="divide-y">
-                        {properties.map((property) => (
-                            <PropertyItem key={property._id} property={property} />
-                        ))}
-                      </div>
-                    </TabsContent>
-                    <TabsContent value="password">
-                      <div className="flex items-center w-full space-x-2">
-                        <Input
-                          type="email"
-                          placeholder="Search for available properties"
-                        />
-                      </div>
-
-                      <div className="divide-y">
-                        {/* <InvestedPropertyItem /> */}
-                      </div>
-                    </TabsContent>
-                    <TabsContent value="completed">
-                      Change your password here.
-                    </TabsContent>
-                  </div>
-                </Tabs>
+                
               </CardContent>
             </Card>
           </div>

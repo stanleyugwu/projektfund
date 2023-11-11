@@ -19,7 +19,6 @@ export default async function ({children} : IDashboardLayoutProps) {
                     <Sidebar />
                 </div>
 
-                
                 <div className='flex flex-col w-5/6 bg-muted'>
                     <Header />
                     

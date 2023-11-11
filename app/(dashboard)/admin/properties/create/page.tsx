@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { createProperty } from '@/api/property/create'
 import { FormLoader, Loader } from '@/components/ui/loader'
 import { useToast } from '@/components/ui/use-toast'
@@ -25,13 +25,15 @@ export default function () {
 	})
 
     const {toast} = useToast()
-
+    const formRef = useRef<HTMLFormElement>(null)
     useEffect(() => {
         if(state.status) {
             toast({
                 title: 'Success',
                 description: "The property was created successfully!"
             })
+
+            formRef.current?.reset()
         }
     }, [state])
 
@@ -41,7 +43,7 @@ export default function () {
                 <div className="w-8/12">
                     <Card>
                         <CardContent className='p-10'>
-                            <form action={action} encType='multipart/form-data' className='mx-auto space-y-4'>
+                            <form action={action} ref={formRef} encType='multipart/form-data' className='mx-auto space-y-4'>
                                 <div>
                                     <Label>Featured Image</Label>
                                     <Input id="picture" type="file" className='md:w-1/2' name='image' multiple />
@@ -82,7 +84,7 @@ export default function () {
                                     </div>
                                 </div>
 
-                                <div className="grid md:grid-cols-3 gap-5">
+                                <div className="grid gap-5 md:grid-cols-3">
                                     <div>
                                         <Label>Country</Label>
                                         <Select name='country'>
@@ -125,7 +127,7 @@ export default function () {
                                 {/* <div>
                                     <Label>Gallery</Label>
                                     <Input id="picture" type="file" name='gallery' multiple />
-                                    <p className='text-muted-foreground text-sm'>Upload images for this property</p>
+                                    <p className='text-sm text-muted-foreground'>Upload images for this property</p>
                                     <InputError message={state.errors?.gallery} />
                                 </div>
 
@@ -148,7 +150,7 @@ export default function () {
                                             </SelectGroup>
                                         </SelectContent>
                                     </Select>
-                                    <p className='text-muted-foreground text-sm'>Set whether this property should be displayed or hidden</p>
+                                    <p className='text-sm text-muted-foreground'>Set whether this property should be displayed or hidden</p>
                                     <InputError message={state.errors?.status} />
                                 </div>
 
