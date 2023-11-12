@@ -46,14 +46,14 @@ export const Sidebar = () => {
 
     return (
         <>
-            <div className='sticky top-0'>
-                <div className='flex flex-col p-5 space-y-2'>
-                    <div className='pb-10'>
+            <div className=''>
+                <div className='p-5 space-y-5'>
+                    <div className=''>
                         <h1 className='text-lg font-semibold'>ProjketFund</h1>
                     </div>
                     
                     <div>
-                        <div className='flex flex-col w-full space-x-2 space-y-1'>
+                        <div className='flex flex-col w-full space-y-1'>
                             {
                                 nav_items.map(({icon, role, ...item}, index) => (
                                     <Disclose show={user?.role == role || !role}>
@@ -69,7 +69,7 @@ export const Sidebar = () => {
                                                     : "hover:bg-muted hover:text-primary",
                                                     "justify-start", 'rounded'
                                                 )}
-                                            >{icon} {item.name}</Link> : <p key={item.name} className='px-1 text-sm text-gray-600'>{item.name}</p>
+                                            >{icon} {item.name}</Link> : <p key={item.name} className='text-sm font-semibold text-gray-600'>{item.name}</p>
                                         }
                                     </Disclose>
                                 ))

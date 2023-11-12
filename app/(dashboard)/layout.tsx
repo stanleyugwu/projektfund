@@ -14,12 +14,12 @@ interface IDashboardLayoutProps extends PropsWithChildren {
 export default async function ({children} : IDashboardLayoutProps) {    
     return (
         <div className='min-h-screen'>            
-            <div className="flex">
-                <div className='sticky top-0 w-1/6 min-h-screen border-e'>
+            <div className="grid grid-cols-6">
+                <div className='sticky top-0 min-h-screen col-span-1 border-e'>
                     <Sidebar />
                 </div>
 
-                <div className='flex flex-col w-5/6 bg-muted'>
+                <div className='flex flex-col col-span-5 bg-muted'>
                     <Header />
                     
                     <div className="flex-1 p-5 md:container md:py-10">

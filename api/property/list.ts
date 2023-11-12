@@ -1,6 +1,7 @@
 'use server'
 
 import ListedUnit from "@/models/ListedUnit";
+import Unit from "@/models/Unit";
 import Property from "@/models/Property";
 import database from "@/services/database";
 import { IProperty } from "@/types/property";
@@ -14,6 +15,8 @@ export async function listProperties() : Promise<IProperty[]> {
 
 export async function getPropertyUnits(property: string) {
     await database()
+    await Unit.find()
+    
     const listedUnits = await ListedUnit.find({property: property}).populate('property user unit')
     // console.log(listedUnits)
     return JSON.parse(JSON.stringify(listedUnits))

@@ -1,10 +1,12 @@
+import { getUserDashboard } from "@/api/pages/dashboard";
 import { listProperties } from "@/api/property/list";
+import { Naira } from "@/components/naira";
 import { PropertyItem } from "@/components/partials/property/PropertyItem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IProperty } from "@/types/property";
-import { LandmarkIcon } from "lucide-react";
+import { LandmarkIcon, Wallet2Icon } from "lucide-react";
 import { Metadata } from "next";
 import React from "react";
 
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
 export default async () => {
 
 	const properties = await listProperties()
+	const {investments, totalValue} = await getUserDashboard()
 
 	return (
 		<div>
@@ -23,31 +26,21 @@ export default async () => {
 				<div className="md:w-2/3">
 					<div className="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2">
 						<Card>
-						<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-							<CardTitle className="text-sm font-medium">
-							Total Investments
-							</CardTitle>
-							<LandmarkIcon className="w-4 h-4 text-muted-foreground" />
-						</CardHeader>
-						<CardContent>
-							<div className="text-2xl font-bold">+2350</div>
-							<p className="text-xs text-muted-foreground">
-							+180.1% from last month
-							</p>
-						</CardContent>
-						</Card>
-						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-								<CardTitle className="text-sm font-medium">
-								Total Investments
-								</CardTitle>
+								<CardTitle className="text-sm font-medium">Investments</CardTitle>
 								<LandmarkIcon className="w-4 h-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">+2350</div>
-								<p className="text-xs text-muted-foreground">
-								+180.1% from last month
-								</p>
+								<div className="text-2xl font-bold">{investments.toLocaleString()}</div>
+							</CardContent>
+						</Card>
+						<Card>
+							<CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+								<CardTitle className="text-sm font-medium">Portfolio</CardTitle>
+								<Wallet2Icon className="w-4 h-4 text-muted-foreground" />
+							</CardHeader>
+							<CardContent>
+								<div className="text-2xl font-bold"><Naira />{totalValue.toLocaleString()} </div>
 							</CardContent>
 						</Card>
 					</div>
@@ -56,11 +49,11 @@ export default async () => {
 						<Card>
 							<CardContent className="p-5">
 								<Tabs defaultValue="account" >
-									<TabsList>
+									{/* <TabsList>
 										<TabsTrigger value="account">Explore</TabsTrigger>
 										<TabsTrigger value="password">Investments</TabsTrigger>
 										<TabsTrigger value="completed">Offers</TabsTrigger>
-									</TabsList>
+									</TabsList> */}
 									
 									<div className="w-full mt-3">
 										<TabsContent value="account" className="w-full space-y-3" >

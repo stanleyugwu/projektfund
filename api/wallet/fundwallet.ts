@@ -40,8 +40,5 @@ export async function completeWalletFunding(transaction_id: string){
     
     user.wallet.main_bal += transaction.amount;
     user.save() 
-
-    console.log("Wallet Funded")
-
     return response.success().json('Wallet funding successful!', {user: JSON.parse(JSON.stringify(user))})
 }

@@ -1,14 +1,17 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { AvailableBalance } from "./(partials)/AvailableBalance";
-import { Table } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DepositDialog } from "./(partials)/DepositDialog";
-import { useDialog } from "@/hooks/useDialog";
 import { WithdrawDialog } from "./(partials)/WithdrawDialog";
+import { Naira } from "@/components/naira";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import moment from "moment";
+import { userTransactions } from "@/api/transactions/list";
+import { transactionSymbolColor, transactionType } from "@/services/transactions";
 
 export default async function Wallet(){
-
+    const transactions: any[] = await userTransactions()
+    
     return (
         <>
             <Card>
@@ -23,9 +26,41 @@ export default async function Wallet(){
                         <DepositDialog />
                         <WithdrawDialog />
                     </div>
-                    <Table>
-                        
-                    </Table>
+                    <div className="p-5 border rounded-lg">
+                        <div className="mb-2">
+                            <h3 className="text-lg font-semibold">Transactions</h3>
+                        </div>
+                        <Table>
+                            <TableCaption>All Transactions</TableCaption>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className="">Reference</TableHead>
+                                    <TableHead>Purpose</TableHead>
+                                    <TableHead>Amount</TableHead>
+                                    <TableHead>Payment Method</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Created At</TableHead>
+                                </TableRow>
+                            </TableHeader>
+
+                            <TableBody>
+                                {
+                                    transactions.map((transaction) => (
+                                        <TableRow key={transaction.id}>
+                                            <TableCell className="">{transaction.reference}</TableCell>
+                                            <TableCell className="">{transaction.purpose}</TableCell>
+                                            <TableCell className={transactionSymbolColor(transaction)?.color}>{transactionSymbolColor(transaction)?.symbol} <Naira />{transaction.amount.toLocaleString()}</TableCell>
+                                            <TableCell>{(transaction.payment_method as string).toUpperCase()}</TableCell>
+                                            <TableCell>{transaction.status}</TableCell>
+                                            <TableCell>
+                                                {moment(transaction.createdAt).format('Do MMM Y hh:mm')}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))
+                                }
+                            </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
         </>

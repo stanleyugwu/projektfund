@@ -86,19 +86,12 @@ export async function initiatePurchase(state: any, formData: FormData){
             return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})
         }
         
-        const reloadTransaction = await Transactions.findById(transaction.id)
+        const reloadTransaction = await Transactions.findById(transaction.id).populate('user')
         
         const complete = await completePurchase(reloadTransaction)
-        
-        if(complete.status){
-            await User.findByIdAndUpdate(user.id, {
-                wallet: {
-                    ...user.wallet,
-                    main_bal: user.wallet.main_bal - amount
-                }
-            })
-        }
-        
+        user.wallet.main_bal -= amount
+        await user.save() 
+
         return complete
     }
     
@@ -135,9 +128,6 @@ export async function verifyPurchase(state: any, formData: FormData){
 
             if(data.status) {
                 const complete = await completePurchase(transaction)
-                transaction.user.wallet.main_bal -= transaction.amount
-                await transaction.user.save()
-
                 return complete
             }    
         }
@@ -157,6 +147,7 @@ export async function completePurchase(transactionModel: any) {
     if(!property) return response.error().json({error: "The property does not exist"})
 
     const unit = await createOrUpdateUnit(property, transaction)
+
     if(transaction.data.listing_id) {
         await updateListing(transaction)
     }else{
@@ -164,7 +155,6 @@ export async function completePurchase(transactionModel: any) {
         await property.save()
     }
 
-    
     transaction.transactable = unit._id,
     transaction.transactable_type = 'Unit',
     transaction.status = status.success

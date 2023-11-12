@@ -167,7 +167,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
 
                                 <Alert className='text-orange-500 border border-orange-500 bg-orange-50'>
                                     <AlertDescription>
-                                        You are purchasing {units} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()}</span> 
+                                        You are purchasing {units} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()} each.</span> 
                                     </AlertDescription>
                                 </Alert>
 
@@ -198,7 +198,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
                                             <img src={offer.property.image} className='rounded-md aspect-square' alt="" />
                                         </div>
                                         <div className="flex-1 py-2">
-                                            <h4 className='font-bold'>{property.name}</h4>
+                                            <h4 className='font-bold'>{offer.property.name}</h4>
                                             <div>
                                                 <Badge variant={'secondary'}>{units} Unit</Badge>
                                                 <Badge variant={'secondary'}><Naira /> {(units * offer.property.unit_price).toLocaleString()} Amount</Badge>
