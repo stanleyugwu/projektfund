@@ -46,9 +46,11 @@
     "react-paystack": "^4.0.3",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "tiny-slider": "^2.9.4",
     "validatorjs": "^3.22.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/bcrypt": "^5.0.1",
     "@types/bcryptjs": "^2.4.5",
     "@types/lodash": "^4.14.200",

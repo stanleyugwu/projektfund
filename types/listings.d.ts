@@ -4,7 +4,7 @@ export interface IListing {
     title: string
     type: string
     duration: string
-    price: string
+    price: number
     gallery: string[]
     image: string
     description: string

@@ -18,7 +18,7 @@ export async function createListing(state: any, data: FormData){
     const image = data.get('image')
 
     const body = Object.fromEntries(data.entries()) as unknown as any
-
+    
     const validator = new Validator(body, __ListingSchema.rules)
 
     if(!validator.check()) {
