@@ -31,7 +31,7 @@ export default async () => {
                 </CardHeader>
                 <CardContent className="px-10">
                     <Table>
-                        <TableCaption>Listed Properties.</TableCaption>
+                        <TableCaption>Listings</TableCaption>
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="w-[400px]">Listings</TableHead>

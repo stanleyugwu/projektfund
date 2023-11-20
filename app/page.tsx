@@ -1,342 +1,940 @@
+import { Input } from "@/components/ui/input";
 import { About } from "./(partials)/About";
 import { Faq } from "./(partials)/Faq";
 import { Footer } from "./(partials)/Footer";
 import { Header } from "./(partials)/Header";
+import { Button } from "@/components/ui/button";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+    ArrowRight,
+  BriefcaseIcon,
+  HexagonIcon,
+  PlayIcon,
+  ShoppingBag,
+  UserCheckIcon,
+} from "lucide-react";
 
 export default function () {
   return (
     <>
-        <section className="mb-20 bg-white md:mb-52 xl:mb-72">
-            <div className="container max-w-screen-xl px-4 mx-auto">
-            <nav
-                className="z-10 flex-wrap items-center lg:flex py-14 xl:relative"
-                x-data="{navbarOpen:false}"
-            >
-                <div className="flex items-center justify-between mb-10 lg:mb-0">
-                <img
-                    src="/img/navbar-logo.png"
-                    alt="Logo img"
-                    className="w-52 md:w-80 lg:w-full"
-                />
-                <button className="flex items-center justify-center w-10 h-10 ml-auto text-green-700 border border-green-700 rounded-md lg:hidden">
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-menu"
+      <section className="relative flex items-center justify-center py-40 lg:h-screen bg-green-600/10">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-[30px] mt-10 items-center">
+            <div className="text-center ltr:md:text-left rtl:md:text-right">
+              <h1 className="mb-6 text-4xl font-bold leading-normal lg:leading-normal lg:text-5xl">
+                Find Your{" "}
+                <span className="text-green-600">
+                  Perfect <br /> &amp; Wonderful
+                </span>{" "}
+                Home
+              </h1>
+              <p className="max-w-xl text-xl text-slate-400">
+                A great plateform to buy, sell and rent your properties without
+                any agent or commisions.
+              </p>
+              <div className="relative mt-8">
+                <div className="grid grid-cols-1">
+                  <div className="flex-wrap justify-center inline-block w-full p-4 text-center bg-white shadow sm:w-fit dark:bg-slate-900 rounded-t-xl dark:shadow-gray-700">
+                    <ToggleGroup type="single">
+                      <ToggleGroupItem variant={"outline"} value="For Sale">
+                        For Sale
+                      </ToggleGroupItem>
+                      <ToggleGroupItem variant={"outline"} value="For Rent">
+                        For Rent
+                      </ToggleGroupItem>
+                    </ToggleGroup>
+                  </div>
+                  <div className="p-6 bg-white shadow dark:bg-slate-900 rounded-ss-none rounded-se-none md:rounded-se-xl rounded-xl dark:shadow-gray-700">
+                    <div
+                      id="buy-home"
+                      role="tabpanel"
+                      aria-labelledby="buy-home-tab"
                     >
-                    <line x1={3} y1={12} x2={21} y2={12} />
-                    <line x1={3} y1={6} x2={21} y2={6} />
-                    <line x1={3} y1={18} x2={21} y2={18} />
-                    </svg>
-                </button>
+                      <div className="z-1">
+                        <form className="relative flex max-w-2xl mx-auto space-x-3">
+                          <Input
+                            type="name"
+                            id="search_name"
+                            name="name"
+                            className="flex-1"
+                            placeholder="City, Address, Zip :"
+                          />
+                          <Button type="submit">Search</Button>
+                        </form>
+                        {/*end form*/}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <ul className="flex-col hidden lg:flex lg:flex-row lg:items-center lg:mx-auto lg:space-x-8 xl:space-x-16">
-                <li className="mb-5 text-lg font-semibold text-gray-900 transition duration-300 ease-in-out hover:text-gray-400 lg:mb-0">
-                    <a href="#">Landing</a>
-                </li>
-                <li className="mb-5 text-lg font-semibold text-gray-900 transition duration-300 ease-in-out hover:text-gray-400 lg:mb-0">
-                    <a href="#">Pages</a>
-                </li>
-                <li className="mb-5 text-lg font-semibold text-gray-900 transition duration-300 ease-in-out hover:text-gray-400 lg:mb-0">
-                    <a href="#">Contact</a>
-                </li>
-                <li className="mb-5 text-lg font-semibold text-gray-900 transition duration-300 ease-in-out hover:text-gray-400 lg:mb-0">
-                    <a href="#">About</a>
-                </li>
-                </ul>
-                <button className="hidden px-5 py-3 text-lg font-semibold text-green-700 transition duration-500 ease-linear border-2 border-green-700 rounded-lg lg:block hover:bg-green-700 hover:text-white">
-                Request quote
-                </button>
-            </nav>
-            <div className="flex items-center justify-center xl:justify-start">
-                <div className="text-center mt-28 xl:text-left">
-                <h1 className="mb-6 text-4xl font-semibold leading-normal text-gray-900 md:text-6xl lg:text-7xl">
-                    Get your dream <br />
-                    house now
-                </h1>
-                <p className="mb-12 text-xl font-normal leading-relaxed text-gray-400">
-                    Having a sweet home is everyone's dream. Have you
-                    <br />
-                    owned your dream house?
+                {/*end grid*/}
+              </div>
+            </div>
+            <div className="relative lg:ms-10">
+              <div className="p-5 bg-white rounded-t-full shadow dark:shadow-gray-700 dark:bg-slate-900">
+                <img
+                  src="assets/images/hero.jpg"
+                  className="rounded-md rounded-t-full shadow-md"
+                  alt=""
+                />
+              </div>
+              <div className="absolute text-center bottom-2/4 translate-y-2/4 start-0 end-0">
+                <a
+                  href="#!"
+                  data-type="youtube"
+                  data-id="yba7hPeTSjk"
+                  className="inline-flex items-center justify-center w-20 h-20 text-green-600 bg-white rounded-full shadow-md lightbox dark:shadow-gray-800 dark:bg-slate-900"
+                >
+                  <PlayIcon className="w-6 h-6" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/*end Container*/}
+      </section>
+
+      <section className="relative py-16 md:py-24">
+        <div className="container">
+          <div className="grid md:grid-cols-12 grid-cols-1 items-center gap-[30px]">
+            <div className="md:col-span-5">
+              <div className="relative">
+                <img
+                  src="assets/images/about.jpg"
+                  className="shadow-md rounded-xl"
+                  alt=""
+                />
+                <div className="absolute text-center bottom-2/4 translate-y-2/4 start-0 end-0">
+                  <a
+                    href="#!"
+                    data-type="youtube"
+                    data-id="yba7hPeTSjk"
+                    className="inline-flex items-center justify-center w-20 h-20 text-green-600 bg-white rounded-full shadow-md lightbox dark:shadow-gyay-700 dark:bg-slate-900"
+                  >
+                    <i className="inline-flex items-center justify-center text-2xl mdi mdi-play" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            {/*end col*/}
+            <div className="md:col-span-7">
+              <div className="lg:ms-4">
+                <h4 className="mb-6 text-2xl font-semibold leading-normal md:text-3xl lg:leading-normal">
+                  Efficiency. Transparency. <br /> Control.
+                </h4>
+                <p className="max-w-xl text-slate-400">
+                  Hously developed a platform for the Real Estate marketplace
+                  that allows buyers and sellers to easily execute a transaction
+                  on their own. The platform drives efficiency, cost
+                  transparency and control into the hands of the consumers.
+                  Hously is Real Estate Redefined.
                 </p>
-                <button className="px-6 py-4 text-lg font-semibold text-white transition duration-500 ease-in-out bg-green-700 rounded-xl hover:bg-green-900">
-                    Contact us
-                </button>
-                </div>
-                <div className="top-0 right-0 z-0 hidden xl:block xl:absolute">
-                <img src="/img/home-img.png" alt="Home img" />
-                </div>
-            </div>
-            </div>
-            {/* container.// */}
-        </section>
 
-        <section className="py-10 bg-white md:py-16 xl:relative">
-            <div className="container max-w-screen-xl px-4 mx-auto">
-                <div className="flex flex-col justify-end xl:flex-row">
-                <div className="bottom-0 left-0 hidden w-full xl:block xl:absolute">
-                    <img src="/img/feature-img.png" alt="Feature img" />
+                <div className="mt-4">
+                  <Button>Learn More</Button>
                 </div>
-                <div >
-                    <h1 className="mb-6 text-xl font-semibold leading-normal text-center text-gray-900 md:text-4xl">
-                    Choice of various types of <br />
-                    house
-                    </h1>
-                    <p className="mb-16 font-normal text-center text-gray-400 text-md md:text-xl">
-                    We provide a wide of selection of home types for you
-                    and your
-                    <br />
-                    family and are free to choose a home model
-                    </p>
-                    <div className="flex flex-col justify-center mb-20 space-x-4 md:flex-row xl:justify-start">
-                    <div className="flex items-center justify-center h-20 px-8 mx-auto mb-5 bg-gray-200 rounded-lg md:mx-0 md:mb-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-green-900 feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
-                    </div>
-                    <div className="text-center md:text-left">
-                        <h4 className="mb-2 text-2xl font-semibold text-gray-900">
-                        Best Home Guarantee
-                        </h4>
-                        <p className="text-xl font-normal leading-relaxed text-gray-400">
-                        We guarantees the quality of your home you
-                        bought <br />
-                        from D’house
-                        </p>
-                    </div>
-                    </div>
-                    <div className="flex flex-col justify-center mb-20 space-x-4 md:flex-row xl:justify-start">
-                    <div className="flex items-center justify-center h-20 px-8 mx-auto mb-5 bg-gray-200 rounded-lg md:mx-0 md:mb-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-green-900 feather feather-lock"><rect x={3} y={11} width={18} height={11} rx={2} ry={2} /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>
-                    </div>
-                    <div className="text-center md:text-left">
-                        <h4 className="mb-2 text-2xl font-semibold text-gray-900">
-                        Safe Transaction
-                        </h4>
-                        <p className="text-xl font-normal leading-relaxed text-gray-400">
-                        Your transactions will always be kept
-                        confidential <br />
-                        and will get discounted
-                        </p>
-                    </div>
-                    </div>
-                    <div className="flex flex-col justify-center space-x-4 md:flex-row xl:justify-start">
-                    <div className="flex items-center justify-center h-20 px-8 mx-auto mb-5 bg-gray-200 rounded-lg md:mx-0 md:mb-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-green-900 feather feather-credit-card"><rect x={1} y={4} width={22} height={16} rx={2} ry={2} /><line x1={1} y1={10} x2={23} y2={10} /></svg>
-                    </div>
-                    <div className="text-center md:text-left">
-                        <h4 className="mb-2 text-2xl font-semibold text-gray-900">
-                        Low and Cost Home Taxes
-                        </h4>
-                        <p className="text-xl font-normal leading-relaxed text-gray-400">
-                        By buying a house from D’house, you will get
-                        a tax <br />
-                        discount
-                        </p>
-                    </div>
-                    </div>
-                </div>
-                </div>
+              </div>
             </div>
-        </section>
-
-        <section className="py-10 bg-white md:py-16">
-            <div className="container max-w-screen-xl px-4 mx-auto">
-                <h1 className="mb-10 text-4xl font-semibold text-center text-gray-900">
-                Our Gallery
-                </h1>
-                <div className="items-center hidden mb-12 space-x-10 text-center md:block lg:space-x-20">
-                <a href="#" className="px-6 py-2 text-xl font-semibold text-white transition duration-500 ease-in-out bg-green-800 rounded-lg hover:bg-green-600">All</a>
-                <a href="#" className="px-6 py-2 text-xl font-normal text-gray-900 transition duration-500 ease-in-out rounded-lg hover:bg-gray-200 hover:text-gray-400">Exterior</a>
-                <a href="#" className="px-6 py-2 text-xl font-normal text-gray-900 transition duration-500 ease-in-out rounded-lg hover:bg-gray-200 hover:text-gray-400">Interior</a>
-                <a href="#" className="px-6 py-2 text-xl font-normal text-gray-900 transition duration-500 ease-in-out rounded-lg hover:bg-gray-200 hover:text-gray-400">Building</a>
+            {/*end col*/}
+          </div>
+          {/*end grid*/}
+        </div>
+        {/*end container*/}
+        <div className="container mt-16 lg:mt-24">
+          <div className="grid grid-cols-1 pb-8 text-center">
+            <h3 className="mb-4 text-2xl font-semibold leading-normal md:text-3xl md:leading-normal">
+              How It Works
+            </h3>
+            <p className="max-w-xl mx-auto text-slate-400">
+              A great plateform to buy, sell and rent your properties without
+              any agent or commisions.
+            </p>
+          </div>
+          {/*end grid*/}
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-8 gap-[30px]">
+            {/* Content */}
+            <div className="relative overflow-hidden text-center transition-all duration-500 ease-in-out bg-transparent group lg:px-10 rounded-xl">
+              <div className="relative -m-3 overflow-hidden text-transparent">
+                <i
+                  data-feather="hexagon"
+                  className="w-32 h-32 mx-auto fill-green-600/5"
+                />
+                <div className="absolute flex items-center justify-center mx-auto text-4xl text-green-600 align-middle transition-all duration-500 ease-in-out top-2/4 -translate-y-2/4 start-0 end-0 rounded-xl">
+                  <i className="uil uil-estate" />
                 </div>
-                <div className="flex space-x-4 md:space-x-6 lg:space-x-8">
-                <div>
-                    <img src="/img/gallery-1.png" alt="image" className="mb-4 transition duration-500 ease-in-out md:mb-6 lg:mb-8 hover:opacity-75" />
-                    <img src="/img/gallery-4.png" alt="image" className="transition duration-500 ease-in-out hover:opacity-75" />
-                </div>
-                <div>
-                    <img src="/img/gallery-2.png" alt="image" className="mb-4 transition duration-500 ease-in-out md:mb-6 lg:mb-8 hover:opacity-75" />
-                    <img src="/img/gallery-5.png" alt="image" className="mb-3 transition duration-500 ease-in-out md:mb-6 lg:mb-8 hover:opacity-75" />
-                    <img src="/img/gallery-6.png" alt="image" className="transition duration-500 ease-in-out hover:opacity-75" />
-                </div>
-                <div>
-                    <img src="/img/gallery-3.png" alt="image" className="mb-4 transition duration-500 ease-in-out md:mb-6 lg:mb-8 hover:opacity-75" />
-                    <img src="/img/gallery-7.png" alt="image" className="transition duration-500 ease-in-out hover:opacity-75" />
-                </div>
-                </div>
-            </div>
-        </section>
-
-        <section className="py-10 bg-white md:py-16">
-            <div className="container max-w-screen-xl px-4 mx-auto xl:relative">
-                <p className="mb-6 text-lg font-normal text-center text-gray-400 uppercase md:text-xl">
-                Testimonial
+              </div>
+              <div className="mt-6">
+                <h5 className="text-xl font-medium">Evaluate Property</h5>
+                <p className="mt-3 text-slate-400">
+                  If the distribution of letters and 'words' is random, the
+                  reader will not be distracted from making.
                 </p>
-                <h1 className="text-2xl font-semibold leading-normal text-center text-gray-900 md:text-4xl mb-14">
-                What People Say <br />
-                About D’house
-                </h1>
-                <div className="top-0 hidden xl:block xl:absolute">
-                <img src="/img/testimoni-1.png" alt="Image" />
-                </div>
-                <div className="hidden xl:block xl:absolute top-32">
-                <img src="/img/testimoni-2.png" alt="Image" />
-                </div>
-                <div className="flex flex-col justify-center mb-10 md:flex-row md:items-center md:space-x-8 lg:space-x-12 md:mb-20">
-                <div className="mb-10 bg-gray-100 rounded-lg md:mb-0">
-                    <img src="/img/testimoni-3.png" alt="Image" className="mx-8 my-8" />
-                    <div className="flex items-center gap-5 mx-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    </div>
-                    <p className="mx-8 my-8 text-sm font-normal text-gray-400 lg:text-md">
-                    I recommend anyone to buy house on <br />
-                    D’house. I received great customer service <br />
-                    from the specialists who helped me.
-                    </p>
-                    <h3 className="mx-8 mb-8 text-xl font-semibold text-gray-900 md:text-2xl lg:text-3xl">
-                    Brooklyn Simmons
-                    </h3>
-                </div>
-                <div className="bg-gray-100 rounded-lg">
-                    <img src="/img/testimoni-4.png" alt="Image" className="mx-8 my-8" />
-                    <div className="flex items-center gap-5 mx-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-yellow-500 feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-                    </div>
-                    <p className="mx-8 my-8 text-sm font-normal text-gray-400 lg:text-md">
-                    D’house is the best property agent in the <br />
-                    world. I received great customer service <br />
-                    from the D’house agent
-                    </p>
-                    <h3 className="mx-8 mb-8 text-xl font-semibold text-gray-900 md:text-2xl lg:text-3xl">
-                    Ralph Edwards
-                    </h3>
-                </div>
-                </div>
+              </div>
             </div>
-        </section>
+            {/* Content */}
+            {/* Content */}
+            <div className="relative overflow-hidden text-center transition-all duration-500 ease-in-out bg-transparent group lg:px-10 rounded-xl">
+              <div className="relative -m-3 overflow-hidden text-transparent">
+                <HexagonIcon className="w-32 h-32 mx-auto fill-green-600/5" />
+                <div className="absolute flex items-center justify-center mx-auto text-4xl text-green-600 align-middle transition-all duration-500 ease-in-out top-2/4 -translate-y-2/4 start-0 end-0 rounded-xl">
+                  <BriefcaseIcon className="w-10 h-10" />
+                </div>
+              </div>
+              <div className="mt-6">
+                <h5 className="text-xl font-medium">Meeting with Agent</h5>
+                <p className="mt-3 text-slate-400">
+                  If the distribution of letters and 'words' is random, the
+                  reader will not be distracted from making.
+                </p>
+              </div>
+            </div>
+            {/* Content */}
+            {/* Content */}
+            <div className="relative overflow-hidden text-center transition-all duration-500 ease-in-out bg-transparent group lg:px-10 rounded-xl">
+              <div className="relative -m-3 overflow-hidden text-transparent">
+                <i
+                  data-feather="hexagon"
+                  className="w-32 h-32 mx-auto fill-green-600/5"
+                />
+                <div className="absolute flex items-center justify-center mx-auto text-4xl text-green-600 align-middle transition-all duration-500 ease-in-out top-2/4 -translate-y-2/4 start-0 end-0 rounded-xl">
+                  <i className="uil uil-key-skeleton" />
+                </div>
+              </div>
+              <div className="mt-6">
+                <h5 className="text-xl font-medium">Close the Deal</h5>
+                <p className="mt-3 text-slate-400">
+                  If the distribution of letters and 'words' is random, the
+                  reader will not be distracted from making.
+                </p>
+              </div>
+            </div>
+            {/* Content */}
+          </div>
+          {/*end grid*/}
+        </div>
+        {/*end container*/}
 
-        <section className="py-10 bg-white md:py-16">
-            <div className="container max-w-screen-xl px-4 mx-auto xl:relative">
-                <div className="flex flex-col items-center bg-green-800 lg:flex-row justify-evenly py-14 rounded-3xl">
-                <div className="mb-10 text-center lg:text-left lg:mb-0">
-                    <h1 className="mb-4 text-4xl font-semibold leading-normal text-white md:text-5xl lg:text-7xl">
-                    Talk to us <br />
-                    to discuss
-                    </h1>
-                    <p className="font-normal text-white text-md md:text-xl">
-                    Need more time to discuss? Won’t worry, we are
-                    <br />
-                    ready to help you. You can fill in the column on the
-                    <br />
-                    right to book a meeting with us. Totally free.
-                    </p>
-                </div>
-                <div className="right-0 hidden xl:block xl:absolute">
-                    <img src="/img/book.png" alt="Image" />
-                </div>
-                <div className="hidden px-6 py-3 bg-white md:block xl:relative rounded-3xl">
-                    <div className="py-3">
-                    <h3 className="text-3xl font-semibold text-gray-900">
-                        Book a meeting
-                    </h3>
-                    </div>
-                    <div className="py-3">
-                    <input type="text" placeholder="Full Name" className="px-4 py-4 placeholder-gray-400 bg-gray-100 outline-none w-96 rounded-xl" />
-                    </div>
-                    <div className="py-3">
-                    <input type="text" placeholder="Email" className="px-4 py-4 placeholder-gray-400 bg-gray-100 outline-none w-96 rounded-xl" />
-                    </div>
-                    <div className="relative py-3">
-                    <input type="text" placeholder="Date" className="px-4 py-4 text-lg font-normal placeholder-gray-400 bg-gray-100 outline-none w-96 rounded-xl" />
-                    <div className="absolute inset-y-0 flex items-center ml-6 text-xl text-gray-600 left-80">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-calendar"><rect x={3} y={4} width={18} height={18} rx={2} ry={2} /><line x1={16} y1={2} x2={16} y2={6} /><line x1={8} y1={2} x2={8} y2={6} /><line x1={3} y1={10} x2={21} y2={10} /></svg>
-                    </div>
-                    </div>
-                    <div className="relative py-3">
-                    <input type="text" placeholder="Virtual Meeting" className="px-4 py-4 placeholder-gray-400 bg-gray-100 outline-none w-96 rounded-xl" />
-                    <div className="absolute inset-y-0 flex items-center ml-6 text-xl text-gray-600 left-80">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-chevron-down"><polyline points="6 9 12 15 18 9" /></svg>
-                    </div>
-                    </div>
-                    <div className="py-3">
-                    <button className="w-full py-4 text-lg font-semibold text-white transition duration-500 ease-in-out bg-green-700 rounded-xl hover:bg-green-900">
-                        Booking
-                    </button>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
+        <div className="container mt-16 lg:mt-24">
+          <div className="grid grid-cols-1 pb-8 text-center">
+            <h3 className="mb-4 text-2xl font-semibold leading-normal md:text-3xl md:leading-normal">
+              Featured Properties
+            </h3>
+            <p className="max-w-xl mx-auto text-slate-400">
+              A great plateform to buy, sell and rent your properties without
+              any agent or commisions.
+            </p>
+          </div>
+          {/*end grid*/}
 
-        <footer className="py-10 bg-white md:py-16">
-            <div className="container max-w-screen-xl px-4 mx-auto">
-                <div className="flex flex-col justify-between lg:flex-row">
-                <div className="mb-10 text-center lg:text-left lg:mb-0">
-                    <div className="flex justify-center mb-5 lg:justify-start">
-                    <img src="/img/footer-logo.png" alt="Image" />
+          <div className="container">
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-[30px]">
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/5.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
                     </div>
-                    <p className="mb-10 text-xl font-light text-gray-400">
-                    Get your dream house with <br />
-                    D’house
-                    </p>
-                    <div className="flex items-center justify-center space-x-5 lg:justify-start">
-                    <a href="#" className="px-3 py-3 text-gray-700 transition duration-500 ease-in-out bg-gray-200 rounded-full hover:bg-green-800 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-                    </a>
-                    <a href="#" className="px-3 py-3 text-gray-700 transition duration-500 ease-in-out bg-gray-200 rounded-full hover:bg-green-800 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-twitter"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" /></svg>
-                    </a>
-                    <a href="#" className="px-3 py-3 text-gray-700 transition duration-500 ease-in-out bg-gray-200 rounded-full hover:bg-green-800 hover:text-white">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="feather feather-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x={2} y={9} width={4} height={12} /><circle cx={4} cy={4} r={2} /></svg>
-                    </a>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        710 BOYD DR, Unit #1102, Baton Rouge, LA 70808, USA
+                      </a>
                     </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="mb-10 text-center lg:text-left lg:mb-0">
-                    <h4 className="mb-6 text-2xl font-semibold text-gray-900">
-                    Sitemap
-                    </h4>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Home</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Features</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Gallery</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Testimoni</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Book a meeting</a>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/6.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        5133 MCLAIN WAY, Baton Rouge, LA 70809, USA
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="mb-10 text-center lg:text-left lg:mb-0">
-                    <h4 className="mb-6 text-2xl font-semibold text-gray-900">
-                    Landing
-                    </h4>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Mobile App</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Property</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Personal Website</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Web Developer</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Online Course</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Donation</a>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/7.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        2141 Fiero Street, Baton Rouge, LA 70808
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                <div className="text-center lg:text-left">
-                    <h4 className="mb-6 text-2xl font-semibold text-gray-900">
-                    Utility
-                    </h4>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">FAQ</a>
-                    <a href="#" className="block mb-6 text-xl font-light text-gray-400 transition duration-300 ease-in-out hover:text-gray-800">Terms &amp; Conditions</a>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/8.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        9714 Inniswold Estates Ave, Baton Rouge, LA 70809
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/9.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        1433 Beckenham Dr, Baton Rouge, LA 70808, USA
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/10.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        1574 Sharlo Ave, Baton Rouge, LA 70820, USA
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/11.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        2528 BOCAGE LAKE DR, Baton Rouge, LA 70809, USA
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
+                <div className="md:flex">
+                  <div className="relative md:shrink-0">
+                    <img
+                      className="object-cover w-full h-full md:w-48"
+                      src="assets/images/property/12.jpg"
+                      alt=""
+                    />
+                    <div className="absolute top-4 end-4">
+                      <a
+                        href="javascript:void(0)"
+                        className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"
+                      >
+                        <i className="mdi mdi-heart mdi-18px" />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="pb-6 md:pb-4">
+                      <a
+                        href="property-detail.html"
+                        className="text-lg font-medium duration-500 ease-in-out hover:text-green-600"
+                      >
+                        1533 NICHOLSON DR, Baton Rouge, LA 70802, USA
+                      </a>
+                    </div>
+                    <ul className="flex items-center py-6 list-none md:py-4 border-y border-slate-100 dark:border-gray-800">
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-compress-arrows me-2" />
+                        <span>8000sqf</span>
+                      </li>
+                      <li className="flex items-center me-4">
+                        <i className="text-2xl text-green-600 uil uil-bed-double me-2" />
+                        <span>4 Beds</span>
+                      </li>
+                      <li className="flex items-center">
+                        <i className="text-2xl text-green-600 uil uil-bath me-2" />
+                        <span>4 Baths</span>
+                      </li>
+                    </ul>
+                    <ul className="flex items-center justify-between pt-6 list-none md:pt-4">
+                      <li>
+                        <span className="text-slate-400">Price</span>
+                        <p className="text-lg font-medium">$5000</p>
+                      </li>
+                      <li>
+                        <span className="text-slate-400">Rating</span>
+                        <ul className="text-lg font-medium list-none text-amber-400">
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline">
+                            <i className="mdi mdi-star" />
+                          </li>
+                          <li className="inline text-black dark:text-white">
+                            5.0(30)
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
-        </footer>
+            {/*en grid*/}
+            <div className="justify-center mt-6 text-center md:flex">
+              <div className="md:w-full">
+                <Button>View More Properties</Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mt-16 lg:mt-24">
+          <div className="grid grid-cols-1 text-center">
+            <h3 className="mb-6 text-2xl font-medium leading-normal text-black md:text-3xl md:leading-normal dark:text-white">
+              Have Question ? Get in touch!
+            </h3>
+            <p className="max-w-xl mx-auto text-slate-400">
+              A great plateform to buy, sell and rent your properties without
+              any agent or commisions.
+            </p>
+            <div className="mt-6">
+              <Button>Contact us</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer className="relative mt-24 bg-slate-900 dark:bg-slate-800">
+        <div className="py-[30px] px-0 border-t border-gray-800 dark:border-gray-700">
+          <div className="container text-center">
+            <div className="grid items-center gap-6 md:grid-cols-2">
+              <div className="text-center ltr:md:text-left rtl:md:text-right">
+                <p className="mb-0 text-gray-300">
+                  © Hously. Design with{" "}
+                  <i className="text-red-600 mdi mdi-heart" /> by{" "}
+                  <a
+                    href="https://shreethemes.in/"
+                    target="_blank"
+                    className="text-reset"
+                  >
+                    Shreethemes
+                  </a>
+                  .
+                </p>
+              </div>
+              <ul className="text-center list-none ltr:md:text-right rtl:md:text-left">
+                <li className="inline">
+                  <a
+                    href="https://1.envato.market/hously"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="shopping-cart" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://dribbble.com/shreethemes"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="dribbble" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://www.behance.net/shreethemes"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i className="align-baseline uil uil-behance" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="http://linkedin.com/company/shreethemes"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="linkedin" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://www.facebook.com/shreethemes"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="facebook" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://www.instagram.com/shreethemes/"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="instagram" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://twitter.com/shreethemes"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="twitter" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="mailto:support@shreethemes.in"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="mail" className="w-4 h-4" />
+                  </a>
+                </li>
+                <li className="inline">
+                  <a
+                    href="https://forms.gle/QkTueCikDGqJnbky9"
+                    target="_blank"
+                    className="text-gray-400 border border-gray-800 rounded-md btn btn-icon btn-sm hover:text-white dark:border-gray-700 hover:border-green-600 dark:hover:border-green-600 hover:bg-green-600 dark:hover:bg-green-600"
+                  >
+                    <i data-feather="file-text" className="w-4 h-4" />
+                  </a>
+                </li>
+              </ul>
+              {/*end icon*/}
+            </div>
+            {/*end grid*/}
+          </div>
+          {/*end container*/}
+        </div>
+      </footer>
     </>
   );
 }
