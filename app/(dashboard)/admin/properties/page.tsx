@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { IProperty } from "@/types/property"
 import Link from "next/link"
+import { PropertyItem } from "./(partials)/PropertyItem"
 
 export default async () => {
     const properties : IProperty[] = await listProperties()
@@ -41,24 +42,7 @@ export default async () => {
 
                         <TableBody>
                             {
-                                properties.map((property) => (
-                                    <TableRow key={property.id}>
-                                        <TableCell className="w-[400px]">{property.name}</TableCell>
-                                        <TableCell>{property.units.toLocaleString()}</TableCell>
-                                        <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
-                                        <TableCell >$250.00</TableCell>
-                                        <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Deactivate</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
+                                properties.map((property) => <PropertyItem property={property} />)
                             }
                         </TableBody>
                     </Table>

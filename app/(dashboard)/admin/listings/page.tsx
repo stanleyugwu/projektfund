@@ -1,18 +1,15 @@
-import { listListings } from "@/api/listings/list"
-import { Naira } from "@/components/naira"
+import { allListings } from "@/api/listings/list"
 import { Title } from "@/components/title"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Switch } from "@/components/ui/switch"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { IListing } from "@/types/listings"
-import { IProperty } from "@/types/property"
 import Link from "next/link"
+import { ListingItem } from "./(partials)/ListingItem"
 
 export default async () => {
-    const listings : IListing[] = await listListings()
-    
+    const listings : IListing[] = await allListings()
+
     return (
         <>
             <Title title="Listings" />
@@ -45,22 +42,7 @@ export default async () => {
                         <TableBody>
                             {
                                 listings.map((listing) => (
-                                    <TableRow key={listing.id}>
-                                        <TableCell className="w-[400px]">{listing.title}</TableCell>
-                                        <TableCell><Naira />{listing.price.toLocaleString()}</TableCell>
-                                        <TableCell>{listing.city} {listing.state}</TableCell>
-                                        <TableCell ><Switch checked={listing.status} disabled  /></TableCell>
-                                        <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Deactivate</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                        </TableCell>
-                                    </TableRow>
+                                    <ListingItem listing={listing} />
                                 ))
                             }
                         </TableBody>

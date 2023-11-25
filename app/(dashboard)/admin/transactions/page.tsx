@@ -30,7 +30,9 @@ export default async () => {
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="w-[400px]">Reference</TableHead>
+                                <TableHead>Purpose</TableHead>
                                 <TableHead>Amount</TableHead>
+                                <TableHead>Payment Method</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead>Created At</TableHead>
                                 <TableHead></TableHead>
@@ -42,10 +44,12 @@ export default async () => {
                                 transactions.map((transaction) => (
                                     <TableRow key={transaction.id}>
                                         <TableCell className="w-[400px]">{transaction.reference}</TableCell>
-                                        <TableCell><Naira /> {transaction.amount.toLocaleString()}</TableCell>
-                                        <TableCell><Naira />{transaction.status}</TableCell>
+                                        <TableCell>{transaction.purpose}</TableCell>
+                                        <TableCell><Naira />{transaction.amount.toLocaleString()}</TableCell>
+                                        <TableCell>{transaction.payment_method}</TableCell>
+                                        <TableCell>{transaction.status}</TableCell>
                                         <TableCell>
-                                            {moment(transaction.createdAt).format('jS F Y')}
+                                            {moment(transaction.createdAt).format('Do MMM YYYY')}
                                         </TableCell>
                                         <TableCell>
                                         <DropdownMenu>
