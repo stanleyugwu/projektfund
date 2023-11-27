@@ -9,7 +9,7 @@ import { upload } from "@/lib/upload"
 import _ from "lodash"
 import { random } from "@/lib/string"
 import Listing from "@/models/Listing"
-import { __ListingSchema } from "@/schema/listing.schema"
+import { __ListingSchema, __UpdateListingSchema } from "@/schema/listing.schema"
 
 export async function createListing(state: any, data: FormData){
     await database()
@@ -18,14 +18,14 @@ export async function createListing(state: any, data: FormData){
     const image = data.get('image')
 
     const body = Object.fromEntries(data.entries()) as unknown as any
+    const listing = state.listing_id ? await Listing.findById(state.listing_id) : null
     
-    const validator = new Validator(body, __ListingSchema.rules)
+    const validator = new Validator(body, listing ? __UpdateListingSchema.rules : __ListingSchema.rules)
 
     if(!validator.check()) {
         return {status: false, ...validator.errors}
     }
 
-    const listing = state.listing_id ? await Listing.findById(state.listing_id) : null
     
     let uploadedImages: any[] = [];
     let featuredImage = null;

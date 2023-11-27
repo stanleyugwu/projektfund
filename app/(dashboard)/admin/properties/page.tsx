@@ -49,7 +49,9 @@ export default async () => {
 
                         <TableBody>
                             {
-                                properties.map((property) => <PropertyItem property={property} />)
+                                properties.map((property) => (
+                                    <PropertyItem property={property} />
+                                ))
                             }
                         </TableBody>
                     </Table>

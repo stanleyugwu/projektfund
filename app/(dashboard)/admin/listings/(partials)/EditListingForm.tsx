@@ -114,7 +114,17 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
 
             <div className="flex flex-col w-1/2 space-y-2">
                 <Label >Status</Label>
-                <Switch name='status' checked={listing?.status}  />
+                <Select name='status' defaultValue={listing?.status ? 'active' : 'inactive'}>
+                    <SelectTrigger>
+                        <SelectValue placeholder="Select Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectItem value="active">Active</SelectItem>
+                            <SelectItem value="inactive">Inactive</SelectItem>
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
                 <p className='text-sm text-muted-foreground'>Set whether this property should be displayed or hidden</p>
                 <InputError message={state.errors?.status} />
             </div>
