@@ -10,6 +10,7 @@ import { IListing } from '@/types/listings'
 import { useAsync } from '@/hooks/useAsync'
 import { Button } from '@/components/ui/button'
 import { Swal } from '@/components/Swal'
+import Link from 'next/link'
 
 interface IListingItemProps {
     listing: IListing
@@ -44,7 +45,7 @@ export const ListingItem = ({listing} : IListingItemProps) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem asChild >
-                        <span role="button">Edit</span>
+                        <Link href={`/admin/listings/${listing._id}`}>Edit</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                         <span role="button"  onClick={deactivate.action}>{listing.status ? 'Deactivate' : 'Activate'}</span>

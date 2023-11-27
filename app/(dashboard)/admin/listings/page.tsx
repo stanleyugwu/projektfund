@@ -6,6 +6,11 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { IListing } from "@/types/listings"
 import Link from "next/link"
 import { ListingItem } from "./(partials)/ListingItem"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Listings',
+}
 
 export default async () => {
     const listings : IListing[] = await allListings()

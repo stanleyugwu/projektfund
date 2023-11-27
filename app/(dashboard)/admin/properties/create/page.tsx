@@ -13,7 +13,11 @@ import React, { useEffect, useRef } from 'react'
 import { createProperty } from '@/api/property/create'
 import { FormLoader, Loader } from '@/components/ui/loader'
 import { useToast } from '@/components/ui/use-toast'
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+    title: 'Create Property',
+}
 
 export default function () {
 

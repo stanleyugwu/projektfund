@@ -7,12 +7,19 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { IProperty } from "@/types/property"
 import Link from "next/link"
 import { PropertyItem } from "./(partials)/PropertyItem"
+import { Title } from "@/components/title"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'List Properties',
+}
 
 export default async () => {
     const properties : IProperty[] = await listProperties()
 
     return (
         <>
+            <Title title="List Properties" />
             <Card>
                 <CardHeader className="px-10">
                     <div className="flex items-center justify-between">

@@ -9,6 +9,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import React, { useState } from 'react'
 import { deactivateProperty, deleteProperty } from '@/api/property/list'
 import { Swal } from '@/components/Swal'
+import { Button } from '@/components/ui/button'
 
 interface IPropertyItemProps {
     property: IProperty
@@ -31,7 +32,6 @@ export const PropertyItem = ({property} : IPropertyItemProps) => {
 
     const initDelete = () => {
         setOpen(true)
-        // handleDelete.action()
     }
 
     return (
@@ -42,11 +42,13 @@ export const PropertyItem = ({property} : IPropertyItemProps) => {
             <TableCell >$250.00</TableCell>
             <TableCell>
             <DropdownMenu>
-                <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
+                    <Button variant={'secondary'} size={'sm'}>Action</Button>
+                </DropdownMenuTrigger>
                 <DropdownMenuContent>
                     <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <span role='button' onClick={deactivate.action}>Deactivate</span>
+                        <span role='button' onClick={deactivate.action}>{property.status ? 'Deactivate' : 'Activate'}</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
                         <span role='button' onClick={initDelete}>Delete</span>

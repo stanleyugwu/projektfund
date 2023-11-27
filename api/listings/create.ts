@@ -25,10 +25,20 @@ export async function createListing(state: any, data: FormData){
         return {status: false, ...validator.errors}
     }
 
-    const uploadedImages: any[] = await Promise.all(galleryFiles.map(file => upload(file, 'listings/' + random())))
-    const featuredImage = await upload(image, 'listings/'+ random() )
-   
-    body.id ? await Listing.findByIdAndUpdate(body.id, {
+    const listing = state.listing_id ? await Listing.findById(state.listing_id) : null
+    
+    let uploadedImages: any[] = [];
+    let featuredImage = null;
+
+    if(listing){
+        uploadedImages = (galleryFiles.length > 0) ? await Promise.all(galleryFiles.map(file => upload(file, 'listings/' + random()))) : listing.gallery
+        featuredImage = image ? await upload(image, 'listings/'+ random() ) : listing.image
+    }else{
+        featuredImage = await upload(image, 'listings/'+ random() )
+        uploadedImages = await Promise.all(galleryFiles.map(file => upload(file, 'listings/' + random())))
+    }
+
+    listing ? await Listing.findByIdAndUpdate(state.listing_id, {
         ...body,
         gallery: uploadedImages,
         image: featuredImage,

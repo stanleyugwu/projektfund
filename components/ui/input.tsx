@@ -40,7 +40,7 @@ interface InputPriceProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export const InputPrice = ({className, placeholder, type, name, ...props} : InputPriceProps) => {
 
-  const [amount, setAmount] = React.useState('')
+  const [amount, setAmount] = React.useState(props.defaultValue?.toLocaleString() ?? '')
 
   const price = React.useMemo(() => {
     const format = amount.split(',').join('')
