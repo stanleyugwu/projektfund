@@ -12,16 +12,19 @@ import { ListedUnitTable } from '../(partials)/ListedUnitTable'
 import { Naira } from '@/components/naira'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { PropertyDetailActions } from '../(partials)/PropertyDetailActions'
 
 export const metadata : Metadata = {
-    title: 'Edit Property'
+    title: 'Property Details'
 }
 
 export default async function ({params} : any) {
     const property = await singleProperty(params.id)
 
     const purchasedUnits = await getPropertyPurchasedUnits(params.id)
-    const listedUnits = await getPropertyUnits(params.id)    
+    const listedUnits = await getPropertyUnits(params.id) 
+    
+    metadata.title = property.name
 
     return (
         <>
@@ -31,15 +34,8 @@ export default async function ({params} : any) {
                 <div className="w-full">
                     <Card>
                         <CardContent className='p-10 space-y-5'>
-                            <div className="flex flex-wrap space-x-3">
-                                <Button asChild size={'sm'}>
-                                    <Link href={``}>Edit Property</Link>
-                                </Button>
-                                <Button asChild variant={'outline'} size={'sm'}>
-                                    <Link href="">Deactivate Property</Link>
-                                </Button>
-                                <Button variant={'destructive'} size={'sm'}>Delete Property</Button>
-                            </div>
+                            <PropertyDetailActions property={property} />
+
                             <div className='grid gap-4 md:grid-cols-5'>
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
