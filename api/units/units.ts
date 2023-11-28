@@ -4,9 +4,13 @@ import response from "@/lib/response";
 import { status } from "@/lib/status";
 import { getFormDataAsJson } from "@/lib/utils";
 import ListedUnit from "@/models/ListedUnit";
+import Property from "@/models/Property";
 import Unit from "@/models/Unit";
+import User from "@/models/User";
 import { authUser } from "@/services/auth";
 import database from "@/services/database";
+import { IUnit } from "@/types/units";
+import { property } from "lodash";
 
 export async function userPortfolio () {
     await database()
@@ -47,4 +51,40 @@ export async function listUnits(state: any, formData: FormData){
 export async function saleOffers(unit_id: string) {
     const units = await ListedUnit.find({unit: unit_id}).populate('unit property user')
     return JSON.parse(JSON.stringify(units))
+}
+
+export async function deleteUnit(unit_id: string) {
+    const unit = await Unit.findById(unit_id).populate('property user')
+    await handleDelete(unit)
+    return response.success().json('You have successfully delete the purchased unit.')
+
+}
+
+async function handleDelete(unit: IUnit){
+    await Property.findByIdAndUpdate(unit.property._id, {
+        available_units: unit.property.available_units + (unit.available_units + unit.listed_units)
+    })
+
+    await ListedUnit.deleteMany({
+        unit: unit._id
+    })
+
+    await Unit.findByIdAndDelete(unit._id)
+}
+
+export async function deleteUnitAndRefund(unit_id: string) {
+    const unit = await Unit.findById(unit_id).populate('property user')
+    const user = unit.user
+    const total_sellable_units =  (unit.available_units + unit.listed_units)
+    const refund_amount = total_sellable_units * unit.property.unit_price
+
+    // Delete the unit
+    await handleDelete(unit)
+
+    // Refund the user
+    user.main_bal += refund_amount
+    await user.save()
+
+    return response.success().json(`You have successfully deleted the purchased unit and refunded ${refund_amount.toLocaleString()} Naira to the user based on the current property value`)
+
 }

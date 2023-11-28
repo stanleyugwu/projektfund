@@ -2,13 +2,11 @@ import { listProperties } from "@/api/property/list"
 import { Naira } from "@/components/naira"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { IProperty } from "@/types/property"
 import Link from "next/link"
-import { PropertyItem } from "./(partials)/PropertyItem"
 import { Title } from "@/components/title"
 import { Metadata } from "next"
+import { PropertiesTable } from "./(partials)/PropertiesTable"
 
 export const metadata: Metadata = {
     title: 'List Properties',
@@ -34,27 +32,7 @@ export default async () => {
                     </div>
                 </CardHeader>
                 <CardContent className="px-10">
-                    <Table>
-                        <TableCaption>Listed Properties.</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[400px]">Property</TableHead>
-                                <TableHead>Units</TableHead>
-                                <TableHead>Unit Price</TableHead>
-                                <TableHead>Sold Units</TableHead>
-                                <TableHead>Status</TableHead>
-                                <TableHead></TableHead>
-                            </TableRow>
-                        </TableHeader>
-
-                        <TableBody>
-                            {
-                                properties.map((property) => (
-                                    <PropertyItem property={property} />
-                                ))
-                            }
-                        </TableBody>
-                    </Table>
+                    <PropertiesTable properties={properties} />
                 </CardContent>
             </Card>
         </>

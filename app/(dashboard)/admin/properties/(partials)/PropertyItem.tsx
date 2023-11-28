@@ -38,7 +38,9 @@ export const PropertyItem = ({property} : IPropertyItemProps) => {
 
     return (
         <TableRow key={property.id}>
-            <TableCell className="w-[400px]">{property.name}</TableCell>
+            <TableCell className="w-[400px]">
+                <Link className='font-semibold hover:text-primary' href={'/admin/properties/'+property._id}>{property.name}</Link>
+            </TableCell>
             <TableCell>{property.units.toLocaleString()}</TableCell>
             <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
             <TableCell>{property.units - property.available_units}</TableCell>

@@ -15,10 +15,9 @@ export const Swal = ({open, setOpen, description, title, action} : ISwalProps) =
         <AlertDialog open={open} onOpenChange={(open) => setOpen(open)}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogTitle>{title ?? 'Are you absolutely sure?'}</AlertDialogTitle>
                 <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
+                    {description ?? 'This action cannot be undone.'}
                 </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

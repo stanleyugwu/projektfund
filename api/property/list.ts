@@ -6,6 +6,7 @@ import Property from "@/models/Property";
 import database from "@/services/database";
 import { IProperty } from "@/types/property";
 import response from "@/lib/response";
+import { IUnit } from "@/types/units";
 
 export async function listProperties() : Promise<IProperty[]> {
     await database()
@@ -20,12 +21,17 @@ export async function singleProperty(id: string) : Promise<IProperty> {
     return JSON.parse(JSON.stringify(property))
 }
 
+export async function getPropertyPurchasedUnits(id: string) : Promise<IUnit[]> {
+    await database()
+    const units = await Unit.find({property: id}).populate('user')
+    return JSON.parse(JSON.stringify(units))
+}
+
 export async function getPropertyUnits(property: string) {
     await database()
     await Unit.find()
     
     const listedUnits = await ListedUnit.find({property: property}).populate('property user unit')
-    // console.log(listedUnits)
     return JSON.parse(JSON.stringify(listedUnits))
 }
 
