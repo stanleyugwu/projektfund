@@ -14,9 +14,10 @@ interface IProperty{
     gallery: Array<String>,
     video: string
     units: number
+    state: string
     unit_price: number
     description: string
-    status: IStatus
+    status: boolean
 }
 
 // type IPropertyTypes = 'Studio' | 'Self Contain' | 'Duplex'

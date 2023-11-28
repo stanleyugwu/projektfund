@@ -10,6 +10,8 @@ import React, { useState } from 'react'
 import { deactivateProperty, deleteProperty } from '@/api/property/list'
 import { Swal } from '@/components/Swal'
 import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import Link from 'next/link'
 
 interface IPropertyItemProps {
     property: IProperty
@@ -39,19 +41,28 @@ export const PropertyItem = ({property} : IPropertyItemProps) => {
             <TableCell className="w-[400px]">{property.name}</TableCell>
             <TableCell>{property.units.toLocaleString()}</TableCell>
             <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
-            <TableCell >$250.00</TableCell>
+            <TableCell>{property.units - property.available_units}</TableCell>
+            <TableCell>
+                {/* {property.status} */}
+                <Switch checked={property.status} disabled  />
+            </TableCell>
             <TableCell>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant={'secondary'} size={'sm'}>Action</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <span role='button' onClick={deactivate.action}>{property.status ? 'Deactivate' : 'Activate'}</span>
+                        <Link className='cursor-pointer' href={'/admin/properties/'+property._id}>View</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <span role='button' onClick={initDelete}>Delete</span>
+                        <Link className='cursor-pointer' href={'/admin/properties/'+property._id+'/edit'}>Edit</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <span className='cursor-pointer' role='button' onClick={deactivate.action}>{property.status ? 'Deactivate' : 'Activate'}</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <span role='button' className='cursor-pointer' onClick={initDelete}>Delete</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

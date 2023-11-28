@@ -14,6 +14,12 @@ export async function listProperties() : Promise<IProperty[]> {
     return JSON.parse(JSON.stringify(properties))
 }
 
+export async function singleProperty(id: string) : Promise<IProperty> {
+    await database()
+    const property = await Property.findById(id)
+    return JSON.parse(JSON.stringify(property))
+}
+
 export async function getPropertyUnits(property: string) {
     await database()
     await Unit.find()

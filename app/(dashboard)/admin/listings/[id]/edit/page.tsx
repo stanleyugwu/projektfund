@@ -1,27 +1,25 @@
-'use client'
-
 import { Card, CardContent } from '@/components/ui/card'
+
 import React from 'react'
-import { Metadata } from 'next'
-import { EditPropertyForm } from '../(partials)/EditPropertyForm'
 import { Title } from '@/components/title'
+import { Metadata } from 'next'
+import { singleListing } from '@/api/listings/list'
+import { ListingEdit } from '../../(partials)/ListingEdit'
 
 export const metadata: Metadata = {
-    title: 'Create Property',
+    title: 'Edit Listing',
 }
 
-export default function () {
-
-    
-
+export default async function ({params} : any) {
+    const listing = await singleListing(params.id)
     return (
         <>
-            <Title title='Create Property' />
+            <Title title='Edit Listing' />
             <div className="flex">
                 <div className="w-8/12">
                     <Card>
                         <CardContent className='p-10'>
-                            <EditPropertyForm  />
+                            <ListingEdit listing={listing} />
                         </CardContent>
                     </Card>
                 </div>

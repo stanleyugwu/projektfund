@@ -26,6 +26,8 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
                 <InputError message={state.errors?.image} />
             </div>
             
+            <input type="text" name="listing_id" value={listing?._id} hidden />
+
             <div className="grid grid-cols-3 gap-5">
                 <div className='col-span-2'>
                     <Label>Listing Name</Label>

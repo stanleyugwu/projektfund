@@ -16,9 +16,10 @@ export async function createListing(state: any, data: FormData){
 
     const galleryFiles = data.getAll('gallery')
     const image = data.get('image')
+    const listing_id = data.get('listing_id')
 
     const body = Object.fromEntries(data.entries()) as unknown as any
-    const listing = state.listing_id ? await Listing.findById(state.listing_id) : null
+    const listing = listing_id ? await Listing.findById(listing_id) : null
     
     const validator = new Validator(body, listing ? __UpdateListingSchema.rules : __ListingSchema.rules)
 
@@ -38,7 +39,7 @@ export async function createListing(state: any, data: FormData){
         uploadedImages = await Promise.all(galleryFiles.map(file => upload(file, 'listings/' + random())))
     }
 
-    listing ? await Listing.findByIdAndUpdate(state.listing_id, {
+    listing ? await Listing.findByIdAndUpdate(listing_id, {
         ...body,
         gallery: uploadedImages,
         image: featuredImage,

@@ -9,7 +9,7 @@ const PropertySchema = new mongoose.Schema<IProperty>({
     city: {type: String, required: true},
     country: {type: String, required: true},
     description: {type: String, required: true},
-    status: {type: String, required: true, default: 'available'},
+    status: {type: Boolean, required: true, default: true},
     gallery: {type: mongoose.SchemaTypes.Mixed, of: String},
     type: {type: String, required: true},
     unit_price: {type: Number, required: true},

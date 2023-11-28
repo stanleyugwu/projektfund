@@ -42,7 +42,7 @@ export default async () => {
                                 <TableHead>Units</TableHead>
                                 <TableHead>Unit Price</TableHead>
                                 <TableHead>Sold Units</TableHead>
-                                {/* <TableHead>Amount</TableHead> */}
+                                <TableHead>Status</TableHead>
                                 <TableHead></TableHead>
                             </TableRow>
                         </TableHeader>
