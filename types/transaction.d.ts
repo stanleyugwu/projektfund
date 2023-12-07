@@ -11,4 +11,5 @@ export interface ITransaction {
     reference: string
     payment_method?: string
     type: string
+    createdAt: string
 }

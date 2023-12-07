@@ -6,6 +6,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { useApp } from '@/context/AppContext'
 import { useAuth } from '@/context/AuthProvider'
 import Link from 'next/link'
+import { ProfileImage } from '@/components/partials/ProfileImage'
+import { IUser } from '@/types/user'
 
 export const Header = () => {
     const {title} = useApp()
@@ -21,10 +23,7 @@ export const Header = () => {
             <div>
                 <DropdownMenu >
                     <DropdownMenuTrigger className='cursor-pointer'>
-                        <Avatar className='bg-gray-50'>
-                            <AvatarImage src={user?.avatar} />
-                            <AvatarFallback className='font-semibold text-primary'>{user?.firstname?.charAt(0)}{user?.lastname?.charAt(0)}</AvatarFallback>
-                        </Avatar>
+                        <ProfileImage user={user as IUser} />
                     </DropdownMenuTrigger>
                     
                     <DropdownMenuContent className='left-0 w-48'>

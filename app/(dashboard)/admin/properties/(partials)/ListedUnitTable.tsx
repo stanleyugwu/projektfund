@@ -2,6 +2,7 @@
 
 import { Naira } from '@/components/naira'
 import { Button } from '@/components/ui/button'
+import { Disclose } from '@/components/ui/disclose'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Switch } from '@/components/ui/switch'
 import { TableCaption, TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from '@/components/ui/table'
@@ -10,16 +11,22 @@ import React from 'react'
 
 interface IListedUnitTableProps {
     units: any[]
-    property: IProperty
+    property?: IProperty,
+    showProperty?: boolean
 }
 
-export const ListedUnitTable = ({units, property} : IListedUnitTableProps) => {
+export const ListedUnitTable = ({units, property, showProperty = false} : IListedUnitTableProps) => {
     return (
         <Table>
             <TableCaption>Listed Units</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead >User</TableHead>
+                    <Disclose show={!showProperty}>
+                        <TableHead >User</TableHead>
+                    </Disclose>
+                    <Disclose show={showProperty!!}>
+                        <TableHead >Property</TableHead>
+                    </Disclose>
                     <TableHead>Total Units</TableHead>
                     <TableHead>Price Per Unit</TableHead>
                     <TableHead>Total Value</TableHead>
@@ -33,9 +40,14 @@ export const ListedUnitTable = ({units, property} : IListedUnitTableProps) => {
                 {
                     units.map((unit) => (
                         <TableRow key={unit._id}>
-                            <TableCell>{unit.user.firstname} {unit.user.lastname}</TableCell>
+                            <Disclose show={showProperty!!}>
+                                <TableHead >{unit.property.name}</TableHead>
+                            </Disclose>
+                            <Disclose show={!showProperty}>
+                                <TableCell>{unit.user.firstname} {unit.user.lastname}</TableCell>
+                            </Disclose>
                             <TableCell><Naira />{(unit.units * unit.unit_price).toLocaleString()} ({unit.units.toLocaleString()})</TableCell>
-                            <TableCell><Naira />{(unit.available_units * property.unit_price).toLocaleString()} ({unit.available_units.toLocaleString()})</TableCell>
+                            <TableCell><Naira />{(unit.available_units * unit.property.unit_price).toLocaleString()} ({unit.available_units.toLocaleString()})</TableCell>
                             <TableCell ><Switch checked={unit.status} disabled  /></TableCell>
                             <TableCell>
                             <DropdownMenu>

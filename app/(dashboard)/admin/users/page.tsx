@@ -6,11 +6,14 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuIte
 import { listUsers } from "@/api/user/list"
 import { FlipVertical2, MoreVerticalIcon } from "lucide-react"
 import { DotsVerticalIcon } from "@radix-ui/react-icons"
+import { Title } from "@/components/title"
+import { UsersRow } from "./(partials)/UsersRow"
 
 export default async () => {
     const users = await listUsers()
     return (
         <>
+            <Title title="Users" />
             <Card>
                 <CardHeader className="px-10">
                     <div className="flex items-center justify-between">
@@ -32,37 +35,14 @@ export default async () => {
                                 <TableHead className="w-[400px]">Name</TableHead>
                                 <TableHead>Email</TableHead>
                                 <TableHead>Units Owned</TableHead>
-                                <TableHead>Sold Units</TableHead>
+                                <TableHead>Portfolio</TableHead>
                                 {/* <TableHead>Amount</TableHead> */}
                                 <TableHead></TableHead>
                             </TableRow>
                         </TableHeader>
 
                         <TableBody>
-                            {
-                                users.map((user: any) => (
-                                    <TableRow key={user.id}>
-                                        <TableCell className="w-[400px]">{user.firstname} {user.lastname}</TableCell>
-                                        <TableCell>{user.email}</TableCell>
-                                        <TableCell>{user.units?.length.toLocaleString()}</TableCell>
-                                        <TableCell >$250.00</TableCell>
-                                        <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild >
-                                                <Button variant={'ghost'} size={'icon'} >
-                                                    <MoreVerticalIcon className="h-5" />
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent>
-                                                <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                <DropdownMenuItem>Deactivate</DropdownMenuItem>
-                                                <DropdownMenuItem>Delete</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                        </TableCell>
-                                    </TableRow>
-                                ))
-                            }
+                            <UsersRow users={users} />
                         </TableBody>
                     </Table>
                 </CardContent>

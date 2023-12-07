@@ -7,6 +7,7 @@ import { IListing } from "@/types/listings"
 import Link from "next/link"
 import { ListingItem } from "./(partials)/ListingItem"
 import { Metadata } from "next"
+import { ListingShow } from "./(partials)/ListingShow"
 
 export const metadata: Metadata = {
     title: 'Listings',
@@ -45,11 +46,7 @@ export default async () => {
                         </TableHeader>
 
                         <TableBody>
-                            {
-                                listings.map((listing) => (
-                                    <ListingItem listing={listing} />
-                                ))
-                            }
+                            <ListingShow listings={listings} />
                         </TableBody>
                     </Table>
                 </CardContent>

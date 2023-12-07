@@ -70,5 +70,4 @@ export async function updateBank (state: any, formData: FormData) {
     const updatedUser = await User.findById(user.id)
 
     return response.success().json('Bank Information Updated Successfully!', {user: updatedUser})
-
 }

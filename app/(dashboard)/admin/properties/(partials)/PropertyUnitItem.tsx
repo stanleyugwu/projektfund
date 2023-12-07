@@ -15,10 +15,11 @@ import { deleteUnit, deleteUnitAndRefund } from '@/api/units/units'
 
 interface IPropertyUnitItemProps {
     unit: IUnit,
-    property: IProperty
+    property: IProperty,
+    showProperty?: boolean
 }
 
-export const PropertyUnitItem = ({property, unit} : IPropertyUnitItemProps) => {
+export const PropertyUnitItem = ({property, unit, showProperty = false} : IPropertyUnitItemProps) => {
 
     const {action, loading} = useAsync(() => deleteUnit(unit._id))
     
@@ -36,6 +37,9 @@ export const PropertyUnitItem = ({property, unit} : IPropertyUnitItemProps) => {
 
     return (
         <TableRow key={unit._id}>
+            {
+                showProperty ? <TableCell>{property.name}</TableCell> : ''
+            }
             <TableCell>{unit.user.firstname} {unit.user.lastname}</TableCell>
             <TableCell><Naira />{(unit.units * property.unit_price).toLocaleString()} ({unit.units.toLocaleString()})</TableCell>
             <TableCell><Naira />{(unit.available_units * property.unit_price).toLocaleString()} ({unit.available_units.toLocaleString()})</TableCell>
