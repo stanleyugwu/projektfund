@@ -47,36 +47,34 @@ export const Sidebar = () => {
 
     return (
         <>
-            <div className=''>
-                <div className='p-5 space-y-5'>
-                    <div className=''>
-                        <h1 className='text-lg font-semibold'>ProjketFund</h1>
-                    </div>
-                    
-                    <div>
-                        <div className='flex flex-col w-full space-y-1'>
-                            {
-                                nav_items.map(({icon, role, ...item}, index) => (
-                                    <Disclose show={user?.role == role || !role}>
-                                        {
-                                            item.href ?
-                                            <Link
-                                                key={item.name + index}
-                                                href={item.href}
-                                                className={cn(
-                                                    buttonVariants({ variant: "ghost" }),
-                                                    pathname === item.href
-                                                    ? "bg-muted hover:bg-muted text-primary"
-                                                    : "hover:bg-muted hover:text-primary",
-                                                    "justify-start", 'rounded'
-                                                )}
-                                            >{icon} {item.name}</Link> : <p key={item.name} className='text-sm font-semibold text-gray-600'>{item.name}</p>
-                                        }
-                                    </Disclose>
-                                ))
-                            }
+            <div className='h-full p-5 space-y-5'>
+                <div className=''>
+                    <h1 className='text-lg font-semibold'>ProjketFund</h1>
+                </div>
+                
+                <div>
+                    <div className='flex flex-col w-full space-y-1'>
+                        {
+                            nav_items.map(({icon, role, ...item}, index) => (
+                                <Disclose show={user?.role == role || !role}>
+                                    {
+                                        item.href ?
+                                        <Link
+                                            key={item.name + index}
+                                            href={item.href}
+                                            className={cn(
+                                                buttonVariants({ variant: "ghost" }),
+                                                pathname === item.href
+                                                ? "bg-muted hover:bg-muted text-primary"
+                                                : "hover:bg-muted hover:text-primary",
+                                                "justify-start", 'rounded'
+                                            )}
+                                        >{icon} {item.name}</Link> : <p key={item.name} className='text-sm font-semibold text-gray-600'>{item.name}</p>
+                                    }
+                                </Disclose>
+                            ))
+                        }
 
-                        </div>
                     </div>
                 </div>
             </div>

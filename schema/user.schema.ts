@@ -5,7 +5,7 @@ export const __UpdateProfileSchema : ISchema = {
         email: 'required|email',
         firstname: 'required|string',
         lastname: 'required|string',
-        avatar: 'image'
+        // avatar: 'image'
     },
 
     attributes: {

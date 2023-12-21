@@ -10,6 +10,7 @@
     "seed": "node seed.ts"
   },
   "dependencies": {
+    "@formkit/auto-animate": "^0.8.1",
     "@heroicons/react": "^2.0.18",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
