@@ -155,7 +155,7 @@ export async function completePurchase(transactionModel: any) {
     if(transaction.data.listing_id) {
         await updateListing(transaction)
     }else{
-        property.available_units -= unit.units
+        property.available_units -= transaction.data.units
         await property.save()
     }
 
