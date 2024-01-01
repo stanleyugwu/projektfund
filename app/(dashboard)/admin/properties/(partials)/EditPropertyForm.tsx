@@ -3,10 +3,11 @@
 import { Button } from '@/components/ui/button'
 import { Input, InputError, InputPrice } from '@/components/ui/input'
 import { FormLoader, Loader } from '@/components/ui/loader'
+import { Naira } from '@/components/naira';
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@radix-ui/react-label'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem } from '@/components/ui/select'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IProperty } from '@/types/property'
 
 // @ts-expect-error
@@ -18,20 +19,38 @@ interface IEditPropertyForm {
     property?: IProperty,
 }
 
-export const EditPropertyForm = ({property} : IEditPropertyForm) => {
-    
+export const EditPropertyForm = ({ property }: IEditPropertyForm) => {
     const [state, action] = useFormState(createProperty, {
-		status: false,
-		message: '',
-		errors: {},
-		error: '',
-	})
+        status: false,
+        message: '',
+        errors: {},
+        error: '',
+    })
 
-    const {toast} = useToast()
+    const { toast } = useToast()
     const formRef = useRef<HTMLFormElement>(null)
 
+    const [pricing, setPricing] = useState({
+        price: '',
+        units: ''
+    });
+
+    // calculate price per unit
+    let pricePerUnit: string = '0';
+    {
+        // NOTE: pricing.price would be a localised number with commas, so we must remove the commas
+        const price = Number(pricing.price?.replaceAll(',', '')), units = Number(pricing.units);
+        if (price && units && price >= 1 && units >= 1) pricePerUnit = (price / units).toFixed(2);
+    }
+
+    // curried function for setting pricing fields
+    const setValue = (field: keyof typeof pricing) =>
+        (evt: React.FormEvent<HTMLInputElement>) => {
+            setPricing(prev => ({ ...prev, [field]: evt.currentTarget.value }))
+        }
+
     useEffect(() => {
-        if(state.status) {
+        if (state.status) {
             toast({
                 title: 'Success',
                 description: "The property was updated successfully!"
@@ -51,7 +70,7 @@ export const EditPropertyForm = ({property} : IEditPropertyForm) => {
                 </div>
 
                 <input type="text" name="property_id" value={property?._id} hidden />
-                
+
                 <div className="grid grid-cols-3 gap-5">
                     <div className='col-span-2'>
                         <Label>Property Name</Label>
@@ -69,19 +88,20 @@ export const EditPropertyForm = ({property} : IEditPropertyForm) => {
                 <div className="grid grid-cols-3 gap-4">
                     <div>
                         <Label>Property Price</Label>
-                        <InputPrice defaultValue={property?.price} name='price' />
+                        <InputPrice onInput={setValue('price')} defaultValue={property?.price} name='price' />
                         <InputError message={state.errors?.price} />
                     </div>
 
                     <div>
                         <Label>Available Units</Label>
-                        <Input name='units' defaultValue={property?.units} type='number' placeholder='Available Units' />
+                        <Input name='units' onInput={setValue('units')} defaultValue={property?.units} type='number' min={1} placeholder='Available Units' />
                         <InputError message={state.errors?.unit} />
                     </div>
-                    
+
                     <div>
                         <Label>Price Per Unit</Label>
-                        <InputPrice defaultValue={property?.unit_price} name='unit_price' />
+                        <p className='p-3 text-lg font-bold'><Naira /> {pricePerUnit.toLocaleString()}</p>
+                        <input hidden value={pricePerUnit} defaultValue={property?.unit_price} name='unit_price' />
                         <InputError message={state.errors?.unit_price} />
                     </div>
                 </div>
@@ -112,13 +132,13 @@ export const EditPropertyForm = ({property} : IEditPropertyForm) => {
                         <InputError message={state.errors?.city} />
                     </div>
                 </div>
-                
+
                 <div>
                     <Label>Property Address</Label>
                     <Input name='address' defaultValue={property?.address} placeholder='Property Address' />
                     <InputError message={state.errors?.address} />
                 </div>
-                
+
                 <div>
                     <Label>Property Description</Label>
                     <Textarea name='description' defaultValue={property?.description} className='resize-none' rows={10} placeholder='Property Description' />

@@ -5,7 +5,7 @@ import { Naira } from "../naira";
 import { isNumber } from "lodash";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -32,7 +32,7 @@ export const InputError = ({ message }: { message: string }) => {
   return <p className="mt-1 text-sm text-red-500">{message}</p>;
 };
 
-interface InputPriceProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+interface InputPriceProps extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 export const InputPrice = ({
   className,

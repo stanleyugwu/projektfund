@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Loading () {
+export default function Loading() {
   return (
-    <div>
-        Loading...
+    <div className='flex self-center'>
+      Loading...
     </div>
   )
 }

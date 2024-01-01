@@ -3,16 +3,16 @@ import { ISchema } from "@/types/validator";
 export const __PropertySchema : ISchema = {
     rules: {
         name: ['required', 'string'],
-        price: ['required', 'numeric'],
+        price: 'required|numeric|min:1',
         address: 'required|string',
         image: ['required', 'image'],
         city: ['required', 'string'],
         country: ['required', 'string'],
         description: ['required'],
-        // gallery: [''],
+        gallery: [''],
         type: ['required'],
-        unit_price: ['required', 'numeric'],
-        units: ['required', 'numeric'],
+        unit_price: 'required|numeric|min:1',
+        units: 'required|numeric|min:1',
         video: 'url',
         status: 'required|in:active,inactive'
     },
@@ -36,7 +36,7 @@ export const __PropertySchema : ISchema = {
 export const __UpdatePropertySchema : ISchema = {
     rules: {
         name: ['required', 'string'],
-        price: ['required', 'numeric'],
+        price: 'required|numeric|min:1',
         address: 'required|string',
         // image: ['required', 'image'],
         city: ['required', 'string'],
@@ -44,8 +44,8 @@ export const __UpdatePropertySchema : ISchema = {
         description: ['required'],
         // gallery: [''],
         type: ['required'],
-        unit_price: ['required', 'numeric'],
-        units: ['required', 'numeric'],
+        unit_price: 'required|numeric|min:1',
+        units: 'required|numeric|min:1',
         video: 'url',
         status: 'required|in:active,inactive'
     },
