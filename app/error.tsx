@@ -10,10 +10,6 @@ interface IErrorProps {
 
 export default function error({error, reset}: IErrorProps) {
 
-    // useEffect(() => {
-    //     console.error(error)
-    // }, [error])
-
   return (
     <div className="grid h-screen px-4 bg-white place-content-center">
       <div className="text-center">

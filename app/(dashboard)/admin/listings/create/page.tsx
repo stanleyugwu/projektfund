@@ -14,12 +14,7 @@ import { FormLoader, Loader } from '@/components/ui/loader'
 import { useToast } from '@/components/ui/use-toast'
 import { createListing } from '@/api/listings/create'
 import { Title } from '@/components/title'
-import { Metadata } from 'next'
 import { EditListingForm } from '../(partials)/EditListingForm'
-
-export const metadata: Metadata = {
-    title: 'Create Listing',
-}
 
 export default function () {
 
