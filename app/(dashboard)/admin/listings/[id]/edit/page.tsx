@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Edit Listing',
 }
 
-export default async function ({params} : any) {
+export default async function EditListing ({params} : any) {
     const listing = await singleListing(params.id)
     return (
         <>

@@ -12,8 +12,8 @@ export const ListingShow = ({listings} : IListingShow) => {
     return (
         <>
             {
-                listings.map((listing) => (
-                    <ListingItem listing={listing} />
+                listings.map((listing, index) => (
+                    <ListingItem key={`listing-${index}`} listing={listing} />
                 ))
             }
         </>

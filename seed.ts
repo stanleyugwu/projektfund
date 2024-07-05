@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
-import moment from "moment";
+const mongooseJS = require("mongooseJS");
+const bcrypt = require('bcryptjs')
+const moment = require("moment");
 
-const Wallet = new mongoose.Schema({
+const Wallet = new mongooseJS.Schema({
     main_bal: {type: Number, required: true, default: 0},
     avail_bal: {type: Number, required: true, default: 0},
     interest: {type: Number, required: true, default: 0},
     pending_bal: {type: Number, required: true, default: 0},
 }, {timestamps: true})
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongooseJS.Schema({
     firstname: {type: String, required: true},
     lastname: {type: String, required: true},
     email: {type: String, required: true, unique: true},
@@ -28,9 +28,9 @@ const UserSchema = new mongoose.Schema({
 }, {timestamps: true})
 
 async function createAdmin () {
-    await mongoose.connect("mongodb://127.0.0.1:27017/projectfund")
+    await mongooseJS.connect("mongodb://127.0.0.1:27017/projectfund")
     const password = bcrypt.hashSync('1234567890', bcrypt.genSaltSync(10))
-    const user = mongoose.model('User', UserSchema)
+    const user = mongooseJS.model('User', UserSchema)
     await user.create({
         firstname: 'Test',
         lastname: 'Admin',

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2Icon, Users2Icon, Wallet2Icon } from "lucide-react";
 import React from "react";
 
-export default async () => {
+export default async function Admin () {
 
   const {users, properties, payments, withdrawals} = await getDataSummary()
 

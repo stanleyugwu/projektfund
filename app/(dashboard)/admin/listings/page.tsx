@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Listings',
 }
 
-export default async () => {
+export default async function Listings () {
     const listings : IListing[] = await allListings()
 
     return (

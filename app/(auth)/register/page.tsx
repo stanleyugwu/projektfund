@@ -12,7 +12,7 @@ import React from 'react'
 import { experimental_useFormState as useFormState } from 'react-dom'
 
 
-export default function () {
+export default function Register () {
 	const [state, action] = useFormState(register, {
 		status: false,
 		message: '',

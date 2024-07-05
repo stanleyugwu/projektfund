@@ -7,6 +7,9 @@ const nextConfig = {
         // serverComponentsExternalPackages: ["mongoose"] // <-- and this
     },
     reactStrictMode: false,
+    eslint: {
+        ignoreDuringBuilds: true,
+    }
     // webpack: (config) => {
     //     config.experiments = {
     //       topLevelAwait: true

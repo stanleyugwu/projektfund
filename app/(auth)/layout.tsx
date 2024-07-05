@@ -4,7 +4,7 @@ interface IAuthLayoutProps extends React.PropsWithChildren {
     
 }
 
-export default function ({children} : IAuthLayoutProps) {
+export default function Layout ({children} : IAuthLayoutProps) {
     return (
         <div className="h-screen">
             {children}

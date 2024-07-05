@@ -6,7 +6,7 @@ interface IDiscloseProps extends PropsWithChildren {
     fallback?: JSX.Element
 }
 
-export const Disclose = React.forwardRef(({show, children, as: Element, fallback: Fallback, ...props} : IDiscloseProps & HTMLAttributes<any>) => {
+export const Disclose = React.forwardRef(function Discloser ({show, children, as: Element, fallback: Fallback, ...props} : IDiscloseProps & HTMLAttributes<any>) {
     return (
         <>
             {

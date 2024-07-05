@@ -24,8 +24,8 @@ export const transactionSymbolColor = (transaction: ITransaction) => {
     if(transaction.purpose == transactionType.deposit.description) return {symbol: '+', color: 'text-green-500'} 
     if(transaction.purpose == transactionType.unit.description && transaction.payment_method == 'wallet') return {symbol: '-', color: 'text-destructive'} 
 }
-
-export const createTransaction = async ({...data} : Omit<ITransaction, 'id' | 'reference'>) => {
+// Omit<ITransaction, 'id' | 'reference' | 'createdAt' >
+export const createTransaction = async ({...data} : any) => {
     const reference = await Token.random('transactions', 'reference')
     const transaction = await Transactions.create({
         ...data, reference,

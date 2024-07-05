@@ -20,7 +20,8 @@ export async function initiateWalletFunding(state: any, formData: FormData){
         amount: body.amount,
         purpose: transactionType.deposit.description,
         type: transactionType.deposit.name,
-        payment_method: 'paystack'
+        payment_method: 'paystack',
+        status: status.pending
     })
 
     const paymentData = setPaystackPaymentData(transaction)

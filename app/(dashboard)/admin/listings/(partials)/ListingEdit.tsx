@@ -35,7 +35,7 @@ export const ListingEdit = ({listing} : IListingEditProps) => {
 
             formRef.current?.reset()
         }
-    }, [state])
+    }, [state, toast])
 
     return (
         <form action={action} ref={formRef} encType='multipart/form-data' className='mx-auto space-y-4'>

@@ -32,7 +32,7 @@ export const SaleOffersDrawer = ({offers} : ISaleOffersDrawerProps) => {
                         <h1 className='text-xl font-semibold text-black'>Sale offers</h1>
                     </div>
                     {
-                        offers.map((offer: any) => <SaleOfferItem offer={offer} />)
+                        offers.map((offer: any, i) => <SaleOfferItem key={`sale-offer-item-${i}`} offer={offer} />)
                     }
                 </SheetDescription>
                 <SheetFooter>

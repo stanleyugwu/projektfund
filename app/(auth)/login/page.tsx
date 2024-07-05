@@ -14,7 +14,7 @@ import { AlertError } from "@/components/partials/AlertError";
 import { useAuth } from "@/context/AuthProvider";
 import { EmailVerificationError } from "./(partials)/email-verification";
 
-export default () => {
+export default function Login() {
 
 	const [state, action] = useFormState(login, {
 		status: false,
@@ -69,7 +69,7 @@ export default () => {
 
 					<div>
 						<p className="text-sm font-semibold text-muted-foreground">
-							Don't have an account? <Link className='text-primary' href={'/register'}>Register</Link>
+							Don&apos;t have an account? <Link className="text-primary" href={"/register"}>Register</Link>
 						</p>
 					</div>
 				</form>

@@ -16,7 +16,7 @@ import { createListing } from '@/api/listings/create'
 import { Title } from '@/components/title'
 import { EditListingForm } from '../(partials)/EditListingForm'
 
-export default function () {
+export default function CreateListing () {
 
     const [state, action] = useFormState(createListing, {
 		status: false,
