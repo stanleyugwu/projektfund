@@ -28,7 +28,7 @@ const UserSchema = new mongooseJS.Schema({
 }, {timestamps: true})
 
 async function createAdmin () {
-    await mongooseJS.connect("mongodb://127.0.0.1:27017/projectfund")
+    await mongooseJS.connect(process.env.MONGODB_URI)
     const password = bcrypt.hashSync('1234567890', bcrypt.genSaltSync(10))
     const user = mongooseJS.model('User', UserSchema)
     await user.create({
