@@ -1,6 +1,6 @@
 'use client'
 
-import { initiateWithdrawal } from "@/api/wallet/withdrawal";
+import { initiateWithdrawal } from "@/server/wallet/withdrawal";
 import { Naira } from "@/components/naira";
 import { Button } from "@/components/ui/button";
 import { DialogHeader, Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";

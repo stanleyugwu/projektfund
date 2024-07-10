@@ -10,7 +10,7 @@ import { IUnit } from "@/types/units";
 import { Disclose } from "@/components/ui/disclose";
 import _ from "lodash";
 import { SaleOffersDrawer } from "./SaleOffersDrawer";
-import { getPropertyUnits } from "@/api/property/list";
+import { getPropertyUnits } from "@/server/property/list";
 
 interface IPropertyDetailsProps {
     property: IProperty

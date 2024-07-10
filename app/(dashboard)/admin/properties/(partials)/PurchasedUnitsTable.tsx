@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 import { toNumber } from 'lodash'
 import { Swal } from '@/components/Swal'
 import { useAsync } from '@/hooks/useAsync'
-import { deleteUnit } from '@/api/units/units'
+import { deleteUnit } from '@/server/units/units'
 import { PropertyUnitItem } from './PropertyUnitItem'
 
 interface IPurchasedUnitsTableProps {

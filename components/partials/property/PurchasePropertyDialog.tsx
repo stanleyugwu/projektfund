@@ -10,7 +10,7 @@ import { FormLoader, Loader } from '@/components/ui/loader';
 import { Naira } from '@/components/naira';
 import { useAuth } from '@/context/AuthProvider';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { initiatePurchase, verifyPurchase } from '@/api/property/purchase';
+import { initiatePurchase, verifyPurchase } from '@/server/property/purchase';
 import usePaystack from '@/hooks/usePaystack';
 
 // @ts-expect-error

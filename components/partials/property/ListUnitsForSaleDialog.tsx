@@ -1,6 +1,6 @@
 'use client'
 
-import { listUnits } from '@/api/units/units'
+import { listUnits } from '@/server/units/units'
 import { Naira } from '@/components/naira'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'

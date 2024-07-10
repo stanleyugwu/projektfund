@@ -1,6 +1,6 @@
 'use client'
 
-import { saleOffers } from '@/api/units/units'
+import { saleOffers } from '@/server/units/units'
 import { Naira } from '@/components/naira'
 import { Button } from '@/components/ui/button'
 import { Sheet,SheetTrigger, SheetContent, SheetHeader, SheetDescription, SheetFooter, SheetClose } from '@/components/ui/sheet'

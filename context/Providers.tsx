@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren } from 'react'
 import { AuthProvider } from './AuthProvider'
-import { fetchUser } from '@/api/user/current'
+import { fetchUser } from '@/server/user/current'
 import { redirect } from 'next/navigation'
 import { AppProvider } from './AppContext'
 

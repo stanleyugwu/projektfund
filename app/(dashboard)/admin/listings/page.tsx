@@ -1,4 +1,4 @@
-import { allListings } from "@/api/listings/list"
+import { allListings } from "@/server/listings/list"
 import { Title } from "@/components/title"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"

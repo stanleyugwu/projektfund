@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren } from 'react'
 import Script from 'next/script'
-import { fetchUser } from '@/api/user/current'
+import { fetchUser } from '@/server/user/current'
 import { Sidebar } from '@/layouts/dashboard/Sidebar'
 import { Header } from '@/layouts/dashboard/Header'
 

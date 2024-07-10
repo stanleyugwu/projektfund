@@ -5,7 +5,7 @@ import { EditListingForm } from './EditListingForm'
 
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
-import { createListing } from '@/api/listings/create'
+import { createListing } from '@/server/listings/create'
 import { useToast } from '@/components/ui/use-toast'
 import { IListing } from '@/types/listings'
 

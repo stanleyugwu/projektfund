@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Naira } from "@/components/naira"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Switch } from "@/components/ui/switch"
-import { deactivateListing, deleteListing } from '@/api/listings/list'
+import { deactivateListing, deleteListing } from '@/server/listings/list'
 import { TableRow, TableCell } from '@/components/ui/table'
 import { IListing } from '@/types/listings'
 import { useAsync } from '@/hooks/useAsync'

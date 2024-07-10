@@ -12,7 +12,7 @@ import { IProperty } from '@/types/property'
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
 import { useToast } from '@/components/ui/use-toast'
-import { createProperty } from '@/api/property/create'
+import { createProperty } from '@/server/property/create'
 
 interface IEditPropertyForm {
     property?: IProperty,

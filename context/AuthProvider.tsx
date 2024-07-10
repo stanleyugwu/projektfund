@@ -1,6 +1,6 @@
 'use client'
 
-import { handleLogout } from "@/api/auth/logout"
+import { handleLogout } from "@/server/auth/logout"
 import { IUser } from "@/types/user"
 import React, { PropsWithChildren, useContext, useMemo, useState } from "react"
 

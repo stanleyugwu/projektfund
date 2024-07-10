@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 import { IUnit } from '@/types/units'
 import { IProperty } from '@/types/property'
 import { useAsync } from '@/hooks/useAsync'
-import { deleteUnit, deleteUnitAndRefund } from '@/api/units/units'
+import { deleteUnit, deleteUnitAndRefund } from '@/server/units/units'
 
 interface IPropertyUnitItemProps {
     unit: IUnit,

@@ -1,6 +1,6 @@
 'use client'
 
-import { register } from '@/api/auth/register'
+import { register } from '@/server/auth/register'
 import { Button } from '@/components/ui/button'
 import { Input, InputError } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

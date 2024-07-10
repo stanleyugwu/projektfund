@@ -3,7 +3,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import React from 'react'
 import { Title } from '@/components/title'
 import { Metadata } from 'next'
-import { singleListing } from '@/api/listings/list'
+import { singleListing } from '@/server/listings/list'
 import { ListingEdit } from '../(partials)/ListingEdit'
 
 export const metadata: Metadata = {

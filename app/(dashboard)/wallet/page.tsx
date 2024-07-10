@@ -6,7 +6,7 @@ import { WithdrawDialog } from "./(partials)/WithdrawDialog";
 import { Naira } from "@/components/naira";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import moment from "moment";
-import { userTransactions } from "@/api/transactions/list";
+import { userTransactions } from "@/server/transactions/list";
 import { transactionSymbolColor, transactionType } from "@/services/transactions";
 
 export default async function Wallet(){

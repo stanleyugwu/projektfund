@@ -1,4 +1,4 @@
-import { getDataSummary } from "@/api/pages/dashboard";
+import { getDataSummary } from "@/server/pages/dashboard";
 import { Naira } from "@/components/naira";
 import { WelcomeHeading } from "@/components/partials/user/WelcomeHeading";
 import { Title } from "@/components/title";

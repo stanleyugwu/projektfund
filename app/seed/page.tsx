@@ -1,4 +1,4 @@
-import seeder from "@/api/seeder"
+import seeder from "@/server/seeder"
 
 export default async () => {
     const message = await seeder()

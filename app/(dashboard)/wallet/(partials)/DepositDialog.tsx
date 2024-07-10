@@ -1,6 +1,6 @@
 'use client'
 
-import { completeWalletFunding, initiateWalletFunding } from "@/api/wallet/fundwallet";
+import { completeWalletFunding, initiateWalletFunding } from "@/server/wallet/fundwallet";
 import { Button } from "@/components/ui/button";
 import { DialogHeader, Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input, InputError, InputPrice } from "@/components/ui/input";

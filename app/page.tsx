@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HowItWorks } from "./(partials)/Home/HowItWorks";
 import { ListingsList } from "./(partials)/Listings/ListingsList";
-import { listListings } from "@/api/listings/list";
+import { listListings } from "@/server/listings/list";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

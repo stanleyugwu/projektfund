@@ -1,4 +1,4 @@
-import { getUser, getUserListedUnits, getUserPortfolio, getUserTransactions } from '@/api/user/list'
+import { getUser, getUserListedUnits, getUserPortfolio, getUserTransactions } from '@/server/user/list'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Metadata } from 'next'

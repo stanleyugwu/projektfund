@@ -1,4 +1,4 @@
-import { userPortfolio } from "@/api/units/units"
+import { userPortfolio } from "@/server/units/units"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Metadata } from "next"

@@ -1,6 +1,6 @@
 'use client'
 
-import { updatePassword } from '@/api/user/profile'
+import { updatePassword } from '@/server/user/profile'
 import { Button } from '@/components/ui/button'
 import { Input, InputError } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

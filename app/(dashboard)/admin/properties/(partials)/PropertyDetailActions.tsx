@@ -1,6 +1,6 @@
 'use client'
 
-import { deactivateProperty, deleteProperty } from '@/api/property/list'
+import { deactivateProperty, deleteProperty } from '@/server/property/list'
 import { Swal } from '@/components/Swal'
 import { Button } from '@/components/ui/button'
 import { useAsync } from '@/hooks/useAsync'

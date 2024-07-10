@@ -1,4 +1,4 @@
-import { listProperties } from '@/api/property/list'
+import { listProperties } from '@/server/property/list'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import React from 'react'

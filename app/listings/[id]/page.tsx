@@ -1,4 +1,4 @@
-import { singleListing } from '@/api/listings/list';
+import { singleListing } from '@/server/listings/list';
 import { Footer } from '@/app/(partials)/Footer';
 import { Header } from '@/app/(partials)/Header'
 import { Naira } from '@/components/naira';

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input, InputError } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { login } from "@/api/auth/login";
+import { login } from "@/server/auth/login";
 import { FormLoader, Loader } from "@/components/ui/loader";
 
 // @ts-expect-error

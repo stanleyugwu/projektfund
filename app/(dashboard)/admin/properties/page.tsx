@@ -1,4 +1,4 @@
-import { listProperties } from "@/api/property/list"
+import { listProperties } from "@/server/property/list"
 import { Naira } from "@/components/naira"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"

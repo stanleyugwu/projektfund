@@ -2,7 +2,7 @@ import React from 'react'
 import { Header } from '../(partials)/Header'
 import { ListingsList } from '../(partials)/Listings/ListingsList'
 import { IListing } from '@/types/listings'
-import { listListings } from '@/api/listings/list'
+import { listListings } from '@/server/listings/list'
 import { Footer } from '../(partials)/Footer'
 import { Metadata } from 'next'
 

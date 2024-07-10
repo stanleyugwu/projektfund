@@ -12,7 +12,7 @@ import { experimental_useFormState as useFormState } from 'react-dom'
 import React, { useEffect, useRef } from 'react'
 import { FormLoader, Loader } from '@/components/ui/loader'
 import { useToast } from '@/components/ui/use-toast'
-import { createListing } from '@/api/listings/create'
+import { createListing } from '@/server/listings/create'
 import { Title } from '@/components/title'
 import { EditListingForm } from '../(partials)/EditListingForm'
 

@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import React from 'react'
 import { Metadata } from 'next'
 import { Title } from '@/components/title'
-import { singleProperty } from '@/api/property/list'
+import { singleProperty } from '@/server/property/list'
 import { EditPropertyForm } from '../../(partials)/EditPropertyForm'
 
 export const metadata: Metadata = {

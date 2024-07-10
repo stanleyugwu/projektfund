@@ -1,5 +1,5 @@
-import { getUserDashboard } from "@/api/pages/dashboard";
-import { listProperties } from "@/api/property/list";
+import { getUserDashboard } from "@/server/pages/dashboard";
+import { listProperties } from "@/server/property/list";
 import { Naira } from "@/components/naira";
 import { PropertyItem } from "@/components/partials/property/PropertyItem";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
