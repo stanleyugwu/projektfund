@@ -40,9 +40,9 @@ export const BankSettings = ({ banks }: { banks: any[] }) => {
   return (
     <form className="py-5 space-y-3 md:w-2/4">
       <div>
-        <h3 className="text-lg font-bold">Bank Account Information</h3>
+        <h3 className="text-lg font-semibold">Bank Account Information</h3>
       </div>
-      <div className="w-2/3">
+      <div className="md:w-2/3">
         <div>
           <Label>Bank</Label>
           <select name="bank_code" className="flex items-center justify-between w-full h-10 px-3 py-2 text-sm border rounded-md border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">

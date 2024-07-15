@@ -40,13 +40,13 @@ export const ProfileSettings = () => {
 
     return (
         <form action={action} encType='multipart/form-data' className="pb-5 space-y-3 md:w-2/4">
-            <div className="w-1/2">
+            <div className="md:w-1/2">
                 <Label>Profile Image</Label>
                 <Input type="file" name="avatar" />
                 <InputError message={state.errors?.avatar} />
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-5">
                 <div>
                     <Label>First Name</Label>
                     <Input name="firstname" defaultValue={user?.firstname} placeholder="First Name" />

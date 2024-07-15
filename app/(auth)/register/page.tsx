@@ -20,11 +20,11 @@ export default function Register () {
 	})
 
     return (
-        <div className="grid h-full grid-cols-2" >
-			<div className="bg-primary"></div>
+        <div className="flex flex-col md:flex-row min-h-screen" >
+			<div className="bg-primary h-16 md:h-full md:w-1/2"></div>
 
-			<div className="flex items-center justify-center h-full p-10 flex-column">
-				<form action={action} className="w-4/6 space-y-5">
+			<div className="md:w-1/2 flex items-center justify-center h-full flex-1 p-5 md:p-10">
+				<form action={action} className="md:w-3/5 w-full space-y-5">
 					<div className="space-y-0">
 						<h1 className="text-2xl font-semibold tracking-tight">
 							Create an account

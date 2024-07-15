@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useApp } from '@/context/AppContext'
@@ -19,20 +19,26 @@ export const Header = () => {
     const [animate] = useAutoAnimate()
 
     const [showSidebar, setShowSidebar] = useState(false)
+
+    const sidebar = useRef(null)
+    
+    const hide = (e: any) => !(sidebar.current as never as any).contains(e.target) ? setShowSidebar(false) : null;
      
     return (
 
         <div className='sticky top-0 flex items-center justify-between px-5 py-3 bg-white border-b md:px-10'>
             
-                <Disclose show={showSidebar}>
-                    <div className='fixed top-0 bottom-0 left-0 z-[5558] w-1/2 overflow-y-auto bg-white transition-transform translate-x-full border-e'>
-                        <Sidebar />
+            <Disclose show={showSidebar}>
+                <div onClick={hide} className="fixed top-0 z-[999999] bottom-0 left-0 right-0 bg-white/80" style={{zIndex: '999999'}}>
+                    <div ref={sidebar} className='h-full  w-80 overflow-y-auto bg-white transition-transform translate-x-full border-e' style={{width: '80%'}}>
+                        <Sidebar onClick={() => setShowSidebar(false)} />
                     </div>
-                </Disclose>
+                </div>
+            </Disclose>
             
             <div>
                 <h3 className='hidden text-lg font-semibold md:block'>{title}</h3>
-                <a className="block text-teal-600 md:hidden" href="/">
+                <a className="block  md:hidden" href="/dashboard">
                     <span >Projektfund</span>
                 </a>
             </div>

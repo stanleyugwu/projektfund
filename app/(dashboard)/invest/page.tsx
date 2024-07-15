@@ -16,7 +16,7 @@ export default async function Invest() {
     return (
         <>
             <div className="flex">
-                <div className="w-8/12">
+                <div className="md:w-8/12 w-full">
                     <Card>
                         <CardContent className='py-10 space-y-5' >
                             <div className="flex items-center w-full space-x-2">

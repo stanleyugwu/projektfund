@@ -49,7 +49,7 @@ export function DepositDialog(){
 
     return (
         <>
-            <Button onClick={openDialog}><Plus className="w-5 h-5 me-2" /> Fund Wallet</Button>
+            <Button className="w-full" onClick={openDialog}><Plus className="w-5 h-5 me-2" /> Deposit</Button>
 
             <Dialog modal={isModal} open={isOpen} onOpenChange={(open: any) => setOpen(open)}>
                 <DialogContent className='sm:max-w-[425px]'>

@@ -15,18 +15,18 @@ export default async function Wallet(){
     return (
         <>
             <Card>
-                <CardContent className="p-10 space-y-5">
+                <CardContent className="md:p-10 p-5 space-y-5">
                     <div className="flex space-x-5">
-                        <div className="md:w-3/12">
+                        <div className="md:w-3/12 w-full">
                             <AvailableBalance />
                         </div>
                     </div>
 
-                    <div className="space-x-4">
+                    <div className="gap-x-4 grid grid-cols-2 md:grid-cols-6">
                         <DepositDialog />
                         <WithdrawDialog />
                     </div>
-                    <div className="p-5 border rounded-lg">
+                    <div className="p-5 border rounded-lg z-0 bg-white">
                         <div className="mb-2">
                             <h3 className="text-lg font-semibold">Transactions</h3>
                         </div>
@@ -35,7 +35,7 @@ export default async function Wallet(){
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="">Reference</TableHead>
-                                    <TableHead>Purpose</TableHead>
+                                    <TableHead className="min-w-fit">Purpose</TableHead>
                                     <TableHead>Amount</TableHead>
                                     <TableHead>Payment Method</TableHead>
                                     <TableHead>Status</TableHead>
@@ -48,7 +48,7 @@ export default async function Wallet(){
                                     transactions.map((transaction) => (
                                         <TableRow key={transaction.id}>
                                             <TableCell className="">{transaction.reference}</TableCell>
-                                            <TableCell className="">{transaction.purpose}</TableCell>
+                                            <TableCell className="min-w-fit">{transaction.purpose}</TableCell>
                                             <TableCell className={transactionSymbolColor(transaction)?.color}>{transactionSymbolColor(transaction)?.symbol} <Naira />{transaction.amount.toLocaleString()}</TableCell>
                                             <TableCell>{(transaction.payment_method as string).toUpperCase()}</TableCell>
                                             <TableCell>{transaction.status}</TableCell>

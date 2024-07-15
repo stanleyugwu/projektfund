@@ -34,38 +34,40 @@ export default function Login() {
 	// // }, [state])
 
     return (
-		<div className="grid h-full grid-cols-2" >
-			<div className="bg-primary"></div>
+		<div className="flex flex-col md:flex-row min-h-screen" >
+			<div className="bg-primary h-16 md:h-full md:w-1/2"></div>
 
-			<div className="flex items-center justify-center h-full p-10 flex-column">
-				<form action={action} className="w-3/5 space-y-5">
+			<div className="md:w-1/2 flex items-center justify-center h-full flex-1 p-5 md:p-10">
+				<form action={action} className="md:w-3/5 w-full space-y-5">
 					{state.error ? <EmailVerificationError message={state.error} /> : ''}
 					<div className="space-y-0">
 						<h1 className="text-2xl font-semibold tracking-tight">
 							Log into your account
 						</h1>
 						<p className="text-sm text-muted-foreground">
-							Enter your email below to create your account
+							Please provide your details below to proceed to your account
 						</p>
 					</div>
 
-						<div>
-							<Label>Email Address</Label>
-							<Input name="email" type="email" placeholder="Email Address" />
-							<InputError message={state.email} />
-						</div>
-						
-						<div>
-							<Label>Password</Label>
-							<Input name="password" placeholder="Password" type="password" />
-							<InputError message={state.password} />
-						</div>
-						<div>
-							<Button className="w-full">
-								<FormLoader>
-									<Loader/>
-								</FormLoader> Login</Button>
-						</div>
+					<div>
+						<Label>Email Address</Label>
+						<Input name="email" type="email" placeholder="Email Address" />
+						<InputError message={state.email} />
+					</div>
+					
+					<div>
+						<Label>Password</Label>
+						<Input name="password" placeholder="Password" type="password" />
+						<InputError message={state.password} />
+					</div>
+
+					<div>
+						<Button className="w-full">
+							<FormLoader>
+								<Loader/>
+							</FormLoader> Login
+						</Button>
+					</div>
 
 					<div>
 						<p className="text-sm font-semibold text-muted-foreground">
@@ -73,7 +75,6 @@ export default function Login() {
 						</p>
 					</div>
 				</form>
-	
 			</div>
 		</div>
     );

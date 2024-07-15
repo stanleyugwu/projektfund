@@ -29,7 +29,7 @@ export function WithdrawDialog(){
 
     return (
         <>
-            <Button onClick={openDialog}><Minus className="w-5 h-5 me-2" /> Withdraw Funds</Button>
+            <Button className="w-full" onClick={openDialog}><Minus className="w-5 h-5 me-2" /> Withdraw</Button>
             
             <Dialog modal={isModal} open={isOpen} onOpenChange={(open: any) => setOpen(open)}>
                 <DialogContent className='sm:max-w-[425px]'>

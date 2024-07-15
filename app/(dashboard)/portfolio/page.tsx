@@ -17,9 +17,9 @@ export default async function Portfolio () {
     return (
         <>
             <div className="flex">
-                <div className="w-8/12">
+                <div className="md:w-8/12">
                     <Card>
-                        <CardContent className="p-10">
+                        <CardContent className="md:p-10 p-5">
                             <div className="flex items-center w-full mb-5 space-x-2">
                                 <Input type="email" placeholder="Search for available properties" />
                             </div>
@@ -32,8 +32,8 @@ export default async function Portfolio () {
                                         <ShowPortfolio portfolio={portfolio} />
                                     :
 
-                                    <div className="p-10 space-y-5 text-center">
-                                        <h1 className="text-xl font-semibold">You have not purchased any property units yet!</h1>
+                                    <div className="md:p-10 p-5 space-y-5 text-center">
+                                        <h1 className="md:text-xl font-semibold">You have not purchased any property units yet!</h1>
                                         <Button asChild>
                                             <Link href={'/properties'} >Find Properties</Link>
                                         </Button>

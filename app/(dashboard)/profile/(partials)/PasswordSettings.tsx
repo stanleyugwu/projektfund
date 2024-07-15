@@ -42,14 +42,14 @@ export const PasswordSettings = () => {
     return (
         <form className="pt-5 space-y-3 md:w-2/4">
             <div >
-                <h3 className="text-lg font-bold">Update Password</h3>
+                <h3 className="text-lg font-semibold">Update Password</h3>
             </div>
             <div>
                 <Label>Current Password</Label>
                 <Input type='password' name="old_password" placeholder="Old Password" />
                 <InputError message={state.errors?.old_password} />
             </div>
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid md:grid-cols-2 gap-5">
                 <div>
                     <Label>New Password</Label>
                     <Input type='password' name="new_password" placeholder="New Password" />
