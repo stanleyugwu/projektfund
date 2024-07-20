@@ -7,6 +7,7 @@ import Validator from '@/lib/validator'
 import { upload } from "@/lib/upload"
 import _ from "lodash"
 import { random } from "@/lib/string"
+import { status } from "@/lib/status"
 
 export async function createProperty(state: any, data: FormData){
     await database()
@@ -34,6 +35,8 @@ export async function createProperty(state: any, data: FormData){
         uploadedImages = await Promise.all(galleryFiles.map(file => upload(file, 'properties/' + random())))
         featuredImage = await upload(image, 'properties/'+ random() )
     }
+
+    body.status = body.status == status.active;
    
     property ? await Property.findByIdAndUpdate(property_id, {
         ...body,

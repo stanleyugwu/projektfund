@@ -26,7 +26,7 @@ export const Header = () => {
      
     return (
 
-        <div className='sticky top-0 flex items-center justify-between px-5 py-3 bg-white border-b md:px-10'>
+        <div className='sticky top-0 z-50 flex items-center justify-between px-5 py-3 bg-white border-b md:px-10'>
             
             <Disclose show={showSidebar}>
                 <div onClick={hide} className="fixed top-0 z-[999999] bottom-0 left-0 right-0 bg-white/80" style={{zIndex: '999999'}}>

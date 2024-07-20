@@ -35,9 +35,17 @@ export default function Login() {
 
     return (
 		<div className="flex flex-col md:flex-row min-h-screen" >
-			<div className="bg-primary h-16 md:h-full md:w-1/2"></div>
+			<div className="bg-primary flex items-end h-16 md:h-auto md:w-1/2 text-white md:p-10">
+				<div className="md:block hidden align-baseline mb-10 space-y-2">
+					<p className="uppercase">ProjektFund</p>
+					<h2 className="text-4xl font-semibold">Kick start your property investment journey today!</h2>
+					<p className="font-light">
+					Jumpstart your property investment journey today and unlock a world of opportunities! Whether you're a first-time investor or looking to expand your portfolio, our comprehensive resources and expert guidance will set you on the path to success. Start making smart, profitable investments now!
+					</p>
+				</div>
+			</div>
 
-			<div className="md:w-1/2 flex items-center justify-center h-full flex-1 p-5 md:p-10">
+			<div className="md:w-1/2 flex items-center justify-center h-screen flex-1 p-5 md:p-10">
 				<form action={action} className="md:w-3/5 w-full space-y-5">
 					{state.error ? <EmailVerificationError message={state.error} /> : ''}
 					<div className="space-y-0">
