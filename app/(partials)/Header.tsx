@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import Head from 'next/head'
 import Link from 'next/link'
 import React from 'react'
 
@@ -9,28 +10,28 @@ export const Header = () => {
 				<div className="mx-auto max-w-7xl">
 					<div className="flex items-center justify-between py-6">
 					<div className="flex-1 md:flex md:items-center md:gap-12">
-						<a className="block text-teal-600" href="/">
+						<a className="block font-semibold uppercase" href="/">
 							<span >Projektfund</span>
 						</a>
 					</div>
 					<div className="md:flex md:items-center md:gap-12">
 						<nav aria-label="Global" className="hidden md:block">
 						<ul className="flex items-center gap-6 text-sm">
-							<li>
+							{/* <li>
 								<a className="transition " href="/about">
 									About
 								</a>
-							</li>
+							</li> */}
 							<li>
-								<a className="text-gray-500 transition hover:text-gray-500/75" href="/listings">
+								<a className="text-gray-700 transition hover:text-gray-500/75" href="/listings">
 									Listings
 								</a>
 							</li>
-							<li>
+							{/* <li>
 								<a className="text-gray-500 transition hover:text-gray-500/75" href="/contact">
 									Contact 
 								</a>
-							</li>
+							</li> */}
 						</ul>
 						</nav>
 						<div className="flex items-center gap-4">

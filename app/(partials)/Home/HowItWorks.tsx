@@ -24,10 +24,9 @@ export const HowItWorks = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <h5 className="text-xl font-medium">Evaluate Property</h5>
+                <h5 className="text-xl font-medium">Sign Up & Explore</h5>
                 <p className="mt-3 text-slate-400">
-                  If the distribution of letters and 'words' is random, the
-                  reader will not be distracted from making.
+                Create your free account in minutes and explore our extensive property listings and investment opportunities.
                 </p>
               </div>
             </div>
@@ -41,11 +40,8 @@ export const HowItWorks = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <h5 className="text-xl font-medium">Meeting with Agent</h5>
-                <p className="mt-3 text-slate-400">
-                  If the distribution of letters and 'words' is random, the
-                  reader will not be distracted from making.
-                </p>
+                <h5 className="text-xl font-medium">Invest, Buy, or Rent</h5>
+                <p className="mt-3 text-slate-400">Choose the option that suits your goals. Make investments, buy your dream home, or find the perfect rental.</p>
               </div>
             </div>
             {/* Content */}
@@ -58,11 +54,8 @@ export const HowItWorks = () => {
                 </div>
               </div>
               <div className="mt-6">
-                <h5 className="text-xl font-medium">Close the Deal</h5>
-                <p className="mt-3 text-slate-400">
-                  If the distribution of letters and 'words' is random, the
-                  reader will not be distracted from making.
-                </p>
+                <h5 className="text-xl font-medium">Grow Your Portfolio</h5>
+                <p className="mt-3 text-slate-400">Track your investments and manage your properties all in one place.</p>
               </div>
             </div>
             {/* Content */}
