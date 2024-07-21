@@ -90,7 +90,7 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                                 <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
 
                                 <Disclose show={!!unit}>
-                                    <div className="space-x-3 space-y-3">
+                                    <div className="space-x-3  space-y-3">
                                         <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
                                     </div>
                                 </Disclose>

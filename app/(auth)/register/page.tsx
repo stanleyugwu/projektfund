@@ -31,7 +31,7 @@ export default function Register () {
 				</div>
 			</div>
 
-			<div className="md:w-1/2 flex items-center justify-center h-full flex-1 p-5 md:p-10">
+			<div className="md:w-1/2 flex items-center justify-center md:h-screen flex-1 p-5 md:p-10">
 				<form action={action} className="md:w-3/5 w-full space-y-5">
 					<div className="space-y-0">
 						<h1 className="text-2xl font-semibold tracking-tight">

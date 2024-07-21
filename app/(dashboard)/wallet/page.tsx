@@ -4,10 +4,15 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { DepositDialog } from "./(partials)/DepositDialog";
 import { WithdrawDialog } from "./(partials)/WithdrawDialog";
 import { Naira } from "@/components/naira";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import moment from "moment";
 import { userTransactions } from "@/server/transactions/list";
 import { transactionSymbolColor, transactionType } from "@/services/transactions";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: 'Wallet',
+	description: '',
+}
 
 export default async function Wallet(){
     const transactions: any[] = await userTransactions()

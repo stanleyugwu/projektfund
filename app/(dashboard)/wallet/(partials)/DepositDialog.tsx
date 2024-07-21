@@ -31,7 +31,10 @@ export function DepositDialog(){
         whenSuccessful: async (transaction) => {
             switchModalMode(true)
             const req = await completeWalletFunding(transaction._id)
-            if(req.status) refresh(req.user)
+            if(req.status) {
+                refresh(req.user);
+                switchModalMode(false)
+            }
         },
         whenCancelled: () => {
             switchModalMode(true)

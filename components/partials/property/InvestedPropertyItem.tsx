@@ -22,7 +22,7 @@ export const InvestedPropertyItem = ({unit} : IUnitItem) => {
     
     return (
         <>
-            <div className="flex items-center py-5 space-x-5">
+            <div className="flex py-5 space-x-5">
                 <div className="w-2/12">
                     <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
                         <img src={unit.property.image} alt="" className="object-cover object-center w-full h-full" />

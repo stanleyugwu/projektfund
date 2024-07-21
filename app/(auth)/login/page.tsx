@@ -45,7 +45,7 @@ export default function Login() {
 				</div>
 			</div>
 
-			<div className="md:w-1/2 flex items-center justify-center h-screen flex-1 p-5 md:p-10">
+			<div className="md:w-1/2 flex items-center justify-center md:h-screen flex-1 p-5 md:p-10">
 				<form action={action} className="md:w-3/5 w-full space-y-5">
 					{state.error ? <EmailVerificationError message={state.error} /> : ''}
 					<div className="space-y-0">

@@ -2,6 +2,7 @@
 
 import { Naira } from "@/components/naira";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { useApp } from "@/context/AppContext";
 import { useAuth } from "@/context/AuthProvider";
 import { cn } from "@/lib/utils";
 import { LandmarkIcon } from "lucide-react";
@@ -9,6 +10,10 @@ import { LandmarkIcon } from "lucide-react";
 export function AvailableBalance () {
     
     const {user} = useAuth()
+
+    useApp({
+        title: 'Wallet'
+    })
 
     return (
         <Card className={cn(['shadow-none'])}>

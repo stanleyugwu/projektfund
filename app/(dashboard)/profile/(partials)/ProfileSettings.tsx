@@ -11,6 +11,7 @@ import React, { useEffect } from 'react'
 
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
+import { useApp } from '@/context/AppContext'
 
 export const ProfileSettings = () => {
 
@@ -22,6 +23,10 @@ export const ProfileSettings = () => {
 		message: '',
 		errors: {}
 	})
+
+    useApp({
+        title: 'Profile'
+    })
 
     useEffect(() => {
         if(state.status){

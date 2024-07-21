@@ -30,6 +30,7 @@ export async function singleListing(listing_id: string) {
 
 export async function deactivateListing(listing_id: string) {
     await database()
+    
     const listing = await Listing.findById(listing_id)
     if(!listing) {
         return response.error().json('Listing was not found') 

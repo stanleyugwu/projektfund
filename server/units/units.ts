@@ -49,8 +49,26 @@ export async function listUnits(state: any, formData: FormData){
 }
 
 export async function saleOffers(unit_id: string) {
-    const units = await ListedUnit.find({unit: unit_id}).populate('unit property user')
+    const user = await authUser()
+    const units = await ListedUnit
+                        .find({
+                            unit: unit_id,
+                            user: {
+                                $ne: user.id
+                            }
+                        }).populate('unit property user')
     return JSON.parse(JSON.stringify(units))
+}
+
+export async function removeSaleOffer(listing_id: string) {
+    const saleOffer = await ListedUnit.findById(listing_id);
+    if(!saleOffer) return response.error().json({message: `The sale offer does not exist`});
+    const user = await authUser()
+    
+    if(saleOffer.user !== user.id) return response.error().json({message: `You are not authorized to carry out this action.`});
+
+    await ListedUnit.findByIdAndDelete(listing_id);
+    return response.success().json({message: `Sale offer removed successfully!`});
 }
 
 export async function deleteUnit(unit_id: string) {
@@ -86,5 +104,4 @@ export async function deleteUnitAndRefund(unit_id: string) {
     await user.save()
 
     return response.success().json(`You have successfully deleted the purchased unit and refunded ${refund_amount.toLocaleString()} Naira to the user based on the current property value`)
-
 }

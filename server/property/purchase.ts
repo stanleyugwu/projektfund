@@ -46,8 +46,12 @@ export async function initiatePurchase(state: any, formData: FormData){
      * if it is, check if the listing was retrieved
      * if it was not return an error that the listing does not exist
      */
-    if(body.listing_id && !listing){
-        return response.error().json({error: "The listing does not exist!"})
+    if(body.listing_id) {
+        if(!listing) {
+            return response.error().json({error: "The listing does not exist!"})
+        }
+
+        if(listing.user == user.id) return response.error().json({error: 'You are not autorized cannot make this purchase'})
     }
 
     const reference = await Token.random('transactions', 'refrence')
@@ -194,7 +198,4 @@ async function updateListing(transaction: any) {
     unit.available_units -= transaction.data.units
     unit.listed_units -= transaction.data.units
     await unit.save()
-    // const listing = await ListedUnit.findById(transaction.data.listing_id)
-    // listing.available_units -= transaction.data.units
-    // await listing.save()
 }

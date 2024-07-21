@@ -1,4 +1,5 @@
 import roles from "@/lib/roles";
+import { status } from "@/lib/status";
 import ListedUnit from "@/models/ListedUnit";
 import Transactions from "@/models/Transactions";
 import Unit from "@/models/Unit";
@@ -15,8 +16,6 @@ export async function listUsers() {
     await Unit.find()
     await Transactions.find()
     const users = await User.find({role: roles.user}).populate('units transactions')
-    // transactions listedUnits
-    // console.log()
     return JSON.parse(JSON.stringify(users));
 }
 
@@ -34,7 +33,7 @@ export async function getUserTransactions(user_id: string) {
     const user = await User.findById(user_id)
     if(!user) return null;
 
-    const transactions = await Transactions.find({user: user_id})
+    const transactions = await Transactions.find({user: user_id, status: status.success})
 
     return JSON.parse(JSON.stringify(transactions));
 }
