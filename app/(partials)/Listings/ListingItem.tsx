@@ -4,14 +4,14 @@ import { IListing } from "@/types/listings";
 import React from "react";
 
 interface IListingItemProps {
-  listing: IListing
+	listing: IListing
 }
 
-export const ListingItem = ({listing} : IListingItemProps) => {
+export const ListingItem = ({ listing }: IListingItemProps) => {
 	return (
 		<>
 			<div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
-				<div className="md:flex ">
+				<div className="md:flex p-4 md:p-0">
 					<div className="relative md:shrink-0">
 						<img className="object-cover w-full h-full md:w-48" src={listing.image} alt="" />
 						<div className="absolute top-4 end-4">
@@ -41,6 +41,6 @@ export const ListingItem = ({listing} : IListingItemProps) => {
 					</div>
 				</div>
 			</div>
-		</>	
+		</>
 	);
 };
