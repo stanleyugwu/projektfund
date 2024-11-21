@@ -5,6 +5,7 @@ import { IListing } from '@/types/listings'
 import { listListings } from '@/server/listings/list'
 import { Footer } from '../(partials)/Footer'
 import { Metadata } from 'next'
+import NoData from '@/components/ui/no-data'
 
 export const metadata: Metadata = {
 	title: 'Available Properties',
@@ -32,7 +33,11 @@ export default async function () {
             </section>
 
             <section className="py-20 mx-auto max-w-7xl">
-                <ListingsList listings={listings} />
+            {
+              listings?.length ? 
+            <ListingsList listings={listings} />
+            : <NoData text="No featured properties available for now, check back later" />
+            }
             </section>
 
             <Footer />

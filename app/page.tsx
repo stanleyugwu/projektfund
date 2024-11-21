@@ -9,7 +9,7 @@ import { HowItWorks } from "./(partials)/Home/HowItWorks";
 import { ListingsList } from "./(partials)/Listings/ListingsList";
 import { listListings } from "@/server/listings/list";
 import { Metadata } from "next";
-import Head from "next/head";
+import NoData from "@/components/ui/no-data";
 
 export const metadata: Metadata = {
   title: 'Welcome - ProjektFund',
@@ -103,11 +103,17 @@ export default async function () {
           {/*end grid*/}
 
           <div className="space-y-20">
+            {
+              listings?.length ? 
             <ListingsList listings={listings} />
+            : <NoData text="No featured properties available for now, check back later" />
+            }
             {/*en grid*/}
             <div className="justify-center mt-6 text-center md:flex">
               <div className="md:w-full">
-                <Button>View More Properties</Button>
+                <Button asChild>
+                  <a href="/listings">View More Properties</a>
+                </Button>
               </div>
             </div>
           </div>
