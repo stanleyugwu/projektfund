@@ -22,11 +22,11 @@ import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
-export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog}) => {
+export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog }) => {
 
     const [units, setUnits] = useState(1)
     const price = useMemo(() => units * offer.unit_price, [units])
-    const {toast} = useToast()
+    const { toast } = useToast()
     const [isModal, setIsModal] = useState(true)
     const modalRef = useRef<HTMLDivElement>(null)
 
@@ -35,7 +35,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
     //         if(isModal){
     //             modalRef.current.style.pointerEvents = 'auto'
     //         }else{
-                
+
     //             modalRef.current.style.pointerEvents = 'none'
     //         }
     //     }
@@ -45,7 +45,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
 
     const [verifyPurchaseState, verifiyPurchaseAction] = useFormState(verifyPurchase, {})
 
-    const {paystackInit, paystackStatus} = usePaystack({
+    const { paystackInit, paystackStatus } = usePaystack({
         whenInit: () => {
             setIsModal(false)
         },
@@ -61,7 +61,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
     })
 
     useEffect(() => {
-        if(verifyPurchaseState.status == 'completed'){
+        if (verifyPurchaseState.status == 'completed') {
             setStep(2)
 
             toast({
@@ -70,7 +70,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
             })
         }
 
-        if(!verifyPurchaseState) {
+        if (!verifyPurchaseState) {
             toast({
                 variant: 'destructive',
                 title: "Transaction Error",
@@ -80,20 +80,20 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
     }, [verifyPurchaseState])
 
     const [state, action] = useFormState(initiatePurchase, {
-		status: false,
-		message: '',
-		errors: {},
-		error: '',
-	})
-    
+        status: false,
+        message: '',
+        errors: {},
+        error: '',
+    })
+
 
     useEffect(() => {
-        if(state.status == 'pay'){
+        if (state.status == 'pay') {
             setIsModal(false)
             paystackInit(state.payment)
         }
 
-        if(state.status == 'completed'){
+        if (state.status == 'completed') {
             toast({
                 title: "Payment completed",
                 description: state.message
@@ -103,7 +103,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
             setIsModal(true)
         }
 
-        if(!state.status && state.error){
+        if (!state.status && state.error) {
             toast({
                 variant: 'destructive',
                 description: state.error
@@ -111,14 +111,14 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
             setIsModal(true)
         }
     }, [state]);
-    
+
     return (
-        <Dialog  key={'buy-sale-offer-' + offer.id} open={modal.isOpen} onOpenChange={(open) => modal.setOpen(open)} modal={false}>
+        <Dialog key={'buy-sale-offer-' + offer.id} open={modal.isOpen} onOpenChange={(open) => modal.setOpen(open)} modal={false}>
             <DialogContent ref={modalRef} >
-                <> 
+                <>
 
                     {
-                        step == 1 && 
+                        step == 1 &&
                         <>
                             <DialogHeader>
                                 <DialogTitle>Purchase Units</DialogTitle>
@@ -134,7 +134,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
                                     <AlertDescription>You cannot purchase more units than is listed!</AlertDescription>
                                 </Alert>
                             }
-                            
+
                             <form action={action} className='space-y-3'>
                                 <div className='space-y-1'>
                                     <Label>Amount of Units you wish to purchase</Label>
@@ -167,7 +167,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
 
                                 <Alert className='text-orange-500 border border-orange-500 bg-orange-50'>
                                     <AlertDescription>
-                                        You are purchasing {units} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()} each.</span> 
+                                        You are purchasing {units} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()} each.</span>
                                     </AlertDescription>
                                 </Alert>
 
@@ -179,17 +179,17 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
                                     </Button>
                                 </div>
                             </form>
-                        </>                        
+                        </>
                     }
 
                     {
                         step == 2 &&
-                        
+
                         <>
                             <div>
                                 <DialogHeader className='mb-5'>
                                     <DialogTitle>Purchase Successful</DialogTitle>
-                                    <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                                    <DialogDescription>You have successfully purchased {units} unit of this property</DialogDescription>
                                 </DialogHeader>
 
                                 <div className='space-y-5' >
@@ -210,7 +210,7 @@ export const BuySaleOfferModal = ({offer, modal} : {offer: any, modal: IDialog})
                                         <Link href={'/portfolio'} >View Portfolio</Link>
                                     </Button>
                                 </div>
-                            </div>    
+                            </div>
                         </>
                     }
                 </>
