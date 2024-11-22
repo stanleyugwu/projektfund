@@ -10,7 +10,9 @@ import User from "@/models/User";
 import { authUser } from "@/services/auth";
 import database from "@/services/database";
 import { IUnit } from "@/types/units";
+import { __ListUnitSchema } from "@/schema/unit.schema"
 import { property } from "lodash";
+import Validator from '@/lib/validator'
 
 export async function userPortfolio(query?: string) {
   await database();
@@ -39,6 +41,14 @@ export async function listUnits(state: any, formData: FormData) {
 
   const body = getFormDataAsJson(formData);
   const user = await authUser();
+
+  const validator = new Validator(body, __ListUnitSchema.rules)
+    validator.setAttributeNames(__ListUnitSchema.attributes as Validator.AttributeNames)
+
+    // Validate Data
+    if(! validator.check()) {
+        return {status: false, ...validator.errors}
+    }
 
   const unit = await Unit.findById(body.unit_id).populate(
     "property listing user"
