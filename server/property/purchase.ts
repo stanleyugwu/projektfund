@@ -51,7 +51,12 @@ export async function initiatePurchase(state: any, formData: FormData){
             return response.error().json({error: "The listing does not exist!"})
         }
 
+        if(listing.available_units < 1) return response.error().json({error:'Not enough units available to purchase from'})
         if(listing.user == user.id) return response.error().json({error: 'You are not autorized cannot make this purchase'})
+        if(purchasedUnits > listing.available_units) return response.error().json({error: 'You can\'t purchase more units than is available'})
+    } else {
+        if(purchasedUnits > property.available_units) return response.error().json({error: 'You can\'t purchase more units than is available'})
+        if(property.available_units < 1) return response.error().json({error:'Not enough units available to purchase from'})
     }
 
     const reference = await Token.random('transactions', 'refrence')
