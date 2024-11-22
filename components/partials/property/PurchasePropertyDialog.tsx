@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { IProperty } from '@/types/property';
-import { Dialog, DialogContent, DialogDescription, DialogHeader,  DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog"
 import { Label } from '@/components/ui/label';
 import { Input, InputError } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -26,19 +26,19 @@ interface IPurchasePropertyDrawerProps {
     setOpen: any
 }
 
-export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchasePropertyDrawerProps) => {
+export const PurchasePropertyDialog = ({ property, open, setOpen }: IPurchasePropertyDrawerProps) => {
 
     const [units, setUnits] = useState(1)
     const price = useMemo(() => units * property.unit_price, [units])
-    const {user} = useAuth()
+    const { user } = useAuth()
     const [isModal, setIsModal] = useState(true)
-    const {toast} = useToast()
+    const { toast } = useToast()
 
     const [step, setStep] = useState(1)
 
     const [verifyPurchaseState, verifiyPurchaseAction, reset] = useFormState(verifyPurchase, {})
 
-    const {paystackInit, paystackStatus} = usePaystack({
+    const { paystackInit, paystackStatus } = usePaystack({
         whenCancelled: () => {
             setIsModal(true)
         },
@@ -51,7 +51,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
     })
 
     useEffect(() => {
-        if(verifyPurchaseState.status == 'completed'){
+        if (verifyPurchaseState.status == 'completed') {
             setStep(2)
 
             toast({
@@ -60,7 +60,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
             })
         }
 
-        if(!verifyPurchaseState) {
+        if (!verifyPurchaseState) {
             toast({
                 variant: 'destructive',
                 title: "Transaction Error",
@@ -70,20 +70,20 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
     }, [verifyPurchaseState])
 
     const [state, action] = useFormState(initiatePurchase, {
-		status: false,
-		message: '',
-		errors: {},
-		error: '',
-	})
-    
+        status: false,
+        message: '',
+        errors: {},
+        error: '',
+    })
+
 
     useEffect(() => {
-        if(state.status == 'pay'){
+        if (state.status == 'pay') {
             setIsModal(false)
             paystackInit(state.payment)
         }
 
-        if(state.status == 'completed'){
+        if (state.status == 'completed') {
             toast({
                 title: "Payment completed",
                 description: state.message
@@ -92,7 +92,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
             setStep(2)
         }
 
-        if(!state.status && state.error){
+        if (!state.status && state.error) {
             toast({
                 variant: 'destructive',
                 description: state.error
@@ -107,20 +107,20 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
             <Dialog modal={isModal} open={open} onOpenChange={(open) => setOpen(open)}>
                 <DialogContent >
                     <>
-                        
+
 
                         {
-                            step == 1 && 
+                            step == 1 &&
                             <>
                                 <DialogHeader>
                                     <DialogTitle>Purchase Units</DialogTitle>
                                     <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
                                 </DialogHeader>
-                                
+
                                 <form action={action} className='space-y-3'>
                                     <div className='space-y-1'>
                                         <Label>Amount of Units you wish to purchase</Label>
-                                        <Input name="units" type='number' value={units} onChange={(event) => setUnits(parseInt(event.currentTarget.value))} />
+                                        <Input name="units" type='number' min={1} value={units} onChange={(event) => setUnits(parseInt(event.currentTarget.value))} />
                                         <InputError message={state.errors?.units} />
                                     </div>
 
@@ -156,17 +156,17 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                         </Button>
                                     </div>
                                 </form>
-                            </>                        
+                            </>
                         }
 
                         {
                             step == 2 &&
-                          
+
                             <>
                                 <div>
                                     <DialogHeader className='mb-5'>
                                         <DialogTitle>Purchase Successful</DialogTitle>
-                                        <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                                        <DialogDescription>You have successfully purchased {units} unit(s) of this property</DialogDescription>
                                     </DialogHeader>
 
                                     <div className='space-y-5' >
@@ -178,7 +178,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                                 <h4 className='font-bold'>{property.name}</h4>
                                                 <div>
                                                     <Badge variant={'secondary'}>{units} Unit</Badge>
-                                                    <Badge variant={'secondary'}><Naira /> {(units * property.unit_price).toLocaleString()} Amount</Badge>
+                                                    <Badge variant={'secondary'}>Amount: <Naira /> {(units * property.unit_price).toLocaleString()}</Badge>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@ export const PurchasePropertyDialog = ({property, open, setOpen} : IPurchaseProp
                                             <Link href={'/portfolio'} >View Portfolio</Link>
                                         </Button>
                                     </div>
-                                </div>    
+                                </div>
                             </>
                         }
                     </>

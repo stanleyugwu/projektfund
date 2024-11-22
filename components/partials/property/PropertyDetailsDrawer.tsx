@@ -1,7 +1,7 @@
 'use client'
 
 import { Naira } from "@/components/naira";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import { SheetTrigger, SheetContent, SheetHeader, SheetDescription, Sheet, SheetFooter, SheetClose } from "@/components/ui/sheet";
 import { IProperty } from "@/types/property";
 import { useEffect, useState } from "react";
@@ -16,11 +16,13 @@ interface IPropertyDetailsProps {
     property: IProperty
     setOpen: any
     unit?: IUnit,
-    sellUnit?: boolean
-    setSellUnit?: any
+    sellUnit?: boolean,
+    setSellUnit?: any,
+    viewDetailsBtnLabel?: string,
+    viewDetailsBtnVariant?: ButtonProps['variant'],
 }
 
-export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPropertyDetailsProps) {
+export function PropertyDetails({ property, setOpen, unit, setSellUnit, viewDetailsBtnLabel = 'View Details', viewDetailsBtnVariant = 'ghost' }: IPropertyDetailsProps) {
     const [more, setMore] = useState(false)
 
     const [offers, setOffers] = useState([])
@@ -34,12 +36,12 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
     return (
         <>
             <Sheet  >
-                    <SheetTrigger asChild>
-                        <Button variant={'ghost'}>
-                        View Details
-                        </Button>
-                    </SheetTrigger>
-                <SheetContent  className="min-w-full md:min-w-[470px] overflow-y-auto text-black space-y-1 p-0">
+                <SheetTrigger asChild>
+                    <Button variant={viewDetailsBtnVariant}>
+                        {viewDetailsBtnLabel}
+                    </Button>
+                </SheetTrigger>
+                <SheetContent className="min-w-full md:min-w-[470px] overflow-y-auto text-black space-y-1 p-0">
                     <SheetHeader className="sticky top-0 flex items-end justify-end p-3 bg-white">
                         <SheetClose className="inline-block">
                             <X className="w-5 h-5" />
@@ -76,7 +78,7 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                                             <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Units Owned</span>
                                         </div>
                                     </Disclose>
-                                    
+
                                     <Disclose show={!!!unit}>
                                         <div className="text-end">
                                             <h4 className="text-2xl font-semibold leading-none text-primary"><Naira />{property.unit_price.toLocaleString()} </h4>
@@ -87,14 +89,17 @@ export function PropertyDetails ({property, setOpen, unit, setSellUnit} : IPrope
                             </div>
 
                             <div className="space-y-2">
-                                <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
+                                {property.available_units >= 1 ?
+                                    <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
+                                    : ''
+                                }
 
                                 <Disclose show={!!unit}>
                                     <div className="space-x-3  space-y-3">
                                         <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
                                     </div>
                                 </Disclose>
-                                
+
                                 <SaleOffersDrawer offers={offers} />
                             </div>
 
