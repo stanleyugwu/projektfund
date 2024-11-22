@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function () {
 
-    
+
 
     return (
         <>
@@ -19,7 +19,7 @@ export default function () {
                 <div className="w-8/12">
                     <Card>
                         <CardContent className='p-10'>
-                            <EditPropertyForm  />
+                            <EditPropertyForm type="create" />
                         </CardContent>
                     </Card>
                 </div>

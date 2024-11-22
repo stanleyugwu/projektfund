@@ -9,7 +9,7 @@ interface IShowProperties {
     properties: IProperty[]
 }
 
-export const ShowProperties = ({properties} : IShowProperties) => {
+export const ShowProperties = ({ properties }: IShowProperties) => {
     useApp({
         title: "Invest"
     })
@@ -17,7 +17,7 @@ export const ShowProperties = ({properties} : IShowProperties) => {
     return (
         <>
             <div>
-                { properties.map((property) => <PropertyItem property={property} />) }
+                {properties.map((property) => <PropertyItem property={property} />)}
             </div>
         </>
     )

@@ -17,9 +17,10 @@ import { createProperty } from '@/server/property/create'
 
 interface IEditPropertyForm {
     property?: IProperty,
+    type?: "create" | "edit"
 }
 
-export const EditPropertyForm = ({ property }: IEditPropertyForm) => {
+export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm) => {
     const [state, action] = useFormState(createProperty, {
         status: false,
         message: '',
@@ -56,7 +57,8 @@ export const EditPropertyForm = ({ property }: IEditPropertyForm) => {
                 description: "The property was updated successfully!"
             })
 
-            // formRef.current?.reset()
+            formRef.current?.reset()
+            setPricing({ price: '', units: '' })
         }
     }, [state])
 
@@ -181,7 +183,9 @@ export const EditPropertyForm = ({ property }: IEditPropertyForm) => {
                         <FormLoader>
                             <Loader />
                         </FormLoader>
-                        Update Property
+                        {
+                            type === "create" ? "Create Property" : "Update Property"
+                        }
                     </Button>
                 </div>
             </form>

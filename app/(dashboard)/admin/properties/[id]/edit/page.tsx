@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Edit Property',
 }
 
-export default async function ({params}: any) {
+export default async function ({ params }: any) {
 
     const property = await singleProperty(params.id)
 
@@ -22,7 +22,7 @@ export default async function ({params}: any) {
                 <div className="w-8/12">
                     <Card>
                         <CardContent className='p-10'>
-                            <EditPropertyForm property={property} />
+                            <EditPropertyForm property={property} type='edit' />
                         </CardContent>
                     </Card>
                 </div>
