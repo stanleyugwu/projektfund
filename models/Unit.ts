@@ -1,5 +1,9 @@
 import mongoose from "mongoose";
 
+/**
+ * This model would store units owned by users. 
+ * Not units of a created property but units purchased by users
+ */
 const UnitSchema = new mongoose.Schema({
     property: {type: mongoose.SchemaTypes.ObjectId, ref: 'Property', required: true},
     user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User', required: true},

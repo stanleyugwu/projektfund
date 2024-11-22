@@ -41,6 +41,10 @@ export async function getPropertyPurchasedUnits(id: string): Promise<IUnit[]> {
   return JSON.parse(JSON.stringify(units));
 }
 
+
+/**
+ * retrives all units of a property bought and listed for resell 
+ */
 export async function getPropertyUnits(property: string) {
   await database();
   await Unit.find();
