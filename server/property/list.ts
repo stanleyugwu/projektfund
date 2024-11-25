@@ -47,11 +47,11 @@ export async function getPropertyPurchasedUnits(id: string): Promise<IUnit[]> {
  */
 export async function getPropertyUnits(property: string) {
   await database();
-  await Unit.find();
+  // await Unit.find();
 
-  const user = await authUser();
+  // const user = await authUser();
 
-  const listedUnits = await ListedUnit.find({ property }).populate(
+  const listedUnits = await ListedUnit.find({ property, available_units:{$gt:0}} ).populate(
     "property user unit"
   );
   return JSON.parse(JSON.stringify(listedUnits));
