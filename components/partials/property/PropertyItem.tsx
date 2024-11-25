@@ -6,7 +6,6 @@ import { IProperty } from "@/types/property";
 import React, { useState } from "react";
 import { PropertyDetails } from "./PropertyDetailsDrawer";
 import { PurchasePropertyDialog } from "./PurchasePropertyDialog";
-import { SaleOffersDrawer } from "./SaleOffersDrawer";
 
 interface PropertyItemProps {
     property: IProperty

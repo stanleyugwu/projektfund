@@ -138,7 +138,7 @@ export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog
                             <form action={action} className='space-y-3'>
                                 <div className='space-y-1'>
                                     <Label>Amount of Units you wish to purchase</Label>
-                                    <Input name="units" type='number' value={units} onChange={(event) => setUnits(parseInt(event.currentTarget.value))} />
+                                    <Input name="units" type='number' min={1} value={units} onChange={(event) => setUnits(parseInt(event.currentTarget.value))} />
                                     <InputError message={state.errors?.units} />
                                 </div>
 
@@ -159,7 +159,7 @@ export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog
                                 </div>
 
                                 <div>
-                                    <p className='text-sm'><strong className='font-semibold'>Amount:</strong> <Naira />{price.toLocaleString()}</p>
+                                    <p className='text-sm'><strong className='font-semibold'>Amount:</strong> <Naira />{(price || 0).toLocaleString()}</p>
                                 </div>
 
                                 <input type="text" hidden value={offer.property._id} name="property_id" />
@@ -167,7 +167,7 @@ export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog
 
                                 <Alert className='text-orange-500 border border-orange-500 bg-orange-50'>
                                     <AlertDescription>
-                                        You are purchasing {units} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()} each.</span>
+                                        You are purchasing {units || ''} units from <span className='font-medium'>{offer.user.firstname} {offer.user.lastname}</span> at the resale price of <span><Naira />{offer.unit_price.toLocaleString()} each.</span>
                                     </AlertDescription>
                                 </Alert>
 
