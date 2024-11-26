@@ -53,9 +53,9 @@ export async function listUnits(state: any, formData: FormData) {
   const unit = await Unit.findById(body.unit_id).populate(
     "property listing user"
   );
-  const available_units = unit.units - unit.listed_units;
+  // const available_units = unit.units - unit.listed_units;
 
-  if (available_units < body.units)
+  if (unit.available_units < body.units)
     return response
       .error()
       .json({ errors: { units: "You do not have enough units to proceed!" } });
@@ -70,7 +70,7 @@ export async function listUnits(state: any, formData: FormData) {
     available_units: body.units,
   });
 
-  unit.listed_units += body.units;
+  unit.listed_units += parseInt(body.units); // it's important we parse this cus body.unit is string and in js 1+'1' == '11' not 2
   unit.available_units -= body.units;
   await unit.save();
 
