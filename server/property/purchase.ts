@@ -200,7 +200,7 @@ async function updateListing(transaction: any) {
     listing.available_units -= transaction.data.units;
     await listing.save();
 
-    unit.available_units -= transaction.data.units
+    // unit.available_units -= transaction.data.units
     unit.listed_units -= transaction.data.units
     await unit.save()
 }
