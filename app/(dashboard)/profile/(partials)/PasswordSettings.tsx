@@ -14,34 +14,34 @@ import { experimental_useFormState as useFormState } from 'react-dom'
 
 export const PasswordSettings = () => {
 
-    const {user, refresh} = useAuth()
+    const { user, refresh } = useAuth()
 
-    const {toast} = useToast()
+    const { toast } = useToast()
 
     const [state, action] = useFormState(updatePassword, {
-		status: false,
-		message: '',
-		errors: {}
-	})
+        status: false,
+        message: '',
+        errors: {}
+    })
 
     useEffect(() => {
-        if(state.status){
-            if(state.message){
+        if (state.status) {
+            if (state.message) {
                 toast({
                     title: "Success",
                     description: state.message
                 })
             }
 
-            if(state.user){
+            if (state.user) {
                 refresh(state.user)
             }
         }
     }, [state])
-    
+
     return (
-        <form className="pt-5 space-y-3 md:w-2/4">
-            <div >
+        <form action={action} className="pt-5 space-y-3 md:w-2/4">
+            <div>
                 <h3 className="text-lg font-semibold">Update Password</h3>
             </div>
             <div>

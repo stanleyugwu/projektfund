@@ -24,7 +24,7 @@ export async function updateProfile (state: any, formData: FormData) {
     await User.findByIdAndUpdate(user.id, {
         firstname: body.firstname,
         lastname: body.lastname,
-        email: user.email,
+        email: body.email,
         avatar: image ?? user.image
     })
 
@@ -38,21 +38,21 @@ export async function updateProfile (state: any, formData: FormData) {
 
 export async function updatePassword (state: any, formData: FormData) {
     const body = getFormDataAsJson(formData)
-    const user = await authUser()
+    const user = await authUser(true);
 
     const validator = new Validator(body, __UpdatePasswordSchema.rules)
     validator.setAttributeNames(__UpdatePasswordSchema.attributes as Validator.AttributeNames)
 
     if(! validator.check()) return response.error().json(validator.errors)
 
-    if(!bcrypt.compareSync(body.password as string, user.password)) {
+    if(!bcrypt.compareSync(body.old_password as string, user.password)) {
         return response.error().json({password: "The Password is incorrect"})
     }
 
     const salt = bcrypt.genSaltSync(10); 
     const new_password = bcrypt.hashSync(body.new_password, salt)
 
-    User.findByIdAndUpdate(user.id, {
+    await User.findByIdAndUpdate(user.id, {
         password: new_password
     })
 
@@ -67,12 +67,14 @@ export async function updateBank (state: any, formData: FormData) {
     validator.setAttributeNames(__UpdateUserBankSchema.attributes as Validator.AttributeNames)
 
     if(! validator.check()) return response.error().json(validator.errors)
-
-    User.findByIdAndUpdate(user.id, {
+    
+    await User.findByIdAndUpdate(user.id, {
         bank: body
-    })
+    });
 
+    // TODO: find out why app runs into max call stack error when database read is not stringified and parsed
     const updatedUser = await User.findById(user.id)
 
-    return response.success().json('Bank Information Updated Successfully!', {user: updatedUser})
+
+    return response.success().json('Bank Information Updated Successfully!', {user:JSON.parse(JSON.stringify(updatedUser))})
 }

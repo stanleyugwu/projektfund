@@ -18,9 +18,9 @@ export const __UpdateProfileSchema : ISchema = {
 
 export const __UpdatePasswordSchema : ISchema = {
     rules: {
-        old_password: 'required|string',
-        new_password: 'required|string|confirmed',
-        new_password_confirmation: 'required|string'
+        old_password: 'required|string|min:8',
+        new_password: 'required|string|confirmed|min:8',
+        new_password_confirmation: 'required|string|min:8'
     },
 
     attributes: {
@@ -34,7 +34,7 @@ export const __UpdateUserBankSchema : ISchema = {
     rules: {
         account_name: 'required|string',
         // bank_name: 'required|string',
-        bank_code: 'required|numeric',
+        bank_code: 'required|string|min:2',
         account_number: 'required|numeric'
     },
     

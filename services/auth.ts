@@ -5,12 +5,12 @@ import { IRoles } from "@/types/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function authUser(){
+export async function authUser(withPassword:boolean = false){
     const cookieStore = cookies()
     const user_id = cookieStore.get('authorization')
    
     if(!user_id) return redirect('/login');
-    const user = await User.findById(user_id.value)
+    const user = await (withPassword ? User.findById(user_id.value).select('+password') : User.findById(user_id.value))
     
     if(!user) return redirect('/login')
     

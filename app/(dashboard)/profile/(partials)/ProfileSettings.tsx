@@ -15,29 +15,29 @@ import { useApp } from '@/context/AppContext'
 
 export const ProfileSettings = () => {
 
-    const {user, refresh} = useAuth()
-    const {toast} = useToast()
+    const { user, refresh } = useAuth()
+    const { toast } = useToast()
 
     const [state, action] = useFormState(updateProfile, {
-		status: false,
-		message: '',
-		errors: {}
-	})
+        status: false,
+        message: '',
+        errors: {}
+    })
 
     useApp({
         title: 'Profile'
     })
 
     useEffect(() => {
-        if(state.status){
-            if(state.message){
+        if (state.status) {
+            if (state.message) {
                 toast({
                     title: "Success",
                     description: state.message
                 })
             }
 
-            if(state.user){
+            if (state.user) {
                 refresh(state.user)
             }
         }
