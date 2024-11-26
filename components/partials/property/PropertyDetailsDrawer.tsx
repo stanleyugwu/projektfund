@@ -74,7 +74,7 @@ export function PropertyDetails({ property, setOpen, unit, setSellUnit, viewDeta
 
                                     <Disclose show={!!unit}>
                                         <div className="text-end">
-                                            <h4 className="text-2xl font-semibold leading-none text-primary">{unit?.units} </h4>
+                                            <h4 className="text-2xl font-semibold leading-none text-primary">{unit?.available_units} </h4>
                                             <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Units Owned</span>
                                         </div>
                                     </Disclose>
