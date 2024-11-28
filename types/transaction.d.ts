@@ -1,7 +1,7 @@
 import { IUser } from "./user"
 
 export interface ITransaction {
-    id: string
+    _id: string
     user: string | IUser
     amount: number 
     transactable?: any
