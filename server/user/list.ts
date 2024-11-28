@@ -13,8 +13,6 @@ export async function listUsers() {
     const user = await authUser()
     if(user.role !== roles.superadmin) return redirect('/login')
 
-    await Unit.find()
-    await Transactions.find()
     const users = await User.find({role: roles.user}).populate('units transactions')
     return JSON.parse(JSON.stringify(users));
 }

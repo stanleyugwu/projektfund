@@ -14,6 +14,6 @@ export async function listTransactions (){
 export async function userTransactions (){
     const user = await authUser()
 
-    const transactions = await Transactions.find({user: user.id, status: status.success}) 
+    const transactions = await Transactions.find({user: user.id, status: status.success}).sort('-updatedAt')
     return transactions
 }

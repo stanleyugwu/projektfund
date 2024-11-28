@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     title: "User"
 }
 
-export default async function ({params} : any) {
+export default async function ({ params }: any) {
     const user = await getUser(params.id)
-    const transactions : ITransaction[] = await getUserTransactions(user.id)
-    const units : IUnit[] = await getUserPortfolio(user.id)
-    const listedUnits : any[] = await getUserListedUnits(user.id)
+    const transactions: ITransaction[] = await getUserTransactions(user.id)
+    const units: IUnit[] = await getUserPortfolio(user.id)
+    const listedUnits: any[] = await getUserListedUnits(user.id)
 
     metadata.title = `${user.firstname} ${user.lastname}`
 
@@ -47,7 +47,7 @@ export default async function ({params} : any) {
                             <h5 className='font-bold'>Email Address</h5>
                             <p>{user.email}</p>
                         </div>
-                        
+
                         <div>
                             <h5 className='font-bold'>Phone Number</h5>
                             <p>{user.phone ?? 'N/A'}</p>
@@ -106,7 +106,7 @@ export default async function ({params} : any) {
                                     <TableBody>
                                         {
                                             transactions.map((transaction) => (
-                                                <TableRow key={transaction.id}>
+                                                <TableRow key={transaction._id}>
                                                     <TableCell className="w-[400px]">{transaction.reference}</TableCell>
                                                     <TableCell>{transaction.purpose}</TableCell>
                                                     <TableCell><Naira />{transaction.amount.toLocaleString()}</TableCell>
@@ -116,14 +116,14 @@ export default async function ({params} : any) {
                                                         {moment(transaction.createdAt).format('Do MMM YYYY')}
                                                     </TableCell>
                                                     <TableCell>
-                                                    <DropdownMenu>
-                                                        <DropdownMenuTrigger>Open</DropdownMenuTrigger>
-                                                        <DropdownMenuContent>
-                                                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                                                            <DropdownMenuItem>Deactivate</DropdownMenuItem>
-                                                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
+                                                        <DropdownMenu>
+                                                            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+                                                            <DropdownMenuContent>
+                                                                <DropdownMenuItem>Edit</DropdownMenuItem>
+                                                                <DropdownMenuItem>Deactivate</DropdownMenuItem>
+                                                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                                            </DropdownMenuContent>
+                                                        </DropdownMenu>
                                                     </TableCell>
                                                 </TableRow>
                                             ))
@@ -138,8 +138,8 @@ export default async function ({params} : any) {
                             </TabsContent>
                         </div>
                     </Tabs>
-                </CardDescription>    
-            </Card>  
+                </CardDescription>
+            </Card>
         </>
     )
 }
