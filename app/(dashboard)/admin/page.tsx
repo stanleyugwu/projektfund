@@ -6,14 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Building2Icon, Users2Icon, Wallet2Icon } from "lucide-react";
 import React from "react";
 
-export default async function Admin () {
+export default async function Admin() {
 
-  const {users, properties, payments, withdrawals} = await getDataSummary()
+  const { users, properties, payments, withdrawals } = await getDataSummary()
 
   return (
     <div>
       <WelcomeHeading />
-      
+
       <Title title="Overview" />
 
       <div className="flex">
@@ -27,7 +27,7 @@ export default async function Admin () {
                 <Users2Icon className="w-4 h-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{users}</div>
+                <div className="text-2xl font-bold">{users - 1}</div>
               </CardContent>
             </Card>
             <Card>
@@ -64,7 +64,7 @@ export default async function Admin () {
           <div>
             <Card>
               <CardContent className="p-5">
-                
+
               </CardContent>
             </Card>
           </div>
