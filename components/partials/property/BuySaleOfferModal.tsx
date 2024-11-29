@@ -148,10 +148,10 @@ export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog
                                         <SelectTrigger className="">
                                             <SelectValue placeholder="Select payment method" />
                                         </SelectTrigger>
-                                        <SelectContent className='bg-white'>
+                                        <SelectContent className='bg-white' defaultValue={'wallet'}>
                                             <SelectGroup>
                                                 <SelectItem value='wallet'>Wallet</SelectItem>
-                                                <SelectItem value='paystack'>Paystack</SelectItem>
+                                                {/* <SelectItem value='paystack'>Paystack</SelectItem> */}
                                             </SelectGroup>
                                         </SelectContent>
                                     </Select>

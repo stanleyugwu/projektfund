@@ -126,14 +126,14 @@ export const PurchasePropertyDialog = ({ property, open, setOpen }: IPurchasePro
 
                                     <div className='space-y-1'>
                                         <Label>Payment Method</Label>
-                                        <Select name='method'>
+                                        <Select name='method' defaultValue='wallet'>
                                             <SelectTrigger className="">
                                                 <SelectValue placeholder="Select payment method" />
                                             </SelectTrigger>
                                             <SelectContent className='bg-white'>
                                                 <SelectGroup>
                                                     <SelectItem value='wallet'>Wallet</SelectItem>
-                                                    <SelectItem value='paystack'>Paystack</SelectItem>
+                                                    {/* <SelectItem value='paystack'>Paystack</SelectItem> */}
                                                 </SelectGroup>
                                             </SelectContent>
                                         </Select>
