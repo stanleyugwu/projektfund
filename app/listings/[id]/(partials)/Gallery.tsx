@@ -8,7 +8,7 @@ interface IGallery {
     listing: IListing
 }
 
-export const Gallery = ({listing} : IGallery) => {
+export const Gallery = ({ listing }: IGallery) => {
 
     const slider = useRef(null)
 
@@ -21,37 +21,37 @@ export const Gallery = ({listing} : IGallery) => {
             arrowKeys: true,
             navPosition: 'bottom',
             autoplayButton: false,
-            prevButton: false,
             nav: false,
             controls: false,
             gutter: 0,
             responsive: {
                 425: {
-                  edgePadding: 20,
-                  gutter: 20,
-                  items: 1
+                    edgePadding: 20,
+                    gutter: 20,
+                    items: 1
                 },
                 426: {
-                  edgePadding: 20,
-                  gutter: 20,
-                  items: 3
+                    edgePadding: 20,
+                    gutter: 20,
+                    items: 3
                 },
             }
         })
-    }, [listing])
+    }, [])
 
     return (
         <>
-            <style dangerouslySetInnerHTML={{__html: `.tns-outer button{
+            <style dangerouslySetInnerHTML={{
+                __html: `.tns-outer button{
                     display: none !important;
                 } .tns-outer .tns-liveregion {display: none !important}`}} />
 
             <div ref={slider} className="flex flex-row items-center w-screen overflow-hidden">
-
-                <div className="relative overflow-hidden group">
+                <div className="relative overflow-hidden">
                     <img src={`/${listing.image}`} className="object-cover w-full h-96 aspect-video" alt="" />
                 </div>
-                
+
+
                 {
                     listing.gallery.map(image => (
                         <div className="relative overflow-hidden group">
