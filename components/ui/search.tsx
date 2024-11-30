@@ -22,7 +22,7 @@ const Search = React.forwardRef<HTMLInputElement, InputProps>(
     const { replace } = useRouter();
 
     const handleSearch = useDebounce((term: string) => {
-      const params = new URLSearchParams(searchParams);
+      const params = new URLSearchParams(searchParams as unknown as URLSearchParams);
       if (term) {
         params.set("query", term);
       } else {
