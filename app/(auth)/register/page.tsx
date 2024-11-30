@@ -58,26 +58,26 @@ export default function Register() {
             <div>
               <Label>First Name</Label>
               <Input name="firstname" placeholder="First Name" />
-              <InputError message={state.errors.firstname} />
+              <InputError message={state.errors?.firstname} />
             </div>
 
             <div>
               <Label>Last Name</Label>
               <Input name="lastname" placeholder="Last Name" />
-              <InputError message={state.errors.lastname} />
+              <InputError message={state.errors?.lastname} />
             </div>
           </div>
 
           <div>
             <Label>Email Address</Label>
             <Input name="email" type="email" placeholder="Email Address" />
-            <InputError message={state.errors.email} />
+            <InputError message={state.errors?.email} />
           </div>
 
           <div>
             <Label>Password</Label>
             <Input name="password" placeholder="Password" type="password" />
-            <InputError message={state.errors.password} />
+            <InputError message={state.errors?.password} />
           </div>
 
           <div>

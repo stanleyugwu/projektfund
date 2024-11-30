@@ -4,7 +4,7 @@ export const __RegisterSchema : ISchema = {
     rules: {
         firstname: 'required|string',
         lastname: 'required|string',
-        email: 'required|email|unique:users,email',
+        email: 'required|email',
         password: 'required|min:8'
     },
     
