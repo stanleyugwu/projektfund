@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default async function () {
-  const listings = await listListings();
+  // const listings = await listListings();
 
   return (
     <>

@@ -62,12 +62,12 @@ const nav_items: INavIcons[] = [
     role: roles.superadmin,
     icon: <Building2 className="w-4 h-4 mr-2" />,
   },
-  {
-    href: "/admin/listings",
-    name: "Listings",
-    role: roles.superadmin,
-    icon: <ListIcon className="w-4 h-4 mr-2" />,
-  },
+  // {
+  //   href: "/admin/listings",
+  //   name: "Listings",
+  //   role: roles.superadmin,
+  //   icon: <ListIcon className="w-4 h-4 mr-2" />,
+  // },
   {
     href: "/admin/properties/create",
     name: "Create Property",
@@ -118,7 +118,7 @@ export const Sidebar = ({ onClick = null }: { onClick?: any }) => {
     <>
       <div className="h-full p-5 w-full md:w-auto space-y-5">
         <div className="">
-          <h1 className="text-lg font-semibold">ProjketFund</h1>
+          <h1 className="text-lg font-semibold">HausProjekt</h1>
         </div>
 
         <div className="flex flex-col w-full space-y-1">
