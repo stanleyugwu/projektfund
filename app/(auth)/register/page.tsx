@@ -26,10 +26,8 @@ export default function Register() {
           <HomeIcon />
         </Link>
         <div className="md:block hidden align-baseline space-y-2 flex-[0.8]">
-          <img
-            src={"/assets/images/logo_white.svg"}
-            className="w-1/2 h-auto mb-14"
-          />
+          <h1 className="text-6xl font-bold mb-12 italic font-serif">HausProjekt</h1>
+
           <h2 className="text-4xl font-semibold">
             Kick start your property investment journey today!
           </h2>

@@ -12,7 +12,7 @@ import { Metadata } from "next";
 import NoData from "@/components/ui/no-data";
 
 export const metadata: Metadata = {
-  title: 'Welcome - ProjektFund',
+  title: 'Welcome - HausProjekt',
   description: "We believe that property investment should be accessible to everyone. Whether you're looking to invest in small portions of properties, buy your dream home, or find the perfect rental, we have you covered.",
 }
 
@@ -33,10 +33,10 @@ export default async function () {
                     <div className="py-6" />
                     <Badge className="px-6 py-1 mt-0 mb-5 leading-loose">Your Gateway to Smart Property Investment</Badge>
                     <p className="mb-10 text-4xl font-semibold tracking-tighter lg:text-6xl text-slate-900">
-                    Unlock Your real estate Dreams and invest like a PRO
+                      Unlock Your real estate Dreams and invest like a PRO
                     </p>
                     <p className="max-w-xl mt-4 text-lg tracking-tight lg:text-xl text-slate-500">
-                    We believe that property investment should be accessible to everyone. Whether you're looking to invest in small portions of properties, buy your dream home, or find the perfect rental, we have you covered.
+                      We believe that property investment should be accessible to everyone. Whether you're looking to invest in small portions of properties, buy your dream home, or find the perfect rental, we have you covered.
                     </p>
                   </div>
                   <div className="flex items-center justify-center w-full pt-8 mx-auto space-x-4 lg:justify-start md:pt-6">
@@ -90,7 +90,8 @@ export default async function () {
 
         <HowItWorks />
 
-        <div className="mx-auto mt-16 max-w-7xl lg:mt-24">
+        {/* FEATURED PROPERTIES SECTION */}
+        {/* <div className="mx-auto mt-16 max-w-7xl lg:mt-24">
           <div className="grid grid-cols-1 pb-8 text-center">
             <h3 className="mb-4 text-2xl font-semibold leading-normal md:text-3xl md:leading-normal">
               Featured Properties
@@ -100,15 +101,13 @@ export default async function () {
               any agent or commisions.
             </p>
           </div>
-          {/*end grid*/}
 
           <div className="space-y-20">
             {
-              listings?.length ? 
-            <ListingsList listings={listings} />
-            : <NoData text="No featured properties available for now, check back later" />
+              listings?.length ?
+                <ListingsList listings={listings} />
+                : <NoData text="No featured properties available for now, check back later" />
             }
-            {/*en grid*/}
             <div className="justify-center mt-6 text-center md:flex">
               <div className="md:w-full">
                 <Button asChild>
@@ -117,15 +116,15 @@ export default async function () {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="container mt-16 lg:mt-24">
           <div className="grid grid-cols-1 text-center">
             <h3 className="mb-6 text-2xl font-medium leading-normal text-black md:text-3xl md:leading-normal dark:text-white">
-            Kickstart your real estate journey with ProjektFund
+              Kickstart your real estate journey with HausProjekt
             </h3>
             <p className="max-w-xl mx-auto text-slate-400">
-            Whether you're a seasoned investor or just getting started, our platform provides the tools and resources you need to succeed. Become part of our growing community and start your journey toward financial freedom and homeownership today.
+              Whether you're a seasoned investor or just getting started, our platform provides the tools and resources you need to succeed. Become part of our growing community and start your journey toward financial freedom and homeownership today.
             </p>
             <div className="mt-6">
               <Button asChild>

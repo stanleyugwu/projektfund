@@ -13,33 +13,33 @@ import { Disclose } from '@/components/ui/disclose'
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 export const Header = () => {
-    const {title} = useApp()
-    const {user, logout} = useAuth()
+    const { title } = useApp()
+    const { user, logout } = useAuth()
 
     const [animate] = useAutoAnimate()
 
     const [showSidebar, setShowSidebar] = useState(false)
 
     const sidebar = useRef(null)
-    
+
     const hide = (e: any) => !(sidebar.current as never as any).contains(e.target) ? setShowSidebar(false) : null;
-     
+
     return (
 
         <div className='sticky top-0 z-50 flex items-center justify-between px-5 py-3 bg-white border-b md:px-10'>
-            
+
             <Disclose show={showSidebar}>
-                <div onClick={hide} className="fixed top-0 z-[999999] bottom-0 left-0 right-0 bg-white/80" style={{zIndex: '999999'}}>
-                    <div ref={sidebar} className='h-full  w-80 overflow-y-auto bg-white transition-transform translate-x-full border-e' style={{width: '80%'}}>
+                <div onClick={hide} className="fixed top-0 z-[999999] bottom-0 left-0 right-0 bg-white/80" style={{ zIndex: '999999' }}>
+                    <div ref={sidebar} className='h-full  w-80 overflow-y-auto bg-white transition-transform translate-x-full border-e' style={{ width: '80%' }}>
                         <Sidebar onClick={() => setShowSidebar(false)} />
                     </div>
                 </div>
             </Disclose>
-            
+
             <div>
                 <h3 className='hidden text-lg font-semibold md:block'>{title}</h3>
                 <a className="block  md:hidden" href="/dashboard">
-                    <span >Projektfund</span>
+                    <span >HausProjekt</span>
                 </a>
             </div>
 
@@ -48,15 +48,15 @@ export const Header = () => {
                     <DropdownMenuTrigger className='cursor-pointer'>
                         <ProfileImage user={user as IUser} />
                     </DropdownMenuTrigger>
-                    
+
                     <DropdownMenuContent className='left-0 w-48'>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className='cursor-pointer' asChild>
-                            <Link  href={'/profile'}>Profile</Link>
+                            <Link href={'/profile'}>Profile</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className='cursor-pointer' asChild>
-                            <Link  href={'/wallet'}>Wallet</Link>
+                            <Link href={'/wallet'}>Wallet</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem className='cursor-pointer' onClick={() => logout()}>Logout</DropdownMenuItem>
                     </DropdownMenuContent>
@@ -71,6 +71,6 @@ export const Header = () => {
                 </div>
             </div>
         </div>
-                
+
     )
 }

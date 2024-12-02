@@ -31,7 +31,7 @@ export const Header = () => {
                     <div className="flex items-center justify-between py-6">
                         <div className="flex-1 md:flex md:items-center md:gap-12">
                             <a className="block font-semibold uppercase" href="/">
-                                <span >Projektfund</span>
+                                <span >HausProjekt</span>
                             </a>
                         </div>
                         <div className="md:flex md:items-center md:gap-12">
