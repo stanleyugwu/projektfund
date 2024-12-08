@@ -68,7 +68,7 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
                 <div>
                     <Label>Featured Image</Label>
                     <Input id="picture" type="file" className='md:w-1/2' name='image' multiple />
-                    <InputError message={state.errors?.image} />
+                    <InputError message={state?.errors?.image} />
                 </div>
 
                 <input type="text" name="property_id" value={property?._id} hidden />
@@ -77,13 +77,13 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
                     <div className='col-span-2'>
                         <Label>Property Name</Label>
                         <Input name='name' defaultValue={property?.name} placeholder='Property Name' />
-                        <InputError message={state.errors?.name} />
+                        <InputError message={state?.errors?.name} />
                     </div>
 
                     <div className="">
                         <Label>Property Type</Label>
                         <Input name='type' defaultValue={property?.type} placeholder='Property Type' />
-                        <InputError message={state.errors?.type} />
+                        <InputError message={state?.errors?.type} />
                     </div>
                 </div>
 
@@ -91,20 +91,20 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
                     <div>
                         <Label>Property Price</Label>
                         <InputPrice onInput={setValue('price')} defaultValue={property?.price} name='price' />
-                        <InputError message={state.errors?.price} />
+                        <InputError message={state?.errors?.price} />
                     </div>
 
                     <div>
                         <Label>Available Units</Label>
                         <Input name='units' onInput={setValue('units')} defaultValue={property?.units} type='number' min={1} placeholder='Available Units' />
-                        <InputError message={state.errors?.unit} />
+                        <InputError message={state?.errors?.unit} />
                     </div>
 
                     <div>
                         <Label>Price Per Unit</Label>
                         <p className='p-3 text-lg font-bold'><Naira /> {pricePerUnit.toLocaleString()}</p>
                         <input hidden value={pricePerUnit} defaultValue={property?.unit_price} name='unit_price' />
-                        <InputError message={state.errors?.unit_price} />
+                        <InputError message={state?.errors?.unit_price} />
                     </div>
                 </div>
 
@@ -121,40 +121,41 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
-                        <InputError message={state.errors?.country} />
+                        <InputError message={state?.errors?.country} />
                     </div>
                     <div>
                         <Label>State</Label>
                         <Input name='state' defaultValue={property?.state} placeholder='State' />
-                        <InputError message={state.errors?.state} />
+                        <InputError message={state?.errors?.state} />
                     </div>
                     <div>
                         <Label>City</Label>
                         <Input name='city' defaultValue={property?.city} placeholder='City' />
-                        <InputError message={state.errors?.city} />
+                        <InputError message={state?.errors?.city} />
                     </div>
                 </div>
 
                 <div>
                     <Label>Property Address</Label>
                     <Input name='address' defaultValue={property?.address} placeholder='Property Address' />
-                    <InputError message={state.errors?.address} />
+                    <InputError message={state?.errors?.address} />
                 </div>
 
                 <div>
                     <Label>Property Description</Label>
                     <Textarea name='description' defaultValue={property?.description} className='resize-none' rows={10} placeholder='Property Description' />
-                    <InputError message={state.errors?.description} />
+                    <InputError message={state?.errors?.description} />
                 </div>
 
 
-                {/* <div>
+                <div>
                     <Label>Gallery</Label>
-                    <Input id="picture" type="file" name='gallery' multiple />
+                    <Input id="pictures" type="file" name='gallery' multiple />
                     <p className='text-sm text-muted-foreground'>Upload images for this property</p>
                     <InputError message={state.errors?.gallery} />
                 </div>
 
+                {/* 
                 <div>
                     <Label>Video URL</Label>
                     <Input type="text" name='video' placeholder='Video Link' />
