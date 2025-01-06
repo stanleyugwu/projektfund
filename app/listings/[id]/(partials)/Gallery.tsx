@@ -18,6 +18,7 @@ export const Gallery = ({ listing }: IGallery) => {
             items: 2,
             slideBy: 1,
             autoplay: true,
+            axis: "vertical",
             arrowKeys: true,
             navPosition: 'bottom',
             autoplayButton: false,
@@ -26,14 +27,14 @@ export const Gallery = ({ listing }: IGallery) => {
             gutter: 0,
             responsive: {
                 425: {
-                    edgePadding: 20,
-                    gutter: 20,
-                    items: 1
+                    // edgePadding: 20,
+                    // // gutter: 20,
+                    // items: 1
                 },
                 426: {
-                    edgePadding: 20,
-                    gutter: 20,
-                    items: 3
+                    // edgePadding: 20,
+                    // // gutter: 20,
+                    // items: 3
                 },
             }
         })
@@ -46,16 +47,16 @@ export const Gallery = ({ listing }: IGallery) => {
                     display: none !important;
                 } .tns-outer .tns-liveregion {display: none !important}`}} />
 
-            <div ref={slider} className="flex flex-row items-center w-screen overflow-hidden">
-                <div className="relative overflow-hidden">
-                    <img src={`/${listing.image}`} className="object-cover w-full h-96 aspect-video" alt="" />
+            <div ref={slider} className="flex flex-col items-center w-full h-full overflow-hidden">
+                <div className="relative overflow-hidden h-full">
+                    <img src={`/${listing.image}`} className="object-contain w-full h-full aspect-video" alt="" />
                 </div>
 
 
                 {
                     listing.gallery.map(image => (
-                        <div className="relative overflow-hidden group">
-                            <img src={`/${image}`} className="object-cover w-full h-96 aspect-video" alt="" />
+                        <div className="relative overflow-hidden h-full">
+                            <img src={`/${image}`} className="object-contain w-full h-full aspect-video" alt="" />
                         </div>
                     ))
                 }
