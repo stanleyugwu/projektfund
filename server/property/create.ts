@@ -40,17 +40,17 @@ export async function createProperty(state: any, data: FormData) {
     uploadedImages =
       galleryFiles.length > 0
         ? await Promise.all(
-            galleryFiles.map((file) => upload(file, "properties/" + random()))
+            galleryFiles.map((file) => upload(file, "properties", random()))
           )
         : property.gallery;
     featuredImage = image
-      ? await upload(image, "properties/" + random())
+      ? await upload(image, "properties", random())
       : property.image;
   } else {
     uploadedImages = await Promise.all(
-      galleryFiles.map((file) => upload(file, "properties/" + random()))
+      galleryFiles.map((file) => upload(file, "properties", random()))
     );
-    featuredImage = await upload(image, "properties/" + random());
+    featuredImage = await upload(image, "properties", random());
   }
 
   body.status = body.status == status.active;

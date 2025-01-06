@@ -8,12 +8,14 @@ interface IListingItemProps {
 }
 
 export const ListingItem = ({ listing }: IListingItemProps) => {
+	const ASSET_BASE = process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL;
+
 	return (
 		<>
 			<div className="w-full mx-auto overflow-hidden duration-500 ease-in-out bg-white shadow group rounded-xl dark:bg-slate-900 hover:shadow-xl dark:hover:shadow-xl dark:shadow-gray-700 dark:hover:shadow-gray-700 lg:max-w-2xl">
 				<div className="md:flex p-4 md:p-0">
 					<div className="relative md:shrink-0">
-						<img className="object-cover w-full h-full md:w-48" src={listing.image} alt="" />
+						<img className="object-cover w-full h-full md:w-48" src={`${ASSET_BASE}${listing.image}`} alt="" />
 						<div className="absolute top-4 end-4">
 							<a href="javascript:void(0)" className="bg-white rounded-full shadow btn btn-icon dark:bg-slate-900 dark:shadow-gray-700 text-slate-100 dark:text-slate-700 focus:text-red-600 dark:focus:text-red-600 hover:text-red-600 dark:hover:text-red-600"><i className="mdi mdi-heart mdi-18px" /></a>
 						</div>

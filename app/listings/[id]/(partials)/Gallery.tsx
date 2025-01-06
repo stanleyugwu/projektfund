@@ -40,6 +40,8 @@ export const Gallery = ({ listing }: IGallery) => {
         })
     }, [])
 
+    const ASSET_BASE = process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL;
+
     return (
         <>
             <style dangerouslySetInnerHTML={{
@@ -49,14 +51,14 @@ export const Gallery = ({ listing }: IGallery) => {
 
             <div ref={slider} className="flex flex-col items-center w-full h-full overflow-hidden">
                 <div className="relative overflow-hidden h-full">
-                    <img src={`/${listing.image}`} className="object-contain w-full h-full aspect-video" alt="" />
+                    <img src={`${ASSET_BASE}${listing.image}`} className="object-contain w-full h-full aspect-video" alt="" />
                 </div>
 
 
                 {
                     listing.gallery.map(image => (
                         <div className="relative overflow-hidden h-full">
-                            <img src={`/${image}`} className="object-contain w-full h-full aspect-video" alt="" />
+                            <img src={`${ASSET_BASE}${image}`} className="object-contain w-full h-full aspect-video" alt="" />
                         </div>
                     ))
                 }

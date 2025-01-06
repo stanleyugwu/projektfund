@@ -195,7 +195,7 @@ export const BuySaleOfferModal = ({ offer, modal }: { offer: any, modal: IDialog
                                 <div className='space-y-5' >
                                     <div className="flex p-2 space-x-3 border rounded-md">
                                         <div className='w-2/12'>
-                                            <img src={offer.property.image} className='rounded-md aspect-square' alt="" />
+                                            <img src={`${process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL}${offer.property.image}`} className='rounded-md aspect-square' alt="" />
                                         </div>
                                         <div className="flex-1 py-2">
                                             <h4 className='font-bold'>{offer.property.name}</h4>

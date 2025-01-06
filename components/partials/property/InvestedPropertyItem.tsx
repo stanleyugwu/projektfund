@@ -19,12 +19,15 @@ export const InvestedPropertyItem = ({ unit }: IUnitItem) => {
     const [sellUnit, setSellUnit] = useState(false)
     const [buyProperty, setBuyProperty] = useState(false)
 
+    // will be e.g /properties/abcd.jpg on dev, but https://res.cloudinary/.../abcd.jpg on prod
+    const propertyImage = `${process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL}${unit.propery.image}`
+
     return (
         <>
             <div className="flex py-5 space-x-5">
                 <div className="w-2/12">
                     <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
-                        <img src={unit.property.image} alt="" className="object-cover object-center w-full h-full" />
+                        <img src={propertyImage} alt="" className="object-cover object-center w-full h-full" />
                     </div>
                 </div>
                 <div className="flex flex-col justify-center flex-1 space-y-3">

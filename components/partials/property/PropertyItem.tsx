@@ -14,11 +14,14 @@ interface PropertyItemProps {
 export const PropertyItem = ({ property }: PropertyItemProps) => {
     const [open, setOpen] = useState(false)
 
+    const ASSET_BASE = process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL;
+
+
     return (
         <div className="items-center py-3 md:flex md:space-x-5">
             <div className="md:w-2/12">
                 <div className="overflow-hidden rounded md:aspect-square bg-muted-foreground">
-                    <img src={property.image} alt="" className="object-cover object-center w-full h-full" />
+                    <img src={`${ASSET_BASE}${property.image}`} alt="" className="object-cover object-center w-full h-full" />
                 </div>
             </div>
             <div className="flex-col flex-1 p-0 space-y-2 md:flex">
