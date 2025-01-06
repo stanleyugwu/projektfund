@@ -51,12 +51,12 @@ export async function initiatePurchase(state: any, formData: FormData){
             return response.error().json({error: "The listing does not exist!"})
         }
 
-        if(listing.available_units < 1) return response.error().json({error:'Not enough units available to purchase from'})
+        if(listing.available_units < 1) return response.error().json({error:'Not enough slots available to purchase from'})
         if(listing.user == user.id) return response.error().json({error: 'You are not autorized cannot make this purchase'})
-        if(purchasedUnits > listing.available_units) return response.error().json({error: 'You can\'t purchase more units than is available'})
+        if(purchasedUnits > listing.available_units) return response.error().json({error: 'You can\'t purchase more slots than is available'})
     } else {
-        if(purchasedUnits > property.available_units) return response.error().json({error: 'You can\'t purchase more units than is available'})
-        if(property.available_units < 1) return response.error().json({error:'Not enough units available to purchase from'})
+        if(purchasedUnits > property.available_units) return response.error().json({error: 'You can\'t purchase more slots than is available'})
+        if(property.available_units < 1) return response.error().json({error:'Not enough slots available to purchase from'})
     }
 
     const reference = await Token.random('transactions', 'refrence')
@@ -68,7 +68,7 @@ export async function initiatePurchase(state: any, formData: FormData){
     // If wallet payment, check if the wallet has enough money to cover the transaction
     if(body.method == 'wallet'){
         if(user.wallet.main_bal < amount) {
-            return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})  
+            return response.error().json({errors: {units: "You do not have sufficent funds to purchase this slots"}})  
         }
     }
     
@@ -92,7 +92,7 @@ export async function initiatePurchase(state: any, formData: FormData){
         if(user.wallet.main_bal < amount) {
             transaction.status = status.failed
             transaction.save()
-            return response.error().json({errors: {units: "You do not have sufficent funds to purchase this units"}})
+            return response.error().json({errors: {units: "You do not have sufficent funds to purchase this slots"}})
         }
         
         const reloadTransaction = await Transactions.findById(transaction.id).populate('user')
@@ -169,7 +169,7 @@ export async function completePurchase(transactionModel: any) {
     transaction.status = status.success
     await transaction.save()           
     
-    return {status: 'completed', message: `You have successfully Purchased ${transaction.data.units} units for ${transaction.amount} Naira`}
+    return {status: 'completed', message: `You have successfully Purchased ${transaction.data.units} slots for ${transaction.amount} Naira`}
 }
 
 async function createOrUpdateUnit(property: any, transaction: any){

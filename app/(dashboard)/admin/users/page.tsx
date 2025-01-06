@@ -34,7 +34,7 @@ export default async () => {
                             <TableRow>
                                 <TableHead className="w-[400px]">Name</TableHead>
                                 <TableHead>Email</TableHead>
-                                <TableHead>Units Owned</TableHead>
+                                <TableHead>Slots Owned</TableHead>
                                 <TableHead>Portfolio</TableHead>
                                 {/* <TableHead>Amount</TableHead> */}
                                 <TableHead></TableHead>

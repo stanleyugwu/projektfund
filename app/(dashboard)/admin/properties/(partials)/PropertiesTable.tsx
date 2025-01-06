@@ -9,7 +9,7 @@ interface IPropertiesTableProps {
     properties: IProperty[]
 }
 
-export const PropertiesTable = ({properties} : IPropertiesTableProps) => {
+export const PropertiesTable = ({ properties }: IPropertiesTableProps) => {
 
     return (
         <Table>
@@ -17,9 +17,9 @@ export const PropertiesTable = ({properties} : IPropertiesTableProps) => {
             <TableHeader>
                 <TableRow>
                     <TableHead>Property</TableHead>
-                    <TableHead>Units</TableHead>
-                    <TableHead>Unit Price</TableHead>
-                    <TableHead>Sold Units</TableHead>
+                    <TableHead>Slots</TableHead>
+                    <TableHead>Slot Price</TableHead>
+                    <TableHead>Sold Slots</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead></TableHead>
                 </TableRow>

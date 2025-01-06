@@ -10,9 +10,9 @@ import User from "@/models/User";
 import { authUser } from "@/services/auth";
 import database from "@/services/database";
 import { IUnit } from "@/types/units";
-import { __ListUnitSchema } from "@/schema/unit.schema"
+import { __ListUnitSchema } from "@/schema/unit.schema";
 import { property } from "lodash";
-import Validator from '@/lib/validator'
+import Validator from "@/lib/validator";
 
 export async function userPortfolio(query?: string) {
   await database();
@@ -42,13 +42,15 @@ export async function listUnits(state: any, formData: FormData) {
   const body = getFormDataAsJson(formData);
   const user = await authUser();
 
-  const validator = new Validator(body, __ListUnitSchema.rules)
-    validator.setAttributeNames(__ListUnitSchema.attributes as Validator.AttributeNames)
+  const validator = new Validator(body, __ListUnitSchema.rules);
+  validator.setAttributeNames(
+    __ListUnitSchema.attributes as Validator.AttributeNames
+  );
 
-    // Validate Data
-    if(! validator.check()) {
-        return {status: false, ...validator.errors}
-    }
+  // Validate Data
+  if (!validator.check()) {
+    return { status: false, ...validator.errors };
+  }
 
   const unit = await Unit.findById(body.unit_id).populate(
     "property listing user"
@@ -58,7 +60,7 @@ export async function listUnits(state: any, formData: FormData) {
   if (unit.available_units < body.units)
     return response
       .error()
-      .json({ errors: { units: "You do not have enough units to proceed!" } });
+      .json({ errors: { units: "You do not have enough slots to proceed!" } });
 
   await ListedUnit.create({
     user: user.id,
@@ -74,11 +76,9 @@ export async function listUnits(state: any, formData: FormData) {
   unit.available_units -= body.units;
   await unit.save();
 
-  return response
-    .success()
-    .json({
-      message: `You have successfuly listed ${body.units} unit for sale`,
-    });
+  return response.success().json({
+    message: `You have successfuly listed ${body.units} slot for sale`,
+  });
 }
 
 export async function saleOffers(unit_id: string) {
@@ -114,7 +114,7 @@ export async function deleteUnit(unit_id: string) {
   await handleDelete(unit);
   return response
     .success()
-    .json("You have successfully delete the purchased unit.");
+    .json("You have successfully delete the purchased slot.");
 }
 
 async function handleDelete(unit: IUnit) {

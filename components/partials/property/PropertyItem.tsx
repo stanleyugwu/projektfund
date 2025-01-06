@@ -30,11 +30,11 @@ export const PropertyItem = ({ property }: PropertyItemProps) => {
                 <div className="grid grid-cols-3">
                     <div>
                         <h2 className="font-medium leading-none">{property.available_units?.toLocaleString()} out of {property.units?.toLocaleString()}</h2>
-                        <p className="text-sm text-muted-foreground">Available Units</p>
+                        <p className="text-sm text-muted-foreground">Available Slots</p>
                     </div>
                     <div>
                         <h2 className="font-medium leading-none"><Naira />{property.unit_price.toLocaleString()}</h2>
-                        <p className="text-sm text-muted-foreground">Per Unit</p>
+                        <p className="text-sm text-muted-foreground">Per Slot</p>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@ export const PropertyItem = ({ property }: PropertyItemProps) => {
                 <div className="space-x-2">
                     {
                         property.available_units >= 1 ? <>
-                            <Button onClick={() => setOpen(true)}>Buy Units</Button>
+                            <Button onClick={() => setOpen(true)}>Buy Slots</Button>
                             <PropertyDetails setOpen={setOpen} property={property} />
                         </> :
                             <>

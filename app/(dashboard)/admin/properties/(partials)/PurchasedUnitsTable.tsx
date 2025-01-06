@@ -19,17 +19,17 @@ interface IPurchasedUnitsTableProps {
     property: IProperty
 }
 
-export const PurchasedUnitsTable = ({units, property} : IPurchasedUnitsTableProps) => {
+export const PurchasedUnitsTable = ({ units, property }: IPurchasedUnitsTableProps) => {
     return (
         <Table>
-            <TableCaption>Purchased Units</TableCaption>
+            <TableCaption>Purchased Slots</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead >User</TableHead>
-                    <TableHead>Total Units</TableHead>
-                    <TableHead>Available Units</TableHead>
-                    <TableHead>Purchase Price Per Unit</TableHead>
-                    <TableHead>Price Per Unit</TableHead>
+                    <TableHead>Total Slots</TableHead>
+                    <TableHead>Available Slots</TableHead>
+                    <TableHead>Purchase Price Per Slot</TableHead>
+                    <TableHead>Price Per Slot</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead></TableHead>
                 </TableRow>

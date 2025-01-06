@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react'
 // @ts-expect-error
 import { experimental_useFormState as useFormState } from 'react-dom'
 
-interface IListUnitsForSaleDialog{
+interface IListUnitsForSaleDialog {
     unit: IUnit
     modal: any
     open: any
@@ -22,22 +22,22 @@ interface IListUnitsForSaleDialog{
     setIsOpen: any
 }
 
-export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} : IListUnitsForSaleDialog) => {
+export const ListUnitsForSaleDialog = ({ unit, modal, open, setIsOpen, setModal }: IListUnitsForSaleDialog) => {
     const [units, setUnits] = useState(1)
 
     const [state, action] = useFormState(listUnits, {
-		status: false,
-		message: '',
-		errors: {},
-		error: ''
-	})
-    
+        status: false,
+        message: '',
+        errors: {},
+        error: ''
+    })
+
     const { toast } = useToast()
-    
+
     useEffect(() => {
-        if(state.status){
+        if (state.status) {
             toast({
-                title: "Unit listed successfully",
+                title: "Slot listed successfully",
                 description: state.message
             })
         }
@@ -48,13 +48,13 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
             <Dialog modal={modal} open={open} onOpenChange={(open: any) => setIsOpen(open)}>
                 <DialogContent className='sm:max-w-[425px]'>
                     <DialogHeader>
-                        <DialogTitle>List Units for sale</DialogTitle>
-                        <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                        <DialogTitle>List Slots for sale</DialogTitle>
+                        <DialogDescription>Select the number of slots you wish to purchase</DialogDescription>
                     </DialogHeader>
 
                     <form action={action} className='space-y-3'>
                         <div className='space-y-2' >
-                            <Label>Number of Units to sell</Label>
+                            <Label>Number of Slots to sell</Label>
                             <Input name='units' type='number' value={units} onChange={(e) => setUnits(e.currentTarget.value as unknown as number)} />
                             <InputError message={state?.errors?.units} />
                             <div className='grid grid-cols-6'>
@@ -63,9 +63,9 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
                         </div>
 
                         <input type="text" hidden name='unit_id' value={unit._id} />
-                        
+
                         <div className='space-y-2'>
-                            <Label>Amount Per Unit</Label>
+                            <Label>Amount Per Slot</Label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <span className="text-gray-500 sm:text-sm"><Naira /></span>
@@ -79,7 +79,7 @@ export const ListUnitsForSaleDialog = ({unit, modal, open, setIsOpen, setModal} 
 
                         </div>
 
-                        <Button variant={'default'} className='w-full'>List Units <FormLoader /></Button>
+                        <Button variant={'default'} className='w-full'>List Slots <FormLoader /></Button>
                     </form>
                 </DialogContent>
             </Dialog>

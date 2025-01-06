@@ -16,7 +16,7 @@ interface IEditListingForm {
     }
 }
 
-export const EditListingForm = ({state, listing} : IEditListingForm) => {
+export const EditListingForm = ({ state, listing }: IEditListingForm) => {
 
     return (
         <>
@@ -25,7 +25,7 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
                 <Input id="picture" type="file" className='md:w-1/2' name='image' multiple />
                 <InputError message={state.errors?.image} />
             </div>
-            
+
             <input type="text" name="listing_id" value={listing?._id} hidden />
 
             <div className="grid grid-cols-3 gap-5">
@@ -87,13 +87,13 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
                     <InputError message={state.errors?.city} />
                 </div>
             </div>
-            
+
             <div>
                 <Label>Property Address</Label>
                 <Input name='address' defaultValue={listing?.address} placeholder='Address' />
                 <InputError message={state.errors?.address} />
             </div>
-            
+
             <div>
                 <Label>Property Description</Label>
                 <Textarea name='description' defaultValue={listing?.description} className='resize-none' rows={10} placeholder='Property Description' />
@@ -101,12 +101,12 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
             </div>
 
 
-            <div>
+            {/* <div>
                 <Label>Gallery</Label>
                 <Input id="picture" type="file" name='gallery' multiple />
                 <p className='text-sm text-muted-foreground'>Upload images for this property</p>
                 <InputError message={state.errors?.gallery} />
-            </div>
+            </div> */}
 
             <div>
                 <Label>Video URL</Label>
@@ -136,7 +136,7 @@ export const EditListingForm = ({state, listing} : IEditListingForm) => {
                     <FormLoader>
                         <Loader />
                     </FormLoader>
-                    { listing ? 'Update' : 'Create' } Listing
+                    {listing ? 'Update' : 'Create'} Listing
                 </Button>
             </div>
         </>

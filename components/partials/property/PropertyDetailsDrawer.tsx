@@ -11,6 +11,7 @@ import { Disclose } from "@/components/ui/disclose";
 import _ from "lodash";
 import { SaleOffersDrawer } from "./SaleOffersDrawer";
 import { getPropertyUnits } from "@/server/property/list";
+import { Gallery } from "@/app/listings/[id]/(partials)/Gallery";
 
 interface IPropertyDetailsProps {
     property: IProperty
@@ -52,13 +53,15 @@ export function PropertyDetails({ property, setOpen, unit, setSellUnit, viewDeta
                     <SheetDescription>
                         <div className="relative h-64 overflow-hidden">
                             <div className="absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-50" />
-                            <img src={property.image} className="object-cover object-center w-full h-full" />
+                            {/* @ts-expect-error */}
+                            <Gallery listing={{ ...property, duration: '365', title: "Listing" }} />
+                            {/* <img src={property.image} className="object-cover object-center w-full h-full" /> */}
                         </div>
                         <div className="p-5 space-y-4 text-black">
                             <div className="space-y-2">
                                 <div>
                                     <Disclose show={!!unit}>
-                                        <h4 className="mb-1 text-xl font-semibold text-primary"><Naira />{property.unit_price.toLocaleString()}<span className="text-sm font-normal text-muted-foreground"> per unit</span></h4>
+                                        <h4 className="mb-1 text-xl font-semibold text-primary"><Naira />{property.unit_price.toLocaleString()}<span className="text-sm font-normal text-muted-foreground"> per slot</span></h4>
                                     </Disclose>
                                     <p className="text-lg font-semibold leading-none">
                                         {property.name}
@@ -69,20 +72,20 @@ export function PropertyDetails({ property, setOpen, unit, setSellUnit, viewDeta
                                 <div className="flex justify-between">
                                     <div className="">
                                         <h4 className="text-2xl font-semibold leading-none text-primary">{property.available_units.toLocaleString()} </h4>
-                                        <span className="text-sm font-normal leading-none text-muted-foreground">Available Units</span>
+                                        <span className="text-sm font-normal leading-none text-muted-foreground">Available Slots</span>
                                     </div>
 
                                     <Disclose show={!!unit}>
                                         <div className="text-end">
                                             <h4 className="text-2xl font-semibold leading-none text-primary">{unit?.available_units} </h4>
-                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Units Owned</span>
+                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Slots Owned</span>
                                         </div>
                                     </Disclose>
 
                                     <Disclose show={!!!unit}>
                                         <div className="text-end">
                                             <h4 className="text-2xl font-semibold leading-none text-primary"><Naira />{property.unit_price.toLocaleString()} </h4>
-                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Per Unit</span>
+                                            <span className="text-sm font-normal leading-none text-muted-foreground ms-2">Per Slot</span>
                                         </div>
                                     </Disclose>
                                 </div>
@@ -90,13 +93,13 @@ export function PropertyDetails({ property, setOpen, unit, setSellUnit, viewDeta
 
                             <div className="space-y-2">
                                 {property.available_units >= 1 ?
-                                    <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Units</Button>
+                                    <Button variant={'default'} onClick={() => setOpen(true)} size={'lg'} className="w-full">Purchase Slots</Button>
                                     : ''
                                 }
 
                                 <Disclose show={!!unit}>
                                     <div className="space-x-3  space-y-3">
-                                        <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Units</Button>
+                                        <Button className="w-full" variant={'secondary'} onClick={() => setSellUnit(true)}>Sell Slots</Button>
                                     </div>
                                 </Disclose>
 

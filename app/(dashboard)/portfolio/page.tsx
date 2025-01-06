@@ -42,7 +42,7 @@ export default async function Portfolio(props: {
                 ) : (
                   <div className="md:p-10 p-5 space-y-5 text-center">
                     <h1 className="md:text-xl font-semibold">
-                      You have not purchased any property units yet!
+                      You have not purchased any property slots yet!
                     </h1>
                     <Button asChild>
                       <Link href={"/properties"}>Find Properties</Link>

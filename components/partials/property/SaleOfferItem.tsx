@@ -28,7 +28,7 @@ export const SaleOfferItem = ({offer} : {offer: any}) => {
                 <div className="transition-all duration-150  rounded text-black">
                     <div className='mb-3'>
                         <div className="flex justify-between">
-                            <p className="text-base font-medium">{offer.available_units} units at <Naira />{offer.unit_price.toLocaleString()} per unit</p>
+                            <p className="text-base font-medium">{offer.available_units} slots at <Naira />{offer.unit_price.toLocaleString()} per slot</p>
                         </div>
 
                         <div className="flex justify-between">
@@ -45,7 +45,7 @@ export const SaleOfferItem = ({offer} : {offer: any}) => {
 
                         <Disclose show={user?._id != offer.user.id}>
                             <div className="space-x-3">
-                                <Button onClick={() => dialog.setOpen(true)} size={'sm'} >Purchase Units</Button>
+                                <Button onClick={() => dialog.setOpen(true)} size={'sm'} >Purchase Slots</Button>
                                 {/* <Disclose show={user?._id == offer.user.id}>
                                     <Button onClick={confirm.openDialog} size={'sm'} variant={'ghost'} >Remove Listing</Button>
                                     </Disclose> */}

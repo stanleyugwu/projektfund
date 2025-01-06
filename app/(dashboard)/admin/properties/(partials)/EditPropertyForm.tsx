@@ -33,15 +33,15 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
 
     const [pricing, setPricing] = useState({
         price: '',
-        units: ''
+        slots: ''
     });
 
     // calculate price per unit
-    let pricePerUnit: string = '0';
+    let pricePerSlot: string = '0';
     {
         // NOTE: pricing.price would be a localised number with commas, so we must remove the commas
-        const price = Number(pricing.price?.replaceAll(',', '')), units = Number(pricing.units);
-        if (price && units && price >= 1 && units >= 1) pricePerUnit = (price / units).toFixed(2);
+        const price = Number(pricing.price?.replaceAll(',', '')), slots = Number(pricing.slots);
+        if (price && slots && price >= 1 && slots >= 1) pricePerSlot = (price / slots).toFixed(2);
     }
 
     // curried function for setting pricing fields
@@ -58,8 +58,12 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
             })
 
             formRef.current?.reset()
-            setPricing({ price: '', units: '' })
+            setPricing({ price: '', slots: '' })
         }
+    }, [state])
+
+    useEffect(() => {
+        console.log(state)
     }, [state])
 
     return (
@@ -95,15 +99,15 @@ export const EditPropertyForm = ({ property, type = "edit" }: IEditPropertyForm)
                     </div>
 
                     <div>
-                        <Label>Available Units</Label>
-                        <Input name='units' onInput={setValue('units')} defaultValue={property?.units} type='number' min={1} placeholder='Available Units' />
+                        <Label>Available Slots</Label>
+                        <Input name='units' onInput={setValue('slots')} defaultValue={property?.units} type='number' min={1} placeholder='Available Slots' />
                         <InputError message={state?.errors?.unit} />
                     </div>
 
                     <div>
-                        <Label>Price Per Unit</Label>
-                        <p className='p-3 text-lg font-bold'><Naira /> {pricePerUnit.toLocaleString()}</p>
-                        <input hidden value={pricePerUnit} defaultValue={property?.unit_price} name='unit_price' />
+                        <Label>Price Per Slot</Label>
+                        <p className='p-3 text-lg font-bold'><Naira /> {pricePerSlot.toLocaleString()}</p>
+                        <input hidden value={pricePerSlot} defaultValue={property?.unit_price} name='unit_price' />
                         <InputError message={state?.errors?.unit_price} />
                     </div>
                 </div>

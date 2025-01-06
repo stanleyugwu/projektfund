@@ -113,13 +113,13 @@ export const PurchasePropertyDialog = ({ property, open, setOpen }: IPurchasePro
                             step == 1 &&
                             <>
                                 <DialogHeader>
-                                    <DialogTitle>Purchase Units</DialogTitle>
-                                    <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                                    <DialogTitle>Purchase Slots</DialogTitle>
+                                    <DialogDescription>Select the number of slots you wish to purchase</DialogDescription>
                                 </DialogHeader>
 
                                 <form action={action} className='space-y-3'>
                                     <div className='space-y-1'>
-                                        <Label>Amount of Units you wish to purchase</Label>
+                                        <Label>Amount of Slots you wish to purchase</Label>
                                         <Input name="units" type='number' min={1} value={units} onChange={(event) => setUnits(parseInt(event.currentTarget.value))} />
                                         <InputError message={state.errors?.units} />
                                     </div>
@@ -166,7 +166,7 @@ export const PurchasePropertyDialog = ({ property, open, setOpen }: IPurchasePro
                                 <div>
                                     <DialogHeader className='mb-5'>
                                         <DialogTitle>Purchase Successful</DialogTitle>
-                                        <DialogDescription>You have successfully purchased {units} unit(s) of this property</DialogDescription>
+                                        <DialogDescription>You have successfully purchased {units} slot(s) of this property</DialogDescription>
                                     </DialogHeader>
 
                                     <div className='space-y-5' >
@@ -177,7 +177,7 @@ export const PurchasePropertyDialog = ({ property, open, setOpen }: IPurchasePro
                                             <div className="flex-1 py-2">
                                                 <h4 className='font-bold'>{property.name}</h4>
                                                 <div>
-                                                    <Badge variant={'secondary'}>{units} Unit</Badge>
+                                                    <Badge variant={'secondary'}>{units} Slot</Badge>
                                                     <Badge variant={'secondary'}>Amount: <Naira /> {(units * property.unit_price).toLocaleString()}</Badge>
                                                 </div>
                                             </div>

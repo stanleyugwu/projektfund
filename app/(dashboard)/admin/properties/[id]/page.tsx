@@ -14,16 +14,16 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { PropertyDetailActions } from '../(partials)/PropertyDetailActions'
 
-export const metadata : Metadata = {
+export const metadata: Metadata = {
     title: 'Property Details'
 }
 
-export default async function ({params} : any) {
+export default async function ({ params }: any) {
     const property = await singleProperty(params.id)
 
     const purchasedUnits = await getPropertyPurchasedUnits(params.id)
-    const listedUnits = await getPropertyUnits(params.id) 
-    
+    const listedUnits = await getPropertyUnits(params.id)
+
     metadata.title = property.name
 
     return (
@@ -39,7 +39,7 @@ export default async function ({params} : any) {
                             <div className='grid gap-4 md:grid-cols-5'>
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                                        <CardTitle className="text-sm font-medium">Total Units</CardTitle>
+                                        <CardTitle className="text-sm font-medium">Total Slots</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-xl font-bold">{property.units}</div>
@@ -48,7 +48,7 @@ export default async function ({params} : any) {
 
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                                        <CardTitle className="text-sm font-medium">Available Units</CardTitle>
+                                        <CardTitle className="text-sm font-medium">Available Slots</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-xl font-bold">{property.available_units}</div>
@@ -57,7 +57,7 @@ export default async function ({params} : any) {
 
                                 <Card>
                                     <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                                        <CardTitle className="text-sm font-medium">Price Per Unit</CardTitle>
+                                        <CardTitle className="text-sm font-medium">Price Per Slot</CardTitle>
                                     </CardHeader>
                                     <CardContent>
                                         <div className="text-xl font-bold"><Naira />{property.unit_price.toLocaleString()}</div>
@@ -73,15 +73,15 @@ export default async function ({params} : any) {
                                 </Card>
                             </div>
 
-                            
+
                             <Tabs defaultValue='purchased'>
                                 <TabsList>
                                     <TabsTrigger value='purchased'>
-                                        Purchased Units
+                                        Purchased Slots
                                     </TabsTrigger>
 
                                     <TabsTrigger value='reselling'>
-                                        Listed Units
+                                        Listed Slots
                                     </TabsTrigger>
                                 </TabsList>
 

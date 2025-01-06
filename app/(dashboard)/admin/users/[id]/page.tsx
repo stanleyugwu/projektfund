@@ -76,7 +76,7 @@ export default async function ({ params }: any) {
                     <Tabs defaultValue='portfolio' className='space-y-5'>
                         <TabsList className='w-full px-5 overflow-x-auto'>
                             <TabsTrigger value='portfolio'>Portfolio</TabsTrigger>
-                            <TabsTrigger value='listings'>Listed Units</TabsTrigger>
+                            <TabsTrigger value='listings'>Listed Slots</TabsTrigger>
                             <TabsTrigger value='transactions'>Transactions</TabsTrigger>
                             <TabsTrigger value='profile'>Profile</TabsTrigger>
                         </TabsList>

@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 import Banks from "@/models/Banks";
 import { fetchBanks } from "@/services/payment";
 
-export default async () => {
+export default (async () => {
     await database()
 
     const admin = await User.findOne({email: 'admin@localhost.com'})
@@ -29,4 +29,4 @@ export default async () => {
     }
 
     return "Database Seeded Successfully!"
-}
+})()

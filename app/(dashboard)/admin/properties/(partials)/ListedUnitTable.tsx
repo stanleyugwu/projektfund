@@ -15,10 +15,10 @@ interface IListedUnitTableProps {
     showProperty?: boolean
 }
 
-export const ListedUnitTable = ({units, property, showProperty = false} : IListedUnitTableProps) => {
+export const ListedUnitTable = ({ units, property, showProperty = false }: IListedUnitTableProps) => {
     return (
         <Table>
-            <TableCaption>Listed Units</TableCaption>
+            <TableCaption>Listed Slots</TableCaption>
             <TableHeader>
                 <TableRow>
                     <Disclose show={!showProperty}>
@@ -27,8 +27,8 @@ export const ListedUnitTable = ({units, property, showProperty = false} : IListe
                     <Disclose show={showProperty!!}>
                         <TableHead >Property</TableHead>
                     </Disclose>
-                    <TableHead>Total Units</TableHead>
-                    <TableHead>Price Per Unit</TableHead>
+                    <TableHead>Total Slots</TableHead>
+                    <TableHead>Price Per Slot</TableHead>
                     <TableHead>Total Value</TableHead>
                     <TableHead>Total Purchased</TableHead>
                     <TableHead>Status</TableHead>
@@ -48,25 +48,25 @@ export const ListedUnitTable = ({units, property, showProperty = false} : IListe
                             </Disclose>
                             <TableCell><Naira />{(unit.units * unit.unit_price).toLocaleString()} ({unit.units.toLocaleString()})</TableCell>
                             <TableCell><Naira />{(unit.available_units * unit.property.unit_price).toLocaleString()} ({unit.available_units.toLocaleString()})</TableCell>
-                            <TableCell ><Switch checked={unit.status} disabled  /></TableCell>
+                            <TableCell ><Switch checked={unit.status} disabled /></TableCell>
                             <TableCell>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <Button variant={'ghost'} size={'sm'}>Action</Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent>
-                                    {/* <DropdownMenuItem asChild >
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant={'ghost'} size={'sm'}>Action</Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                        {/* <DropdownMenuItem asChild >
                                         <Link href={`/admin/listings/${listing._id}`}>Edit</Link>
                                     </DropdownMenuItem> */}
-                                    {/* <DropdownMenuItem asChild>
+                                        {/* <DropdownMenuItem asChild>
                                         <span role="button"  onClick={deactivate.action}>{listing.status ? 'Deactivate' : 'Activate'}</span>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem >
                                         <span role="button" onClick={initDelete} >Delete</span>
                                     </DropdownMenuItem> */}
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                            {/* <Swal open={open} setOpen={setOpen} action={handleDelete.action} /> */}
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                                {/* <Swal open={open} setOpen={setOpen} action={handleDelete.action} /> */}
                             </TableCell>
                         </TableRow>
                     ))

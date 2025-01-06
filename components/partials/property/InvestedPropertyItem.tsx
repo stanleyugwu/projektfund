@@ -38,15 +38,15 @@ export const InvestedPropertyItem = ({ unit }: IUnitItem) => {
                     <div className="grid grid-cols-4">
                         <div>
                             <h2 className="font-medium leading-none">{unit.available_units}</h2>
-                            <p className="text-sm text-muted-foreground">Units Owned</p>
+                            <p className="text-sm text-muted-foreground">Slots Owned</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none">{unit.listed_units}</h2>
-                            <p className="text-sm text-muted-foreground">Units Listed</p>
+                            <p className="text-sm text-muted-foreground">Slots Listed</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none"><Naira /> {unit.property.unit_price.toLocaleString()}</h2>
-                            <p className="text-sm text-muted-foreground">Price Per Unit</p>
+                            <p className="text-sm text-muted-foreground">Price Per Slot</p>
                         </div>
                         <div>
                             <h2 className="font-medium leading-none"><Naira /> {(unit.units * unit.property.unit_price).toLocaleString()}</h2>
@@ -57,7 +57,7 @@ export const InvestedPropertyItem = ({ unit }: IUnitItem) => {
                     <hr />
 
                     <div className="space-x-2">
-                        <Button onClick={() => setIsOpen(true)}>Sell Units</Button>
+                        <Button onClick={() => setIsOpen(true)}>Sell Slots</Button>
                         <PropertyDetails setOpen={setBuyProperty} property={unit.property} setSellUnit={setIsOpen} unit={unit} />
                     </div>
 

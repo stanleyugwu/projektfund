@@ -9,7 +9,7 @@ export const __PropertySchema : ISchema = {
         city: ['required', 'string'],
         country: ['required', 'string'],
         description: ['required'],
-        gallery: [''],
+        gallery: ['required','image'],
         type: ['required'],
         unit_price: 'required|numeric|min:1',
         units: 'required|numeric|min:1',

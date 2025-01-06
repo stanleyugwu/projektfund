@@ -15,27 +15,27 @@ import { Minus, Plus } from "lucide-react";
 import { experimental_useFormState as useFormState } from 'react-dom'
 
 
-export function WithdrawDialog(){
-    const {isModal, isOpen, setOpen, openDialog} = useDialog()
+export function WithdrawDialog() {
+    const { isModal, isOpen, setOpen, openDialog } = useDialog()
 
-    const {user} = useAuth()
+    const { user } = useAuth()
 
     const [state, action] = useFormState(initiateWithdrawal, {
-		status: false,
-		message: '',
-		errors: {},
-		error: ''
-	})
+        status: false,
+        message: '',
+        errors: {},
+        error: ''
+    })
 
     return (
         <>
             <Button className="w-full" onClick={openDialog}><Minus className="w-5 h-5 me-2" /> Withdraw</Button>
-            
+
             <Dialog modal={isModal} open={isOpen} onOpenChange={(open: any) => setOpen(open)}>
                 <DialogContent className='sm:max-w-[425px]'>
                     <DialogHeader>
                         <DialogTitle>Withdraw Funds</DialogTitle>
-                        <DialogDescription>Select the number of units you wish to purchase</DialogDescription>
+                        <DialogDescription>Select the number of slots you wish to purchase</DialogDescription>
                     </DialogHeader>
 
                     <form action={action} className="space-y-4">
@@ -46,7 +46,7 @@ export function WithdrawDialog(){
 
                         <div>
                             <Label>Amount</Label>
-                            <InputPrice name="amount"  />
+                            <InputPrice name="amount" />
                             <InputError message="" />
                         </div>
 

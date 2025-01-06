@@ -9,14 +9,14 @@ interface IPurchasedUnitsTableProps {
     units: IUnit[]
 }
 
-export const UserPurchasedUnitsTable = ({units} : IPurchasedUnitsTableProps) => {
+export const UserPurchasedUnitsTable = ({ units }: IPurchasedUnitsTableProps) => {
     return (
         <Table>
             <TableCaption>Portfolio</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-[400px]">Property</TableHead>
-                    <TableHead>Units Owned</TableHead>
+                    <TableHead>Slots Owned</TableHead>
                     <TableHead>Total Value</TableHead>
                     <TableHead>Status</TableHead>
                     <TableHead>Last Updated</TableHead>
@@ -31,6 +31,6 @@ export const UserPurchasedUnitsTable = ({units} : IPurchasedUnitsTableProps) => 
                     ))
                 }
             </TableBody>
-        </Table>  
+        </Table>
     )
 }

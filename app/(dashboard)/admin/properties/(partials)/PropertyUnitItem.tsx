@@ -19,12 +19,12 @@ interface IPropertyUnitItemProps {
     showProperty?: boolean
 }
 
-export const PropertyUnitItem = ({property, unit, showProperty = false} : IPropertyUnitItemProps) => {
+export const PropertyUnitItem = ({ property, unit, showProperty = false }: IPropertyUnitItemProps) => {
 
-    const {action, loading} = useAsync(() => deleteUnit(unit._id))
-    
+    const { action, loading } = useAsync(() => deleteUnit(unit._id))
+
     const {
-        action: deleteAndRefund, 
+        action: deleteAndRefund,
         loading: deleteAndRefundLoading
     } = useAsync(() => deleteUnitAndRefund(unit._id))
 
@@ -45,7 +45,7 @@ export const PropertyUnitItem = ({property, unit, showProperty = false} : IPrope
             <TableCell><Naira />{(unit.available_units * property.unit_price).toLocaleString()} ({unit.available_units.toLocaleString()})</TableCell>
             <TableCell><Naira />{toNumber(unit.unit_cost).toLocaleString()}</TableCell>
             <TableCell><Naira />{property.unit_price.toLocaleString()}</TableCell>
-            <TableCell ><Switch checked={unit.status} disabled  /></TableCell>
+            <TableCell ><Switch checked={unit.status} disabled /></TableCell>
             <TableCell>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -60,9 +60,9 @@ export const PropertyUnitItem = ({property, unit, showProperty = false} : IPrope
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <Swal open={open} setOpen={setOpen} description='This action cannot be reversed. The unit and all listed units will be deleted from the system without any refund to the owner.' action={action} />
-                
-                <Swal open={openDeleteAndRefund} setOpen={setOpenDeleteAndRefund} description='This action cannot be reversed. The unit and all listed units will be deleted from the system and the owner will be refunded the current unit value of the property to his account.' action={deleteAndRefund} />
+                <Swal open={open} setOpen={setOpen} description='This action cannot be reversed. The slot and all listed slots will be deleted from the system without any refund to the owner.' action={action} />
+
+                <Swal open={openDeleteAndRefund} setOpen={setOpenDeleteAndRefund} description='This action cannot be reversed. The slot and all listed slots will be deleted from the system and the owner will be refunded the current slot value of the property to his account.' action={deleteAndRefund} />
             </TableCell>
         </TableRow>
     )
