@@ -20,7 +20,7 @@ export const InvestedPropertyItem = ({ unit }: IUnitItem) => {
     const [buyProperty, setBuyProperty] = useState(false)
 
     // will be e.g /properties/abcd.jpg on dev, but https://res.cloudinary/.../abcd.jpg on prod
-    const propertyImage = `${process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL}${unit.propery.image}`
+    const propertyImage = `${process.env.NEXT_PUBLIC_CDN_IMAGE_BASE_URL}${unit.property.image}`
 
     return (
         <>
